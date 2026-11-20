@@ -178,6 +178,56 @@ header a.homebtn:hover{border-color:var(--o)}
 .lec::after{content:"‹";margin-inline-start:auto;color:var(--muted);font-size:22px;line-height:1}
 .lec.done::after{display:none}
 .card h1{margin-top:10px}
+
+/* ---------- background design ---------- */
+body{background:
+ radial-gradient(700px 480px at 100% 0%,color-mix(in srgb,var(--o) 16%,transparent),transparent 62%),
+ radial-gradient(640px 520px at 0% 45%,rgba(123,44,191,.16),transparent 62%),
+ radial-gradient(700px 520px at 100% 100%,rgba(45,212,191,.08),transparent 62%),
+ var(--bg)!important;background-attachment:fixed!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+ background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;
+ -webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 20%,#000 0%,transparent 70%)}
+#bgic{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#bgic i{position:absolute;color:var(--y);opacity:.07;animation:bgf 10s ease-in-out infinite}
+#bgic i:nth-child(2n){color:var(--o);animation-duration:13s}
+#bgic i svg{width:100%;height:100%;display:block}
+@keyframes bgf{50%{transform:translateY(-12px) rotate(var(--r,6deg))}}
+@media(max-width:640px){#bgic i{opacity:.05}}
+@media(prefers-reduced-motion:reduce){#bgic i{animation:none}}
+
+/* ---------- background design v2 ---------- */
+#bgic .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.28;animation:blobm 22s ease-in-out infinite}
+#bgic .blob.b1{width:420px;height:420px;background:var(--o);top:-140px;right:-120px}
+#bgic .blob.b2{width:380px;height:380px;background:#7b2cbf;top:38%;left:-160px;animation-delay:-7s}
+#bgic .blob.b3{width:360px;height:360px;background:#2dd4bf;bottom:-160px;right:12%;opacity:.16;animation-delay:-14s}
+@keyframes blobm{33%{transform:translate(40px,30px) scale(1.08)}66%{transform:translate(-30px,20px) scale(.95)}}
+#bgic .ring{position:absolute;border-radius:50%;border:1px solid color-mix(in srgb,var(--y) 16%,transparent)}
+#bgic .ring.r1{width:520px;height:520px;top:-260px;left:-200px}
+#bgic .ring.r2{width:360px;height:360px;top:-180px;left:-120px;border-color:color-mix(in srgb,var(--o) 18%,transparent)}
+#bgic .ring.r3{width:600px;height:600px;bottom:-320px;right:-240px}
+#bgic .ring.r4{width:420px;height:420px;bottom:-240px;right:-160px;border-color:color-mix(in srgb,var(--o) 18%,transparent)}
+#bgic i{opacity:.09}
+.tile,.lec,.hello,.card,.sum,.g-card,.q{background:color-mix(in srgb,var(--card) 78%,transparent)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tile:hover{border-color:var(--o)}
+@media(max-width:640px){#bgic .blob{opacity:.22}#bgic i{opacity:.06}}
+@media(prefers-reduced-motion:reduce){#bgic .blob{animation:none}}
+
+/* ---------- motivation ---------- */
+.hello .mot{margin-top:10px;font-weight:800;font-size:14px;color:var(--y)}
+.quote{display:flex;align-items:center;gap:14px;margin:10px 0 4px;padding:14px 18px;border-radius:18px;background:color-mix(in srgb,var(--card) 70%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-inline-start:4px solid var(--o);position:relative;overflow:hidden}
+.quote::after{content:"❝";position:absolute;left:14px;top:-18px;font-size:90px;color:var(--o);opacity:.12;font-family:serif}
+.quote .qi{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,var(--o),var(--y))}
+.quote .qi .ic{width:24px;height:24px;color:#2a1300}
+.quote small{display:block;color:var(--muted);font-size:12px;font-weight:700}
+.quote b{font-size:16px;line-height:1.7}
+.homesub{margin:-4px 0 12px}
+.tile .tpc{position:absolute;left:14px;top:16px;font-family:Inter,sans-serif;font-weight:900;font-size:14px;color:var(--y);background:color-mix(in srgb,var(--y) 12%,transparent);border:1px solid color-mix(in srgb,var(--y) 35%,transparent);border-radius:999px;padding:1px 10px;direction:ltr}
+.tile.full .prog i{background:linear-gradient(90deg,#22c55e,#86efac)}
+.tile.full .tpc{color:#86efac;border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.12)}
+#cheer{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;z-index:60;background:linear-gradient(90deg,var(--o),var(--y));color:#2a1300;font-weight:900;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.35s;pointer-events:none;white-space:nowrap}
+#cheer.show{opacity:1;transform:translate(-50%,0)}
+.g-auto{display:inline-block;margin:10px 0 2px;background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.5);color:#86efac;font-weight:800;border-radius:999px;padding:5px 14px;font-size:14px}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -190,6 +240,7 @@ header a.homebtn:hover{border-color:var(--o)}
   </div>
 </header>
 <div id="wm"></div>
+<div id="bgic" aria-hidden="true"></div>
 <div class="bgt" aria-hidden="true"><i style="top:14%;right:4%;width:70px"></i><i style="top:48%;left:3%;width:54px"></i><i style="bottom:10%;right:8%;width:46px"></i><i style="bottom:24%;left:12%;width:34px"></i><i style="top:30%;left:46%;width:26px"></i></div>
 
 <div class="wrap">
@@ -215,6 +266,7 @@ header a.homebtn:hover{border-color:var(--o)}
     <div id="hello"></div>
     <div id="cont"></div>
     <h1 id="homeTitle"><i class="ic" data-i="book"></i> موادك</h1>
+    <p class="muted homesub" id="homeSub">اختار مادة وكمّل من مكان ما وقفت</p>
     <div class="grid" id="subs"></div>
   </div>
 
@@ -238,6 +290,17 @@ header a.homebtn:hover{border-color:var(--o)}
 </div>
 
 <script src="icons.js"></script>
+<script>
+(function(){
+  const N=['histology','physiology','biophysics','general anatomy','dental anatomy','dental biomaterials','dental','histology','physiology','biophysics'];
+  const P=[[6,14,64,-10],[86,10,54,12],[12,48,48,8],[82,44,70,-14],[4,80,58,10],[88,82,50,-8],[48,92,40,6],[30,6,36,14],[64,70,44,-12],[40,34,30,10]];
+  function draw(){ const d=document.getElementById('bgic'); if(!d||!window.subjectIcon) return;
+    const mob=innerWidth<640;
+    d.innerHTML='<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div>'+P.map((p,i)=>{const s=mob?p[2]*.7:p[2];return `<i style="left:${p[0]}%;top:${p[1]}%;width:${s}px;height:${s}px;transform:rotate(${p[3]}deg);--r:${p[3]+8}deg;animation-delay:-${i*1.4}s">${subjectIcon(N[i])}</i>`}).join(''); }
+  if(document.readyState!=='loading') draw(); else document.addEventListener('DOMContentLoaded',draw);
+  addEventListener('resize',()=>{clearTimeout(window.__bgt);window.__bgt=setTimeout(draw,200)});
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -338,11 +401,12 @@ function renderHome(){
   if(!freeMode&&codeInfo){ const mine=lectures.filter(l=>subjects.some(x=>x.id===l.subjectId)), dn=mine.filter(l=>isDone(l.id)).length, pc=mine.length?Math.round(dn*100/mine.length):0;
     $('hello').innerHTML=`<div class="hello"><div><div class="hi">أهلًا ${esc(codeInfo.name||'')} 👋</div><div class="muted">خلّصت ${dn} من ${mine.length} محاضرة في موادك</div><div class="prog big"><i style="width:${pc}%"></i></div></div><div class="pc">${pc}%</div></div>`; }
   else $('hello').innerHTML='';
+  $('homeSub').textContent=freeMode?'جرّب المستوى بنفسك، ولو عجبك اشترك':'اختار مادة وكمّل من مكان ما وقفت';
   $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> محاضرات مجانية':'<i class="ic" data-i="book"></i> موادك';
   const last=LS.get('dp_last',null), ll=last&&lectures.find(l=>l.id===last.id);
   $('cont').innerHTML=(!freeMode&&ll)?`<div class="contc" data-l="${esc(ll.id)}"><i class="ic" data-i="play"></i><div><small>كمّل من مكان ما وقفت</small><b>${esc(ll.title)}</b></div></div>`:'';
   $('subs').innerHTML=subjects.length?subjects.map(s=>{const ls=lectures.filter(l=>l.subjectId===s.id), d=ls.filter(l=>isDone(l.id)).length, nw=ls.some(isNew);
-    return `<div class="tile" data-s="${esc(s.id)}"><div class="ic">${subjectIcon(s.name,s.icon)}</div><h3>${esc(s.name)}${nw?'<span class="newb">جديد</span>':''}</h3><div class="muted">${ls.length} محاضرة${!freeMode&&ls.length?` · خلّصت ${d}`:''}</div>${!freeMode&&ls.length?`<div class="prog"><i style="width:${Math.round(d*100/ls.length)}%"></i></div>`:''}</div>`}).join('')
+    return `<div class="tile${!freeMode&&ls.length&&d===ls.length?' full':''}" data-s="${esc(s.id)}">${!freeMode&&ls.length?`<span class="tpc">${Math.round(d*100/ls.length)}%</span>`:''}<div class="ic">${subjectIcon(s.name,s.icon)}</div><h3>${esc(s.name)}${nw?'<span class="newb">جديد</span>':''}</h3><div class="muted">${ls.length} محاضرة${!freeMode&&ls.length?` · خلّصت ${d}`:''}</div>${!freeMode&&ls.length?`<div class="prog"><i style="width:${Math.round(d*100/ls.length)}%"></i></div>`:''}</div>`}).join('')
     : `<div class="card muted">${freeMode?'لسه مفيش محاضرات مجانية، ارجع قريب':'لسه مفيش مواد متاحة ليك'}</div>`;
   show('vHome'); fillIcons();
 }
@@ -357,7 +421,7 @@ function openSub(id){
 $('lecs').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ $('wm').style.display='block'; b.dataset.go==='home'?renderHome():openSub(curSub.id); });
 function doneUI(){ const on=isDone(curId); $('doneBtn').className='donebtn'+(on?' on':''); $('doneBtn').innerHTML=on?'<i class="ic" data-i="check"></i> خلّصت المحاضرة دي':'علّم إنك خلّصتها'; fillIcons($('doneBtn')); }
-$('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); if(d[curId]) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); };
+$('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); const was=!!d[curId]; if(was) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); };
 
 async function openLec(id){
   curLec=lectures.find(l=>l.id===id); $('lecTitle').textContent=curLec.title; show('loading');
@@ -520,6 +584,8 @@ function gResolve(ok,q,correct){
 function gEnd(){
   const n=G.list.length, pct=Math.round(G.right*100/n), stars=pct>=90?3:pct>=70?2:pct>=50?1:0;
   const key='dp_best_'+curId+'_'+quizKey; let best=LS.get(key,0); const nb=!G.retry&&pct>best; if(nb){ best=pct; LS.set(key,pct); }
+  const auto=!G.retry&&!freeMode&&curId&&pct>=70&&!isDone(curId);
+  if(auto){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); }
   const msg=pct>=90?'ممتاز! إنت جاهز للامتحان':pct>=70?'كويس جدًا، راجع اللي غلطت فيه':pct>=50?'مش وحش، بس محتاج مراجعة':'راجع الملخص وحاول تاني';
   $('game').innerHTML=`<div class="g-end" id="gend">
     <div class="g-stars">${[1,2,3].map(s=>`<i class="ic${s<=stars?' on':''}" data-i="star" style="animation-delay:${s*.15}s"></i>`).join('')}</div>
@@ -527,6 +593,7 @@ function gEnd(){
     <div style="margin-top:6px;font-weight:800">${msg}</div>
     <div class="g-stats"><span class="g-chip"><i class="ic" data-i="check"></i>${G.right} صح من ${n}</span><span class="g-chip"><i class="ic" data-i="star"></i>${G.pts} نقطة</span><span class="g-chip fire"><i class="ic" data-i="spark"></i>أطول سلسلة ${G.maxStreak}</span></div>
     ${!G.retry?`<div class="g-best">${nb?'🏆 دي أحسن درجة ليك في المحاضرة دي!':`أحسن درجة ليك: ${best}%`}</div>`:''}
+    ${auto?'<div class="g-auto">✓ المحاضرة دي اتسجلت إنها خلصت</div>':''}
     <div class="g-btns">${G.wrong.length?`<button class="btn" id="gwrong">حل الغلط بس (${G.wrong.length})</button>`:''}<button class="btn ghost" id="gagain">من الأول</button></div></div>`;
   fillIcons($('game'));
   if(pct>=70&&!matchMedia('(prefers-reduced-motion: reduce)').matches){ const e=$('gend'), C=['#ffc94d','#ff8a3d','#22c55e','#ff6aa2','#7b8cff'];
