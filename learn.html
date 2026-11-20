@@ -141,7 +141,7 @@ h1 .ic{color:var(--y)}
 .contc{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--o);border-radius:16px;padding:12px 16px;cursor:pointer;margin:8px 0 6px}
 .contc .ic{width:30px;height:30px;color:var(--y);flex:none}
 .contc small{color:var(--muted);display:block}
-.newb{font-size:11px;font-weight:900;background:#ff3d6e;color:#fff;border-radius:999px;padding:1px 9px;margin-inline-start:8px}
+.newb{display:none!important;font-size:11px;font-weight:900;background:#ff3d6e;color:#fff;border-radius:999px;padding:1px 9px;margin-inline-start:8px}
 .freeb{font-size:11px;font-weight:800;background:color-mix(in srgb,var(--y) 20%,transparent);color:var(--y);border-radius:999px;padding:1px 9px;margin-inline-start:8px}
 .lec.done .n{background:var(--ok);color:#fff}
 .lec .tick{margin-inline-start:auto;color:var(--ok);display:none}
@@ -228,6 +228,40 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 #cheer{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;z-index:60;background:linear-gradient(90deg,var(--o),var(--y));color:#2a1300;font-weight:900;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.35s;pointer-events:none;white-space:nowrap}
 #cheer.show{opacity:1;transform:translate(-50%,0)}
 .g-auto{display:inline-block;margin:10px 0 2px;background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.5);color:#86efac;font-weight:800;border-radius:999px;padding:5px 14px;font-size:14px}
+
+/* ---------- lectures screen ---------- */
+.back{display:inline-flex!important;align-items:center;gap:8px;font-size:15px!important;font-weight:800;color:var(--ink)!important;background:color-mix(in srgb,var(--card) 80%,transparent)!important;border:1px solid var(--line)!important;border-radius:12px;padding:8px 16px!important;margin-bottom:14px!important;backdrop-filter:blur(8px)}
+.back .ar{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,var(--o),var(--y));color:#2a1300;font-size:14px}
+.back:hover{border-color:var(--o)!important}
+.shead{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;padding:22px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(120deg,color-mix(in srgb,var(--o) 18%,var(--card)),color-mix(in srgb,var(--card) 85%,transparent));backdrop-filter:blur(8px)}
+.shead::after{content:"";position:absolute;width:200px;height:140px;left:0;bottom:0;pointer-events:none;background:radial-gradient(color-mix(in srgb,var(--y) 45%,transparent) 1.3px,transparent 1.6px) 0 0/12px 12px;-webkit-mask-image:radial-gradient(circle at 0% 100%,#000,transparent 70%);mask-image:radial-gradient(circle at 0% 100%,#000,transparent 70%);opacity:.6}
+.shead .sic{flex:none;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--o) 30%,transparent),color-mix(in srgb,var(--y) 15%,transparent));border:1px solid color-mix(in srgb,var(--y) 40%,transparent);box-shadow:0 10px 26px color-mix(in srgb,var(--o) 30%,transparent)}
+.shead .sic svg{width:42px;height:42px;color:var(--y)}
+.shead .sinfo{flex:1;min-width:0}
+.shead h1{margin:2px 0 6px;font-size:26px;text-transform:capitalize}
+.slvl{font-size:11px;font-weight:800;color:var(--y);background:color-mix(in srgb,var(--y) 12%,transparent);border:1px solid color-mix(in srgb,var(--y) 35%,transparent);border-radius:999px;padding:1px 10px}
+.smeta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-weight:700;font-size:14px}
+.smeta .ic{width:16px;height:16px;color:var(--y)}
+.spc{font-family:Inter,sans-serif;font-weight:900;font-size:32px;color:var(--y);direction:ltr}
+.nextc{display:flex;align-items:center;gap:14px;margin-top:12px;padding:14px 18px;border-radius:18px;cursor:pointer;background:color-mix(in srgb,var(--card) 80%,transparent);border:1px solid var(--o)}
+.nextc>.ic{width:34px;height:34px;color:var(--y);flex:none}
+.nextc small{display:block;color:var(--muted)}
+.nextc>div{flex:1}
+.lhead{margin:22px 0 10px;font-weight:900;font-size:18px;display:flex;align-items:center;gap:10px}
+.lhead::before{content:"";width:5px;height:20px;border-radius:4px;background:linear-gradient(var(--o),var(--y))}
+.lec2{display:flex;align-items:center;gap:14px;padding:14px 16px;margin:0 0 10px;border-radius:18px;cursor:pointer;position:relative;overflow:hidden;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(8px);transition:.18s}
+.lec2::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--o),var(--y))}
+.lec2:hover{border-color:var(--o);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.lec2 .n{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-family:Inter,sans-serif;font-weight:900;font-size:17px;color:#2a1300;background:linear-gradient(135deg,var(--o),var(--y))}
+.lec2 .lt{flex:1;min-width:0}
+.lec2 .lt b{display:block;font-size:17px}
+.lec2 .lt small{color:var(--muted);font-weight:700}
+.lec2 .go,.nextc .go{flex:none;font-weight:800;font-size:14px;color:#2a1300;background:linear-gradient(90deg,var(--o),var(--y));border-radius:10px;padding:6px 14px}
+.lec2.done .n{background:linear-gradient(135deg,#16a34a,#4ade80);color:#fff}
+.lec2.done::before{background:linear-gradient(#16a34a,#4ade80)}
+.lec2.done .lt small{color:#86efac}
+.lec2.done .go{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+@media(max-width:560px){.shead{padding:16px;gap:12px}.shead .sic{width:58px;height:58px}.shead .sic svg{width:32px;height:32px}.shead h1{font-size:21px}.spc{font-size:24px}.lec2 .go{padding:5px 10px;font-size:13px}.lec2 .n{width:40px;height:40px}}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -272,14 +306,14 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 
   <!-- lectures -->
   <div id="vSub" class="hide">
-    <button class="back" data-go="home">→ رجوع للمواد</button>
-    <h1 id="subTitle"></h1>
+    <button class="back" data-go="home"><span class="ar">→</span> رجوع للمواد</button>
+    <div id="subHead"></div><h1 id="subTitle" class="hide"></h1>
     <div id="lecs"></div>
   </div>
 
   <!-- lecture -->
   <div id="vLec" class="hide">
-    <button class="back" data-go="sub">→ رجوع للمحاضرات</button>
+    <button class="back" data-go="sub"><span class="ar">→</span> رجوع للمحاضرات</button>
     <h1 id="lecTitle"></h1>
     <button class="donebtn" id="doneBtn"></button>
     <div class="tabs" id="tabs"></div>
@@ -415,10 +449,15 @@ $('subs').onclick=e=>{const t=e.target.closest('[data-s]');if(t)openSub(t.datase
 function openSub(id){
   curSub=subjects.find(s=>s.id===id); $('subTitle').textContent=curSub.name;
   const ls=lectures.filter(l=>l.subjectId===id);
-  $('lecs').innerHTML=ls.length?ls.map((l,i)=>`<div class="lec${isDone(l.id)?' done':''}" data-l="${esc(l.id)}"><span class="n">${i+1}</span><div>${esc(l.title)}${isNew(l)?'<span class="newb">جديد</span>':''}${l.free&&!freeMode?'<span class="freeb">Free</span>':''}</div><i class="ic tick" data-i="check"></i></div>`).join(''):'<div class="card muted">المحاضرات هتنزل هنا قريب</div>';
+  const dn=ls.filter(l=>isDone(l.id)).length, pc=ls.length?Math.round(dn*100/ls.length):0, nxt=ls.find(l=>!isDone(l.id));
+  $('subHead').innerHTML=`<div class="shead"><div class="sic">${subjectIcon(curSub.name,curSub.icon)}</div><div class="sinfo"><span class="slvl">Level 1</span><h1>${esc(curSub.name)}</h1><div class="smeta"><span><i class="ic" data-i="book"></i> ${ls.length} محاضرة</span>${!freeMode?`<span><i class="ic" data-i="check"></i> خلّصت ${dn}</span>`:''}</div>${!freeMode&&ls.length?`<div class="prog big"><i style="width:${pc}%"></i></div>`:''}</div>${!freeMode&&ls.length?`<div class="spc">${pc}%</div>`:''}</div>
+  ${!freeMode&&nxt&&dn>0?`<div class="nextc" data-l="${esc(nxt.id)}"><i class="ic" data-i="play"></i><div><small>المحاضرة اللي عليك</small><b>${esc(nxt.title)}</b></div><span class="go">كمّل ‹</span></div>`:''}
+  <div class="lhead">المحاضرات</div>`;
+  $('lecs').innerHTML=ls.length?ls.map((l,i)=>{const dd=isDone(l.id);return `<div class="lec2${dd?' done':''}" data-l="${esc(l.id)}"><span class="n">${String(i+1).padStart(2,'0')}</span><div class="lt"><b>${esc(l.title)}</b><small>${dd?'✓ خلّصتها':'لسه ماخلّصتهاش'}${l.free&&!freeMode?' · Free':''}</small></div><span class="go">${dd?'راجعها':'ابدأ'} ‹</span></div>`}).join(''):'<div class="card muted">المحاضرات هتنزل هنا قريب</div>';
   show('vSub'); fillIcons();
 }
 $('lecs').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
+$('subHead').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ $('wm').style.display='block'; b.dataset.go==='home'?renderHome():openSub(curSub.id); });
 function doneUI(){ const on=isDone(curId); $('doneBtn').className='donebtn'+(on?' on':''); $('doneBtn').innerHTML=on?'<i class="ic" data-i="check"></i> خلّصت المحاضرة دي':'علّم إنك خلّصتها'; fillIcons($('doneBtn')); }
 $('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); const was=!!d[curId]; if(was) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); };
