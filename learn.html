@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='%230e1630'/><path transform='translate(8 7) scale(.75)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><path transform='translate(-1.5 2) scale(1.05)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
 <meta name="theme-color" content="#0e1630">
 <title>منطقة الطلبة</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -155,15 +155,38 @@ h1 .ic{color:var(--y)}
 .bgt i:nth-child(2n){animation-delay:-3s;transform:rotate(-15deg)}
 @keyframes fl{50%{translate:0 -12px}}
 #pages canvas{display:block;width:100%;height:auto;margin:0 0 12px;border-radius:10px;background:#fff;pointer-events:none}
+
+/* ---------- polish ---------- */
+header{background:color-mix(in srgb,var(--bg2) 85%,transparent);backdrop-filter:blur(10px)}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.brand .bname{font-weight:900;font-size:18px;color:var(--ink)}
+.brand .bbadge{font-size:12px;font-weight:800;color:var(--o);background:color-mix(in srgb,var(--o) 14%,transparent);border:1px solid color-mix(in srgb,var(--o) 40%,transparent);border-radius:999px;padding:1px 10px}
+@media(max-width:480px){.brand .bname{display:none}}
+header a.homebtn{color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:5px 12px;font-weight:700;font-size:13px}
+header a.homebtn:hover{border-color:var(--o)}
+.hello{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(120deg,color-mix(in srgb,var(--o) 16%,var(--card)),var(--card));border:1px solid var(--line);border-radius:20px;padding:16px 20px;margin:10px 0 6px}
+.hello>div:first-child{flex:1}
+.hello .hi{font-size:20px;font-weight:900}
+.hello .pc{direction:ltr;font-size:30px;font-weight:900;color:var(--y);font-family:Inter,sans-serif}
+.prog.big{height:8px;margin-top:10px}
+.tile{position:relative;overflow:hidden}
+.tile::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--o),var(--y));opacity:.85}
+.tile:hover{box-shadow:0 12px 28px rgba(0,0,0,.3)}
+.tile h3,#subTitle{text-transform:capitalize}
+.lec{transition:.15s}
+.lec:hover{transform:translateX(-3px)}
+.lec::after{content:"‹";margin-inline-start:auto;color:var(--muted);font-size:22px;line-height:1}
+.lec.done::after{display:none}
+.card h1{margin-top:10px}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
 <body>
 <header>
-  <b id="brand" style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 64 64" width="28" height="28"><path fill="#ff9f45" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/></svg>منطقة الطلبة</b>
+  <a id="brand" href="./" class="brand"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--y)"/><stop offset="1" style="stop-color:var(--o)"/></linearGradient></defs><path fill="url(#hg)" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/><path fill="#fff" opacity=".35" d="M18 13c-4 1-6 4-6 8 0 2 1 3 2 3s2-1 2-3c0-3 1-4 3-5 1-1 1-3-1-3z"/></svg><span class="bname">Dental Program</span><span class="bbadge">منطقة الطلبة</span></a>
   <div style="display:flex;gap:12px;align-items:center">
     <span id="who" class="muted" style="font-size:14px"></span>
-    <a href="./">الصفحة الرئيسية</a>
+    <a href="./" class="homebtn">الصفحة الرئيسية</a>
   </div>
 </header>
 <div id="wm"></div>
@@ -189,6 +212,7 @@ h1 .ic{color:var(--y)}
   <!-- subjects -->
   <div id="vHome" class="hide">
     <div id="freeBar" class="freebar hide"><div><b>دي محاضرات مجانية عشان تجرب المستوى</b><div class="muted">عجبتك؟ اشترك وافتح كل المحاضرات، وكل جديد هيوصلك أول بأول.</div></div><a class="btn small" href="./#subjects">اشترك دلوقتي</a></div>
+    <div id="hello"></div>
     <div id="cont"></div>
     <h1 id="homeTitle"><i class="ic" data-i="book"></i> موادك</h1>
     <div class="grid" id="subs"></div>
@@ -294,7 +318,7 @@ async function enterFree(){
 
 function watermark(){
   const t=`${codeInfo.name||''}  ${codeInfo.phone||''}  ${code}`;
-  $('who').textContent='أهلًا '+(codeInfo.name||'');
+  $('who').textContent='';
   let h='';for(let y=-100;y<window.innerHeight+300;y+=210)for(let x=-200;x<window.innerWidth+200;x+=440)h+=`<span style="top:${y}px;left:${x+(Math.round(y/210)%2)*220}px">${esc(t)}</span>`;
   $('wm').innerHTML=h; $('wm').style.display='block';
 }
@@ -311,6 +335,9 @@ async function home(){
 }
 function renderHome(){
   $('freeBar').classList.toggle('hide',!freeMode);
+  if(!freeMode&&codeInfo){ const mine=lectures.filter(l=>subjects.some(x=>x.id===l.subjectId)), dn=mine.filter(l=>isDone(l.id)).length, pc=mine.length?Math.round(dn*100/mine.length):0;
+    $('hello').innerHTML=`<div class="hello"><div><div class="hi">أهلًا ${esc(codeInfo.name||'')} 👋</div><div class="muted">خلّصت ${dn} من ${mine.length} محاضرة في موادك</div><div class="prog big"><i style="width:${pc}%"></i></div></div><div class="pc">${pc}%</div></div>`; }
+  else $('hello').innerHTML='';
   $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> محاضرات مجانية':'<i class="ic" data-i="book"></i> موادك';
   const last=LS.get('dp_last',null), ll=last&&lectures.find(l=>l.id===last.id);
   $('cont').innerHTML=(!freeMode&&ll)?`<div class="contc" data-l="${esc(ll.id)}"><i class="ic" data-i="play"></i><div><small>كمّل من مكان ما وقفت</small><b>${esc(ll.title)}</b></div></div>`:'';
