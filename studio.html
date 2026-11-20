@@ -213,9 +213,9 @@ $('sList').onclick=async e=>{
   await deleteDoc(doc(db,'subjects',b.dataset.sdel)); await loadAll(); });};
 
 /* ---------- lectures ---------- */
-const SLOTS=[{k:'tf',t:'✅ أسئلة صح وغلط'},{k:'mcq',t:'🔘 أسئلة اختيار من متعدد'},{k:'written',t:'✍️ أسئلة كتابي'},{k:'complete',t:'🧩 أسئلة كومبليت'}];
+const SLOTS=[{k:'tf',t:'✅ أسئلة صح وغلط'},{k:'mcq',t:'🔘 أسئلة اختيار من متعدد'},{k:'written',t:'✍️ أسئلة كتابي'}];
 let curPdfs={}, removed={}, curExams={};
-const EX=['tf','mcq','complete','written'];
+const EX=['tf','mcq','written'];
 $('slots').innerHTML=SLOTS.map(s=>`<div class="item"><b>${s.t}</b>
   ${EX.includes(s.k)?'<div class="muted" style="font-size:12px;margin-top:4px">ارفع بي دي إف عشان يظهر كملف، أو ملف الامتحان الجاهز اللي بعمله ليك عشان يبقى امتحان إلكتروني</div>':''}
   <input type="file" id="f_${s.k}" accept="${EX.includes(s.k)?'application/pdf,.pdf,.txt,text/plain':'application/pdf,.pdf'}" style="margin-top:8px">

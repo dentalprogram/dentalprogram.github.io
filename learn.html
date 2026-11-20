@@ -503,7 +503,7 @@ async function openLec(id){
   }catch(e){ show('vSub'); alertBox(freeMode?'مش قادر يفتح المحاضرة دي دلوقتي، جرب تاني':'مش قادر يفتح المحاضرة دي. لو الكود بتاعك شغال، كلّمنا على واتساب'); }
 }
 const SI=(i,t)=>`<i class="ic" data-i="${i}"></i>${t}`;
-const SLOTS=[{k:'tf',t:SI('tf','صح وغلط')},{k:'mcq',t:SI('mcq','اختيار من متعدد')},{k:'written',t:SI('pen','كتابي')},{k:'complete',t:SI('puzzle','كومبليت')}];
+const SLOTS=[{k:'tf',t:SI('tf','صح وغلط')},{k:'mcq',t:SI('mcq','اختيار من متعدد')},{k:'written',t:SI('pen','كتابي')}];
 let curPdfs={}, curId=null;
 let pdfToken=0;
 function stamp(c){
