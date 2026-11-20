@@ -434,7 +434,6 @@ async function openLec(id){
     if(!freeMode) LS.set('dp_last',{id}); doneUI();
     const T=[];
     SLOTS.forEach(s=>{ if(curPdfs[s.k]) T.push({t:'pdf:'+s.k,l:s.t}); });
-    if((d.summary||'').trim()) T.push({t:'sum',l:'<i class="ic" data-i="file"></i>ملخص مكتوب'});
     if(QS.length) T.push({t:'quiz',l:'<i class="ic" data-i="target"></i>اختبر نفسك'});
     $('tabs').innerHTML=T.map(x=>`<button data-t="${x.t}">${x.l}</button>`).join(''); fillIcons($('tabs'));
     show('vLec');
@@ -442,7 +441,7 @@ async function openLec(id){
   }catch(e){ show('vSub'); alertBox(freeMode?'مش قادر يفتح المحاضرة دي دلوقتي، جرب تاني':'مش قادر يفتح المحاضرة دي. لو الكود بتاعك شغال، كلّمنا على واتساب'); }
 }
 const SI=(i,t)=>`<i class="ic" data-i="${i}"></i>${t}`;
-const SLOTS=[{k:'summary',t:SI('book','الملخص')},{k:'explain',t:SI('teach','الشرح')},{k:'tf',t:SI('tf','صح وغلط')},{k:'mcq',t:SI('mcq','اختيار من متعدد')},{k:'written',t:SI('pen','كتابي')},{k:'complete',t:SI('puzzle','كومبليت')}];
+const SLOTS=[{k:'tf',t:SI('tf','صح وغلط')},{k:'mcq',t:SI('mcq','اختيار من متعدد')},{k:'written',t:SI('pen','كتابي')},{k:'complete',t:SI('puzzle','كومبليت')}];
 let curPdfs={}, curId=null;
 let pdfToken=0;
 function stamp(c){
@@ -586,7 +585,7 @@ function gEnd(){
   const key='dp_best_'+curId+'_'+quizKey; let best=LS.get(key,0); const nb=!G.retry&&pct>best; if(nb){ best=pct; LS.set(key,pct); }
   const auto=!G.retry&&!freeMode&&curId&&pct>=70&&!isDone(curId);
   if(auto){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); }
-  const msg=pct>=90?'ممتاز! إنت جاهز للامتحان':pct>=70?'كويس جدًا، راجع اللي غلطت فيه':pct>=50?'مش وحش، بس محتاج مراجعة':'راجع الملخص وحاول تاني';
+  const msg=pct>=90?'ممتاز! إنت جاهز للامتحان':pct>=70?'كويس جدًا، راجع اللي غلطت فيه':pct>=50?'مش وحش، بس محتاج مراجعة':'راجع المحاضرة وحاول تاني';
   $('game').innerHTML=`<div class="g-end" id="gend">
     <div class="g-stars">${[1,2,3].map(s=>`<i class="ic${s<=stars?' on':''}" data-i="star" style="animation-delay:${s*.15}s"></i>`).join('')}</div>
     <div class="g-pct">${pct}%</div>

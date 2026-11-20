@@ -102,19 +102,18 @@ pre{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:10px;fo
         <label>اسم المحاضرة</label><input id="lTitle">
         <label>ترتيبها</label><input id="lOrder" type="number" inputmode="numeric" value="1">
         <label class="freebox"><input type="checkbox" id="lFree"> 🎁 محاضرة مجانية: أي حد يقدر يفتحها من غير كود، عشان يجرب المستوى</label>
-        <div class="muted" style="margin-top:10px">ارفع ملف بي دي إف في كل خانة عايزها، والخانة اللي تسيبها فاضية مش هتظهر للطالب. الملف بيتحوّل لصور عليها اسم الموقع محفور جواها، والطالب بيشوفها واسمه مرسوم عليها.</div>
+        <div class="muted" style="margin-top:10px">ارفع الملفات في الخانات اللي عايزها، والخانة اللي تسيبها فاضية مش هتظهر للطالب. الملف بيتحوّل لصور عليها اسم الموقع محفور جواها، والطالب بيشوفها واسمه مرسوم عليها.</div>
         <div id="slots"></div>
         <div class="item" style="margin-top:12px"><b>🎯 أسئلة تفاعلية</b>
           <div class="muted" style="font-size:13px;margin:4px 0 8px">الطالب بيحلها جوه الموقع ويعرف إجابته على طول. اكتب كل سؤال وتحته اختياراته، وحط علامة * قبل الإجابة الصح، وسيب سطر فاضي بين كل سؤال والتاني. ولو عايز تكتب شرح للإجابة، اكتب سطر يبدأ بكلمة Explanation.</div>
           <textarea id="lQtext" rows="8" class="ltr" placeholder="The mandible is the movable jaw.&#10;*True&#10;False&#10;&#10;Which tooth has the longest root?&#10;a) Central incisor&#10;*b) Maxillary canine&#10;c) First molar&#10;Explanation: The maxillary canine has the longest root."></textarea>
           <div class="muted" id="lQcount" style="font-size:13px;margin-top:6px"></div>
         </div>
-        <details style="margin-top:12px"><summary class="muted" style="cursor:pointer">إضافات اختيارية: ملخص مكتوب أو ملف أسئلة جاهز</summary>
+        <details style="margin-top:12px"><summary class="muted" style="cursor:pointer">إضافات اختيارية: ملف أسئلة جاهز</summary>
         <label>📦 ملف الأسئلة التفاعلية اللي بعمله ليك</label>
         <input type="file" id="lFile" accept=".json,application/json">
         <div class="muted" id="lQinfo" style="margin-top:6px">مفيش أسئلة</div>
-        <label>ملخص مكتوب</label>
-        <textarea id="lSum" placeholder="السطر اللي يبدأ بعلامة # يبقى عنوان، واللي يبدأ بشرطة - يبقى نقطة"></textarea>
+        <textarea id="lSum" class="hide"></textarea>
         </details>
         <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn" id="lSave">حفظ المحاضرة</button>
@@ -214,7 +213,7 @@ $('sList').onclick=async e=>{
   await deleteDoc(doc(db,'subjects',b.dataset.sdel)); await loadAll(); });};
 
 /* ---------- lectures ---------- */
-const SLOTS=[{k:'summary',t:'📘 الملخص'},{k:'explain',t:'🧑‍🏫 الشرح'},{k:'tf',t:'✅ أسئلة صح وغلط'},{k:'mcq',t:'🔘 أسئلة اختيار من متعدد'},{k:'written',t:'✍️ أسئلة كتابي'},{k:'complete',t:'🧩 أسئلة كومبليت'}];
+const SLOTS=[{k:'tf',t:'✅ أسئلة صح وغلط'},{k:'mcq',t:'🔘 أسئلة اختيار من متعدد'},{k:'written',t:'✍️ أسئلة كتابي'},{k:'complete',t:'🧩 أسئلة كومبليت'}];
 let curPdfs={}, removed={}, curExams={};
 const EX=['tf','mcq','complete','written'];
 $('slots').innerHTML=SLOTS.map(s=>`<div class="item"><b>${s.t}</b>
