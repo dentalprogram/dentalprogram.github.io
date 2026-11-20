@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><path transform='translate(-1.5 2) scale(1.05)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
 <script>window.__dp=fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());</script>
 <meta name="theme-color" content="#0e1630">
-<title>Dental Programming</title>
+<title>Dental Program</title>
 <meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات Free تجربها قبل ما تشترك">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
@@ -339,7 +339,23 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 .num .copy{flex:none}
 
 /* ---------- performance ---------- */
-.card,.feat,.step,.pay,.bundle,.free,.student,.faq details{contain:layout paint}
+
+/* steps timeline */
+.card,.feat,.pay,.bundle,.free,.student,.faq details{contain:layout paint}
+.step{contain:layout;overflow:visible}
+.step::before{z-index:2;line-height:1;font-family:Inter,system-ui,sans-serif;font-size:15px;background:linear-gradient(135deg,var(--y),var(--o));box-shadow:0 0 0 5px var(--bg),0 6px 16px rgba(255,138,61,.35)}
+@media(min-width:1000px){
+  .steps{grid-template-columns:repeat(5,1fr)!important;gap:14px;margin-top:34px}
+  .step{padding-top:30px}
+  .step::before{top:-17px;right:50%;transform:translateX(50%);width:34px;height:34px}
+  .steps::before{content:"";position:absolute;top:0;height:2px;z-index:1;right:calc((100% - 56px)/10);left:calc((100% - 56px)/10);background:repeating-linear-gradient(90deg,var(--o) 0 8px,transparent 8px 14px);opacity:.75}
+}
+@media(max-width:640px){
+  .step{position:relative}
+  .step::before{position:relative;z-index:2}
+  .steps::before{content:"";position:absolute;top:40px;bottom:60px;right:55px;width:2px;z-index:1;background:repeating-linear-gradient(180deg,var(--o) 0 8px,transparent 8px 14px);opacity:.75}
+}
+
 .nav{backdrop-filter:none!important}
 #deco i,.ht{will-change:transform}
 @media(max-width:760px){#deco{display:none}.ht{animation:none!important}body{background-attachment:scroll!important}.tooth-hero,.launch{animation:none!important}}
@@ -386,7 +402,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 
 <main class="wrap">
   <h2 data-sec="feats" class="reveal"><span class="em"><i class="ic" data-i="gift"></i></span><span data-t>هتاخد إيه في كل مادة؟</span></h2>
-  <p data-sec="feats" class="sec-sub reveal"><span data-t>كل محاضرة فيها خمس حاجات، تذاكرها كلها من مكان واحد</span></p>
+  <p data-sec="feats" class="sec-sub reveal"><span data-t>كل محاضرة فيها أربع حاجات، تذاكرها كلها من مكان واحد</span></p>
   <div data-sec="feats" class="feats reveal">
     <div class="feat"><div class="fi"><i class="ic" data-i="teach"></i></div><b><span data-t>Explanation</span></b></div>
     <div class="feat"><div class="fi"><i class="ic" data-i="tf"></i></div><b><span data-t>True / False</span></b></div>
