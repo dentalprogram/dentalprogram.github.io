@@ -6,17 +6,17 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><path transform='translate(-1.5 2) scale(1.05)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
 <meta name="theme-color" content="#0e1630">
 <title>Dental Programming</title>
-<meta name="description" content="ملخصات مركزة وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات مجانية تجربها قبل ما تشترك">
+<meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات مجانية تجربها قبل ما تشترك">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:site_name" content="Dental Program">
 <meta property="og:url" content="https://dentalprogram.github.io/">
-<meta property="og:title" content="Dental Program | ملخصات وبنوك أسئلة">
-<meta property="og:description" content="ملخصات مركزة وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات مجانية تجربها قبل ما تشترك">
+<meta property="og:title" content="Dental Program | شرح وبنوك أسئلة">
+<meta property="og:description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات مجانية تجربها قبل ما تشترك">
 <meta property="og:image" content="https://dentalprogram.github.io/og.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="800">
-<meta property="og:image:alt" content="Dental Program - ملخصات وبنوك أسئلة">
+<meta property="og:image:alt" content="Dental Program - شرح وبنوك أسئلة">
 <meta name="twitter:card" content="summary">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -323,7 +323,11 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 #grid .card .orb{width:120px!important;height:120px!important}
 #grid .card .btn{padding:10px 16px!important;font-size:15px!important}
 #grid .card:hover .ic,#grid .card:active .ic{transform:none!important}
-@media(min-width:900px){#grid{grid-template-columns:repeat(3,1fr)!important;max-width:900px;margin:0 auto}}
+@media(min-width:900px){#grid{grid-template-columns:repeat(3,1fr)!important;max-width:none;margin:0}}
+
+/* ---------- 5 feature cards sizing ---------- */
+.feats{display:grid;grid-template-columns:repeat(5,1fr)!important;gap:14px}
+@media(max-width:760px){.feats{display:flex!important;flex-wrap:wrap;justify-content:center;gap:12px}.feats .feat{flex:0 0 calc(50% - 6px)}}
 </style>
 </head>
 <body>
@@ -346,7 +350,7 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
   <div id="aud"></div>
   <h1 id="sName"></h1>
   <p id="sSlogan"></p>
-  <div data-sec="chips" class="chips"><span class="chip"><i class="ic" data-i="book"></i> <span data-t>ملخصات</span></span><span class="chip"><i class="ic" data-i="teach"></i> <span data-t>شرح</span></span><span class="chip"><i class="ic" data-i="tf"></i> <span data-t>صح وغلط</span></span><span class="chip"><i class="ic" data-i="mcq"></i> <span data-t>اختيار من متعدد</span></span><span class="chip"><i class="ic" data-i="pen"></i> <span data-t>كتابي</span></span><span class="chip"><i class="ic" data-i="puzzle"></i> <span data-t>كومبليت</span></span></div>
+  <div data-sec="chips" class="chips"><span class="chip"><i class="ic" data-i="teach"></i> <span data-t>شرح</span></span><span class="chip"><i class="ic" data-i="tf"></i> <span data-t>صح وغلط</span></span><span class="chip"><i class="ic" data-i="mcq"></i> <span data-t>اختيار من متعدد</span></span><span class="chip"><i class="ic" data-i="pen"></i> <span data-t>كتابي</span></span><span class="chip"><i class="ic" data-i="puzzle"></i> <span data-t>كومبليت</span></span></div>
   <div class="btns">
     <a class="btn" href="#subjects"><span data-t>شوف المواد</span></a>
     <a data-sec="btnFree" class="btn ghost" href="learn.html#free"><i class="ic" data-i="eye"></i> <span data-t>جرّب ببلاش</span></a>
@@ -356,9 +360,8 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 
 <div class="wrap">
   <h2 data-sec="feats" class="reveal"><span class="em"><i class="ic" data-i="gift"></i></span><span data-t>هتاخد إيه في كل مادة؟</span></h2>
-  <p data-sec="feats" class="sec-sub reveal"><span data-t>كل محاضرة فيها ست حاجات، تذاكرها كلها من مكان واحد</span></p>
+  <p data-sec="feats" class="sec-sub reveal"><span data-t>كل محاضرة فيها خمس حاجات، تذاكرها كلها من مكان واحد</span></p>
   <div data-sec="feats" class="feats reveal">
-    <div class="feat"><div class="fi"><i class="ic" data-i="book"></i></div><b><span data-t>Summary</span></b></div>
     <div class="feat"><div class="fi"><i class="ic" data-i="teach"></i></div><b><span data-t>Explanation</span></b></div>
     <div class="feat"><div class="fi"><i class="ic" data-i="tf"></i></div><b><span data-t>True / False</span></b></div>
     <div class="feat"><div class="fi"><i class="ic" data-i="mcq"></i></div><b><span data-t>MCQ</span></b></div>
@@ -511,7 +514,7 @@ $('ipNum').textContent=$('mIp').textContent=SITE.instapay;
 if(SITE.instapayLink){$('ipLink').href=SITE.instapayLink;$('ipLink').style.display='inline-block';}
 $('foot').textContent='© '+new Date().getFullYear()+' '+SITE.name+' — كل الحقوق محفوظة';
 const wa=t=>'https://wa.me/'+SITE.whatsapp+'?text='+encodeURIComponent(t);
-$('waFloat').href=$('footWa').href=wa('السلام عليكم، عندي استفسار عن الملخصات');
+$('waFloat').href=$('footWa').href=wa('السلام عليكم، عندي استفسار عن المواد');
 window.addEventListener('scroll',()=>$('totop').classList.toggle('show',scrollY>700),{passive:true});
 $('totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
