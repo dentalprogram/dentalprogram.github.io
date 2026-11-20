@@ -307,6 +307,23 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 #grid .card .glow{position:absolute;left:18%;right:18%;bottom:0;height:3px;border-radius:99px 99px 0 0;background:linear-gradient(90deg,transparent,var(--o),var(--y),var(--o),transparent);z-index:1;pointer-events:none;transition:left .3s,right .3s}
 #grid .card .glow::after{content:"";position:absolute;left:10%;right:10%;bottom:0;height:26px;background:radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--o) 40%,transparent),transparent 70%)}
 #grid .card:hover .glow{left:6%;right:6%}
+
+/* ---------- tone down ---------- */
+#grid .card::before,#grid .card::after{width:170px!important;height:130px!important;opacity:.55!important;background-size:12px 12px!important}
+#grid .card .dots{width:120px;height:95px;opacity:.35;background-size:12px 12px}
+#grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))!important}
+#grid .card{padding:18px 14px 16px!important}
+#grid .card .ic{width:54px!important;height:54px!important;border-radius:17px!important}
+#grid .card .ic svg{width:30px!important;height:30px!important}
+#grid .card .ic::after{inset:-6px!important;border-radius:21px!important}
+#grid .card h3{font-size:18px!important}
+#grid .card .price{font-size:22px!important;padding:3px 14px!important;margin:8px auto 12px!important}
+#grid .card .num{font-size:24px!important;top:12px!important;left:14px!important}
+#grid .card .tag{top:13px!important;right:13px!important}
+#grid .card .orb{width:120px!important;height:120px!important}
+#grid .card .btn{padding:10px 16px!important;font-size:15px!important}
+#grid .card:hover .ic,#grid .card:active .ic{transform:none!important}
+@media(min-width:900px){#grid{grid-template-columns:repeat(3,1fr)!important;max-width:900px;margin:0 auto}}
 </style>
 </head>
 <body>
