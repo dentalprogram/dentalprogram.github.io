@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><path transform='translate(-1.5 2) scale(1.05)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
 <meta name="theme-color" content="#0e1630">
 <title>منطقة الطلبة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0e1630;--bg2:#141f42;--card:#18254f;--ink:#f3f5ff;--muted:#a9b3d6;--line:#26356b;--o:#ff8a3d;--y:#ffc94d;--ok:#22c55e;--bad:#f43f5e;--t:#2dd4bf}
@@ -262,6 +263,16 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 .lec2.done .lt small{color:#86efac}
 .lec2.done .go{background:var(--card);color:var(--ink);border:1px solid var(--line)}
 @media(max-width:560px){.shead{padding:16px;gap:12px}.shead .sic{width:58px;height:58px}.shead .sic svg{width:32px;height:32px}.shead h1{font-size:21px}.spc{font-size:24px}.lec2 .go{padding:5px 10px;font-size:13px}.lec2 .n{width:40px;height:40px}}
+
+/* ---------- performance ---------- */
+.tile,.lec,.lec2,.hello,.card,.sum,.g-card,.q,.shead,.nextc,.back{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.tile,.lec2,.hello,.shead,.nextc{background-color:color-mix(in srgb,var(--card) 92%,transparent)!important}
+#bgic .blob{animation:none!important;filter:blur(50px)!important}
+#bgic i{will-change:transform}
+header{backdrop-filter:none!important}
+#pages canvas{content-visibility:auto;contain-intrinsic-size:900px 1270px}
+@media(max-width:760px){#bgic i,.bgt i{animation:none!important}body{background-attachment:scroll!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -496,16 +507,18 @@ function stamp(c){
 async function loadPdf(id,k,meta){
   const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جاري تحميل الملف...'; $('pdfMsg').style.display='';
   try{
-    const parts=await Promise.all(Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`))));
+    const jobs=Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`)));
     if(meta.type==='img'){
-      for(let i=0;i<parts.length;i++){
+      for(let i=0;i<jobs.length;i++){
+        const part=await jobs[i];
         if(tok!==pdfToken) return;
-        $('pdfMsg').textContent=`جاري عرض الصفحات... ${i+1} من ${parts.length}`;
-        const img=new Image(); img.src='data:image/jpeg;base64,'+parts[i].data().data; await img.decode();
+        $('pdfMsg').textContent=`جاري تحميل الصفحات... ${i+1} من ${jobs.length}`;
+        const img=new Image(); img.src='data:image/jpeg;base64,'+part.data().data; await img.decode();
         const c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight;
         c.getContext('2d').drawImage(img,0,0); stamp(c); $('pages').appendChild(c);
       }
     } else {
+      const parts=await Promise.all(jobs);
       const bins=parts.map(p=>{const s=atob(p.data().data);const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;});
       const all=new Uint8Array(bins.reduce((a,b)=>a+b.length,0)); let o=0; bins.forEach(b=>{all.set(b,o);o+=b.length;});
       const lib=window.pdfjsLib; lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
