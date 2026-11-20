@@ -421,7 +421,7 @@ const UA=navigator.userAgent||'';
 const inApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Snapchat|Line\/|TikTok|musical_ly|; wv\)/i.test(UA);
 const gp=new GoogleAuthProvider(); gp.setCustomParameters({prompt:'select_account'});
 const isG=u=>!!u&&u.providerData.some(p=>p.providerId==='google.com');
-let sid=null, unsubKick=null, legacy=false;
+let sid=null, unsubKick=null, legacy=false, udata=null;
 
 onAuthStateChanged(auth, async u=>{
   if(!u){ try{ await signInAnonymously(auth); }catch(e){ $('loading').textContent='مش قادر يوصل، اتأكد من النت وحدّث الصفحة'; } return; }
@@ -444,7 +444,7 @@ function askCode(){ $('acct').textContent=auth.currentUser?.email||''; step('stC
 async function boot(){
   legacy=false;
   try{
-    const ud=await getDoc(doc(db,'users',me));
+    const ud=await getDoc(doc(db,'users',me)); udata=ud.exists()?ud.data():null;
     if(ud.exists()&&ud.data().code){
       const c=ud.data().code, cd=await getDoc(doc(db,'codes',c));
       if(cd.exists() && cd.data().active && cd.data().uid===me){
@@ -498,11 +498,28 @@ $('go').onclick=async()=>{
     if(d.uid && d.uid!==me) throw 'الكود ده مربوط بحساب جوجل تاني. ادخل بالحساب اللي استخدمته أول مرة، ولو مش فاكره كلّمنا على واتساب';
     const em=auth.currentUser.email||'';
     if(!d.uid) await updateDoc(ref,{uid:me,email:em,claimedAt:serverTimestamp()});
-    await setDoc(doc(db,'users',me),{code:c});
+    await setDoc(doc(db,'users',me),{code:c},{merge:true});
     code=c; codeInfo={...d,uid:me,email:em}; home();
   }catch(e){ $('cmsg').className='msg err'; $('cmsg').textContent= typeof e==='string'?e:'حصلت مشكلة، جرب تاني'; }
   $('go').disabled=false;
 };
+
+/* progress is saved on the account, so it follows the student to any device */
+function syncProg(){
+  const pu=LS.get('dp_uid',null); if(pu&&pu!==me){ LS.set('dp_done',{}); LS.set('dp_last',null); } LS.set('dp_uid',me);
+  const srv=(udata&&udata.done)||{}, loc=LS.get('dp_done',{}), all={...srv,...loc};
+  LS.set('dp_done',all);
+  const sl=udata&&udata.last, ll=LS.get('dp_last',null);
+  if(sl&&(!ll||(sl.t||0)>(ll.t||0))) LS.set('dp_last',sl);
+  if(Object.keys(all).length!==Object.keys(srv).length||(ll&&(!sl||(ll.t||0)>(sl.t||0)))) pushProg();
+}
+let progT=null;
+function pushProg(){
+  if(freeMode||!code) return;
+  clearTimeout(progT);
+  progT=setTimeout(()=>{ updateDoc(doc(db,'users',me),{done:LS.get('dp_done',{}),last:LS.get('dp_last',null)}).catch(()=>{}); },1500);
+}
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden'&&progT){ clearTimeout(progT); progT=null; if(!freeMode&&code) updateDoc(doc(db,'users',me),{done:LS.get('dp_done',{}),last:LS.get('dp_last',null)}).catch(()=>{}); } });
 
 /* one device at a time: opening the account somewhere else closes it here */
 async function claimSession(){
@@ -544,7 +561,7 @@ function watermark(){
 window.addEventListener('resize',()=>{if(codeInfo)watermark(); else if(freeMode)freeWatermark();});
 
 async function home(){
-  watermark(); show('loading'); claimSession();
+  watermark(); show('loading'); syncProg(); claimSession();
   try{
     const [s,l]=await Promise.all([getDocs(collection(db,'subjects')),getDocs(collection(db,'lectures'))]);
     subjects=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>codeInfo.subjects.includes(x.id)).sort((a,b)=>(a.order||0)-(b.order||0));
@@ -582,7 +599,7 @@ $('lecs').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.datase
 $('subHead').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ $('wm').style.display='block'; b.dataset.go==='home'?renderHome():openSub(curSub.id); });
 function doneUI(){ const on=isDone(curId); $('doneBtn').className='donebtn'+(on?' on':''); $('doneBtn').innerHTML=on?'<i class="ic" data-i="check"></i> خلّصت المحاضرة دي':'علّم إنك خلّصتها'; fillIcons($('doneBtn')); }
-$('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); const was=!!d[curId]; if(was) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); };
+$('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); const was=!!d[curId]; if(was) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); pushProg(); };
 
 async function openLec(id){
   curLec=lectures.find(l=>l.id===id); $('lecTitle').textContent=curLec.title; show('loading');
@@ -592,7 +609,7 @@ async function openLec(id){
     const d=c.data();
     $('tSum').innerHTML='<div class="sum">'+md(d.summary||'')+'</div>';
     lecQS=d.questions||[]; curExams=d.exams||{}; QS=lecQS; curPdfs=d.pdfs||{}; curId=id;
-    if(!freeMode) LS.set('dp_last',{id}); doneUI();
+    if(!freeMode){ LS.set('dp_last',{id,t:Date.now()}); pushProg(); } doneUI();
     const T=[];
     SLOTS.forEach(s=>{ if(curPdfs[s.k]) T.push({t:'pdf:'+s.k,l:s.t}); });
     if(QS.length) T.push({t:'quiz',l:'<i class="ic" data-i="target"></i>اختبر نفسك'});
@@ -712,7 +729,7 @@ function updBar(){
 function showEnd(){
   const n=LIST.length, r=LIST.filter(j=>ST[j].ok).length, w=n-r, pct=Math.round(r*100/n);
   let auto=false;
-  if(!wrongMode&&!freeMode&&curId&&pct>=70&&!isDone(curId)){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); auto=true; }
+  if(!wrongMode&&!freeMode&&curId&&pct>=70&&!isDone(curId)){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); pushProg(); auto=true; }
   $('qend').innerHTML=`<div class="qsum"><div class="qsum-t">${wrongMode?'نتيجة إعادة الغلط':'نتيجتك'}</div><div class="qsum-n">${r} / ${n} <small>(${pct}%)</small></div>
     ${auto?'<div class="g-auto">✓ المحاضرة دي اتسجلت إنها خلصت</div>':''}
     <div class="g-btns">${w?`<button class="btn q-wrong">حل الغلط بس (${w})</button>`:''}<button class="btn ghost q-again">من الأول</button></div></div>`;

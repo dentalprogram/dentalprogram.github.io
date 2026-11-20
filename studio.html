@@ -226,14 +226,14 @@ function slotInfo(){ SLOTS.forEach(s=>{ const cur=curPdfs[s.k], f=$('f_'+s.k).fi
   $('i_'+s.k).textContent= f?'هيترفع: '+f.name : (cur&&!removed[s.k])?(cur.type==='exam'?`امتحان إلكتروني فيه ${cur.n} سؤال: `:'الملف الحالي: ')+cur.name:'مفيش ملف';
   $('r_'+s.k).classList.toggle('hide',!(cur&&!removed[s.k]&&!f)); }); }
 function burnBrand(c){
-  const ctx=c.getContext('2d'), w=c.width, H=c.height, fs=Math.round(w/26), t='Dental Programming';
+  const ctx=c.getContext('2d'), w=c.width, H=c.height, fs=Math.round(w/26), t='Dental Program';
   ctx.save(); ctx.globalAlpha=.05; ctx.fillStyle='#e8681f'; ctx.font=`800 ${fs}px Inter, Cairo, sans-serif`;
   ctx.translate(w/2,H/2); ctx.rotate(-25*Math.PI/180);
   const sx=ctx.measureText(t).width+fs*7, sy=fs*11, R=Math.hypot(w,H);
   for(let y=-R;y<R;y+=sy){ const off=(Math.round(y/sy)%2)*sx/2; for(let x=-R;x<R;x+=sx) ctx.fillText(t,x+off,y); }
   ctx.restore();
   ctx.save(); ctx.globalAlpha=.25; ctx.fillStyle='#e8681f'; ctx.font=`700 ${Math.round(w/60)}px Inter, sans-serif`; ctx.textAlign='center';
-  ctx.fillText('Dental Programming',w/2,H-Math.round(w/80)); ctx.restore();
+  ctx.fillText('Dental Program',w/2,H-Math.round(w/80)); ctx.restore();
 }
 async function pdfToImages(file,label){
   const lib=window.pdfjsLib; lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
