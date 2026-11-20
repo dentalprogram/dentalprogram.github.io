@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ffc94d'/><stop offset='1' stop-color='%23ff8a3d'/></linearGradient></defs><path transform='translate(-1.5 2) scale(1.05)' fill='url(%23g)' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
+<script>window.__dp=fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());</script>
 <meta name="theme-color" content="#0e1630">
 <title>Dental Programming</title>
 <meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات Free تجربها قبل ما تشترك">
@@ -358,7 +359,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <body>
 
 <nav class="nav">
-  <a class="logo" href="#"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--y)"/><stop offset="1" style="stop-color:var(--o)"/></linearGradient></defs><path fill="url(#tg)" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/><path fill="#fff" opacity=".35" d="M18 13c-4 1-6 4-6 8 0 2 1 3 2 3s2-1 2-3c0-3 1-4 3-5 1-1 1-3-1-3z"/></svg><span id="navName"></span></a>
+  <a class="logo" href="#"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--y)"/><stop offset="1" style="stop-color:var(--o)"/></linearGradient></defs><path fill="url(#tg)" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/><path fill="#fff" opacity=".35" d="M18 13c-4 1-6 4-6 8 0 2 1 3 2 3s2-1 2-3c0-3 1-4 3-5 1-1 1-3-1-3z"/></svg><span id="navName">Dental Program</span></a>
   <div class="links">
     <a href="#subjects"><span data-t>المواد</span></a><a href="#how"><span data-t>إزاي تطلب</span></a><a href="#pay"><span data-t>الدفع</span></a><a href="#faq"><span data-t>أسئلة</span></a>
     <a class="cta" href="learn.html"><i class="ic" data-i="lock"></i> <span data-t>دخول المشتركين</span></a>
@@ -372,9 +373,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
   <span class="ht" style="top:66%;left:9%;width:52px;--d:-1s"></span>
   <span class="ht" style="top:45%;left:30%;width:22px;--d:-3s"></span>
   <span class="ht" style="top:40%;right:32%;width:24px;--d:-5s"></span>
-  <div id="aud"></div>
-  <h1 id="sName"></h1>
-  <p id="sSlogan"></p>
+  <div id="aud" style="min-height:34px"></div>
+  <h1 id="sName">Dental Program</h1>
+  <p id="sSlogan" style="min-height:1.75em"></p>
   <div data-sec="chips" class="chips"><span class="chip"><i class="ic" data-i="teach"></i> <span data-t>شرح</span></span><span class="chip"><i class="ic" data-i="tf"></i> <span data-t>صح وغلط</span></span><span class="chip"><i class="ic" data-i="mcq"></i> <span data-t>اختيار من متعدد</span></span><span class="chip"><i class="ic" data-i="pen"></i> <span data-t>كتابي</span></span><span class="chip"><i class="ic" data-i="puzzle"></i> <span data-t>كومبليت</span></span></div>
   <div class="btns">
     <a class="btn" href="#subjects"><span data-t>شوف المواد</span></a>
@@ -508,7 +509,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 let SITE, SUBJECTS;
 (async()=>{
   try{
-    const d=await fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());
+    const d=await window.__dp;
     SITE=d.site; SUBJECTS=d.subjects||[];
   }catch(e){ document.body.innerHTML='<p style="text-align:center;padding:40px">حصلت مشكلة في تحميل الموقع، حدّث الصفحة</p>'; return; }
   init();
@@ -620,8 +621,9 @@ function deco(){
   }
   d.innerHTML=html;
 }
-deco(); let dt; window.addEventListener('resize',()=>{clearTimeout(dt);dt=setTimeout(deco,200);});
-setTimeout(deco,1200);
+const decoLater=()=>{ if(innerWidth<760){const d=document.getElementById('deco'); if(d) d.innerHTML=''; return;} requestAnimationFrame(()=>requestAnimationFrame(deco)); };
+(window.requestIdleCallback||setTimeout)(decoLater,{timeout:1500}); let dt; window.addEventListener('resize',()=>{clearTimeout(dt);dt=setTimeout(decoLater,250);});
+window.addEventListener('load',()=>setTimeout(decoLater,600));
 $('mClose').onclick=()=>$('m').classList.remove('on');
 $('m').onclick=e=>{if(e.target.id==='m')$('m').classList.remove('on');};
 }
