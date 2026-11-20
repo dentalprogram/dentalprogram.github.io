@@ -273,6 +273,18 @@ header{backdrop-filter:none!important}
 #pages canvas{content-visibility:auto;contain-intrinsic-size:900px 1270px}
 @media(max-width:760px){#bgic i,.bgt i{animation:none!important}body{background-attachment:scroll!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- scrolling quiz ---------- */
+.qbar{position:sticky;top:64px;z-index:4;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin-bottom:12px;font-weight:700}
+.qbar .g-bar{flex:1 1 100%}
+.qbar .okc{color:#86efac}.qbar .badc{color:#fda4af}
+.qi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 12px;scroll-margin-top:130px}
+.qi.is-ok{border-color:rgba(34,197,94,.55)}
+.qi.is-bad{border-color:rgba(244,63,94,.55)}
+.qsum{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:6px}
+.qsum-t{color:var(--muted);font-weight:700}
+.qsum-n{font-family:Inter,sans-serif;font-size:40px;font-weight:900;color:var(--y);direction:ltr}
+.qsum-n small{font-size:18px;color:var(--muted)}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -556,115 +568,86 @@ function md(src){
 }
 
 let QS=[], lecQS=[], curExams={}, quizKey='quiz';
-const G={list:[],i:0,pts:0,streak:0,maxStreak:0,right:0,wrong:[],answered:false};
 const isAr=s=>/[؀-ۿ]/.test(s||'');
-function renderQuiz(onlyWrong){
-  const src=onlyWrong?G.wrong.slice():QS.map((_,i)=>i);
-  Object.assign(G,{list:src,i:0,pts:0,streak:0,maxStreak:0,right:0,wrong:[],answered:false,retry:!!onlyWrong});
-  gShow();
-}
-function gTop(){
-  const n=G.list.length;
-  return `<div class="g-top">
-    <span class="g-chip"><i class="ic" data-i="star"></i>${G.pts} نقطة</span>
-    <span class="g-chip fire${G.streak>=2?' hot':''}" ${G.streak<2?'style="opacity:.55"':''}><i class="ic" data-i="spark"></i>سلسلة ${G.streak}</span>
-    <span class="g-chip"><i class="ic" data-i="target"></i>${Math.min(G.i+1,n)} / ${n}</span>
-    <div class="g-bar"><i style="width:${Math.round(G.i*100/n)}%"></i></div></div>`;
-}
-function gShow(){
-  if(!G.list.length){ $('game').innerHTML='<div class="card muted">مفيش أسئلة هنا</div>'; return; }
-  if(G.i>=G.list.length) return gEnd();
-  const q=QS[G.list[G.i]], L=isAr(q.q)?'':' ltr';
-  $('game').innerHTML=gTop()+`<div class="g-card">
-    <div class="g-n">${G.retry?'بنعيد الغلط · ':''}سؤال ${G.i+1}</div>
-    ${q.type==='type'&&inlineOK(q)?'':`<div class="g-q${L}">${esc(q.q)}</div>`}
-    ${q.type==='open'?`<textarea id="gopen" class="g-open${L?' ltr':''}" rows="3" placeholder="اكتب إجابتك هنا لو حابب، أو جاوب في دماغك"></textarea><button class="btn ghost" id="gshow" style="width:100%;margin-top:8px">شوف الإجابة النموذجية</button>`
-     :q.type==='type'?gBlanksHTML(q,L)
-      :(q.options||[]).map((o,k)=>`<button class="g-opt${isAr(o)?'':' ltr'}" data-k="${k}"><span class="k">${String.fromCharCode(65+k)}</span><span>${esc(o)}</span></button>`).join('')}
-    <div class="g-fb" id="gfb"></div>
-    <button class="btn g-next hide" id="gnext">${G.i+1<G.list.length?'اللي بعده ←':'شوف نتيجتك'}</button></div>`;
-  G.answered=false; fillIcons($('game'));
-  const gi=document.querySelector('#game .g-bl'); if(gi) setTimeout(()=>gi.focus({preventScroll:true}),50);
-}
 const blanksOf=q=>(q.blanks||[q.answers||[]]).map(b=>Array.isArray(b)?b:String(b).split('|').map(x=>x.trim()).filter(Boolean));
 const inlineOK=q=>(q.q.match(/_{3,}/g)||[]).length===blanksOf(q).length&&blanksOf(q).length>0;
-function gBlanksHTML(q,L){
-  const B=blanksOf(q);
-  const inp=i=>`<input class="g-bl${L?' ltr':''}" data-b="${i}" autocomplete="off" aria-label="الفراغ ${i+1}">`;
-  if(inlineOK(q)){ let i=0; const parts=esc(q.q).split(/_{3,}/); return `<div class="g-q g-fill${L}">${parts.map((p,j)=>p+(j<parts.length-1?inp(i++):'')).join('')}</div><button class="btn" id="gcheck" style="width:100%;margin-top:4px">تأكيد</button>`; }
-  return `<div class="g-type" style="flex-direction:column">${B.map((_,i)=>inp(i)).join('')}<button class="btn" id="gcheck">تأكيد</button></div>`;
-}
-const norm=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[^a-z0-9\u0600-\u06FF]+/g,' ').trim();
+const norm=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[^a-z0-9؀-ۿ]+/g,' ').trim();
 function lev(a,b){ const m=a.length,n=b.length; if(Math.abs(m-n)>2) return 9; const d=Array.from({length:m+1},(_,i)=>[i]); for(let j=1;j<=n;j++)d[0][j]=j;
   for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[m][n]; }
 function typedOk(v,answers){ const x=norm(v); if(!x) return false; return answers.some(a=>{ const y=norm(a); return x===y||(y.length>=5&&lev(x,y)<=1); }); }
-function gTyped(){
-  if(G.answered) return; const q=QS[G.list[G.i]], B=blanksOf(q);
-  const ins=[...document.querySelectorAll('#game .g-bl')], vals=ins.map(x=>x.value);
-  if(!vals.some(v=>v.trim())) return;
-  let pos=vals.map((v,i)=>typedOk(v,B[i]));
-  if(!pos.every(Boolean)&&B.length>1){ // accept any order for lists
-    const used=new Set(), any=vals.map(v=>{ const j=B.findIndex((b,j)=>!used.has(j)&&typedOk(v,b)); if(j>=0){used.add(j);return true;} return false; });
-    if(any.every(Boolean)) pos=any;
-  }
-  ins.forEach((x,i)=>{ x.disabled=true; x.classList.add(pos[i]?'ok':'bad'); });
-  $('gcheck').disabled=true;
-  gResolve(pos.every(Boolean), q, B.map(b=>b[0]).join(' – '));
+
+/* ---------- scrolling quiz: all questions on one page ---------- */
+let ST={}, LIST=[], wrongMode=false;
+function renderQuiz(onlyWrong){
+  if(!QS.length){ $('game').innerHTML='<div class="card muted">مفيش أسئلة هنا</div>'; return; }
+  wrongMode=!!onlyWrong;
+  if(onlyWrong){ LIST=LIST.filter(i=>ST[i]&&!ST[i].ok); LIST.forEach(i=>delete ST[i]); }
+  else { ST={}; LIST=QS.map((_,i)=>i); }
+  $('game').innerHTML=`<div class="qbar" id="qbar"></div><div id="qlist">${LIST.map((i,k)=>qHTML(i,k)).join('')}</div><div id="qend"></div>`;
+  updBar(); fillIcons($('game'));
+  if(onlyWrong) $('game').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function gReveal(){
-  const q=QS[G.list[G.i]], b=$('gshow'); b.outerHTML=`<div class="g-model${isAr(q.model)?'':' ltr'}"><b>الإجابة النموذجية:</b><div>${esc(q.model).replace(/\n/g,'<br>')}</div></div>
-    <div class="g-self"><span>جاوبت صح؟</span><button class="btn small" id="gyes">أيوه ✓</button><button class="btn ghost small" id="gno">محتاج أراجعها</button></div>`;
-  const t=$('gopen'); if(t) t.disabled=true;
+function qHTML(i,k){
+  const q=QS[i], L=isAr(q.q)?'':' ltr';
+  let body='';
+  if(q.type==='open') body=`<textarea class="g-open${L?' ltr':''}" rows="3" placeholder="اكتب إجابتك هنا لو حابب، أو جاوب في دماغك"></textarea><button class="btn ghost q-show" style="width:100%;margin-top:8px">شوف الإجابة النموذجية</button>`;
+  else if(q.type==='type'){
+    const B=blanksOf(q), inp=j=>`<input class="g-bl${L?' ltr':''}" data-b="${j}" autocomplete="off" aria-label="الفراغ ${j+1}">`;
+    if(inlineOK(q)){ let j=0; const parts=esc(q.q).split(/_{3,}/); body=`<div class="g-q g-fill${L}">${parts.map((p,x)=>p+(x<parts.length-1?inp(j++):'')).join('')}</div><button class="btn q-check" style="width:100%;margin-top:4px">تأكيد</button>`; }
+    else body=`<div class="g-type" style="flex-direction:column">${B.map((_,j)=>inp(j)).join('')}<button class="btn q-check">تأكيد</button></div>`;
+  } else body=(q.options||[]).map((o,x)=>`<button class="g-opt${isAr(o)?'':' ltr'}" data-k="${x}"><span class="k">${String.fromCharCode(65+x)}</span><span>${esc(o)}</span></button>`).join('');
+  const showQ=!(q.type==='type'&&inlineOK(q));
+  return `<div class="qi" data-q="${i}"><div class="g-n">سؤال ${k+1} من ${LIST.length}</div>${showQ?`<div class="g-q${L}">${esc(q.q)}</div>`:''}${body}<div class="g-fb"></div></div>`;
 }
-function gAnswer(k){
-  if(G.answered) return;
-  const q=QS[G.list[G.i]];
-  document.querySelectorAll('#game .g-opt').forEach(b=>{ b.disabled=true; const kk=+b.dataset.k; if(kk===q.answer) b.classList.add('ok'); else if(kk===k) b.classList.add('bad'); });
-  gResolve(k===q.answer, q, q.options[q.answer]);
+function resolve(box,ok,correct){
+  const i=+box.dataset.q, q=QS[i]; ST[i]={ok}; box.classList.add(ok?'is-ok':'is-bad');
+  const fb=box.querySelector('.g-fb'); fb.className='g-fb show '+(ok?'ok':'bad');
+  fb.innerHTML=(ok?'✓ إجابة صحيحة':`✗ إجابة غلط${correct?` · الصح: <span class="${isAr(correct)?'':'ltr'}" style="display:inline-block">${esc(correct)}</span>`:''}`)+(q.explanation?`<p class="${isAr(q.explanation)?'':'ltr'}">${esc(q.explanation)}</p>`:'');
+  updBar();
+  if(LIST.every(j=>ST[j])) showEnd();
 }
-function gResolve(ok,q,correct){
-  G.answered=true; const qi=G.list[G.i];
-  if(ok){ G.right++; G.streak++; G.maxStreak=Math.max(G.maxStreak,G.streak); G.pts+=10+Math.min(G.streak-1,5)*2; }
-  else { G.streak=0; G.wrong.push(qi); }
-  const msgs=ok?(G.streak>=3?['نار عليك 🔥','مكمّل صح!','ولا غلطة!']:['صح ✓','برافو!','كده بالظبط']):['لأ، مش دي','قريبة، بس لأ','ركّز في دي'];
-  const fb=$('gfb'); fb.className='g-fb show '+(ok?'ok':'bad');
-  fb.innerHTML=`${msgs[Math.floor(Math.random()*msgs.length)]}${ok?` <span style="opacity:.8">+${10+Math.min(G.streak-1,5)*2}</span>`:!correct?' · راجعها تاني':` · الصح: <span class="${isAr(correct)?'':'ltr'}" style="display:inline-block">${esc(correct)}</span>`}${q.explanation?`<p class="${isAr(q.explanation)?'':'ltr'}">${esc(q.explanation)}</p>`:''}`;
-  $('gnext').classList.remove('hide');
-  const top=document.querySelector('#game .g-top'); if(top){ top.outerHTML=gTop(); fillIcons($('game')); }
+function updBar(){
+  const n=LIST.length, a=LIST.filter(j=>ST[j]).length, r=LIST.filter(j=>ST[j]&&ST[j].ok).length;
+  $('qbar').innerHTML=`<span>جاوبت <b>${a}</b> من ${n}</span><span>صح <b class="okc">${r}</b> · غلط <b class="badc">${a-r}</b></span><div class="g-bar"><i style="width:${n?Math.round(a*100/n):0}%"></i></div>`;
 }
-function gEnd(){
-  const n=G.list.length, pct=Math.round(G.right*100/n), stars=pct>=90?3:pct>=70?2:pct>=50?1:0;
-  const key='dp_best_'+curId+'_'+quizKey; let best=LS.get(key,0); const nb=!G.retry&&pct>best; if(nb){ best=pct; LS.set(key,pct); }
-  const auto=!G.retry&&!freeMode&&curId&&pct>=70&&!isDone(curId);
-  if(auto){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); }
-  const msg=pct>=90?'ممتاز! إنت جاهز للامتحان':pct>=70?'كويس جدًا، راجع اللي غلطت فيه':pct>=50?'مش وحش، بس محتاج مراجعة':'راجع المحاضرة وحاول تاني';
-  $('game').innerHTML=`<div class="g-end" id="gend">
-    <div class="g-stars">${[1,2,3].map(s=>`<i class="ic${s<=stars?' on':''}" data-i="star" style="animation-delay:${s*.15}s"></i>`).join('')}</div>
-    <div class="g-pct">${pct}%</div>
-    <div style="margin-top:6px;font-weight:800">${msg}</div>
-    <div class="g-stats"><span class="g-chip"><i class="ic" data-i="check"></i>${G.right} صح من ${n}</span><span class="g-chip"><i class="ic" data-i="star"></i>${G.pts} نقطة</span><span class="g-chip fire"><i class="ic" data-i="spark"></i>أطول سلسلة ${G.maxStreak}</span></div>
-    ${!G.retry?`<div class="g-best">${nb?'🏆 دي أحسن درجة ليك في المحاضرة دي!':`أحسن درجة ليك: ${best}%`}</div>`:''}
+function showEnd(){
+  const n=LIST.length, r=LIST.filter(j=>ST[j].ok).length, w=n-r, pct=Math.round(r*100/n);
+  let auto=false;
+  if(!wrongMode&&!freeMode&&curId&&pct>=70&&!isDone(curId)){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); auto=true; }
+  $('qend').innerHTML=`<div class="qsum"><div class="qsum-t">${wrongMode?'نتيجة إعادة الغلط':'نتيجتك'}</div><div class="qsum-n">${r} / ${n} <small>(${pct}%)</small></div>
     ${auto?'<div class="g-auto">✓ المحاضرة دي اتسجلت إنها خلصت</div>':''}
-    <div class="g-btns">${G.wrong.length?`<button class="btn" id="gwrong">حل الغلط بس (${G.wrong.length})</button>`:''}<button class="btn ghost" id="gagain">من الأول</button></div></div>`;
-  fillIcons($('game'));
-  if(pct>=70&&!matchMedia('(prefers-reduced-motion: reduce)').matches){ const e=$('gend'), C=['#ffc94d','#ff8a3d','#22c55e','#ff6aa2','#7b8cff'];
-    for(let i=0;i<40;i++){ const s=document.createElement('i'); s.className='conf'; s.style.left=Math.random()*100+'%'; s.style.background=C[i%5]; s.style.animationDelay=Math.random()*.6+'s'; e.appendChild(s); } }
+    <div class="g-btns">${w?`<button class="btn q-wrong">حل الغلط بس (${w})</button>`:''}<button class="btn ghost q-again">من الأول</button></div></div>`;
 }
 $('game').addEventListener('click',e=>{
-  const o=e.target.closest('.g-opt'); if(o&&!o.disabled) return gAnswer(+o.dataset.k);
-  if(e.target.closest('#gcheck')) return gTyped();
-  if(e.target.closest('#gshow')) return gReveal();
-  if(e.target.closest('#gyes')||e.target.closest('#gno')){ const q=QS[G.list[G.i]], ok=!!e.target.closest('#gyes'); document.querySelector('#game .g-self').remove(); return gResolve(ok,q,''); }
-  if(e.target.closest('#gnext')){ G.i++; gShow(); $('game').scrollIntoView({behavior:'smooth',block:'start'}); return; }
-  if(e.target.closest('#gwrong')) return renderQuiz(true);
-  if(e.target.closest('#gagain')) return renderQuiz(false);
+  const o=e.target.closest('.g-opt');
+  if(o&&!o.disabled){ const box=o.closest('.qi'); if(box.classList.contains('done')) return; box.classList.add('done');
+    const q=QS[+box.dataset.q], k=+o.dataset.k;
+    box.querySelectorAll('.g-opt').forEach(b=>{ b.disabled=true; const kk=+b.dataset.k; if(kk===q.answer) b.classList.add('ok'); else if(kk===k) b.classList.add('bad'); });
+    return resolve(box,k===q.answer,q.options[q.answer]); }
+  const c=e.target.closest('.q-check'); if(c) return checkTyped(c.closest('.qi'));
+  const sh=e.target.closest('.q-show');
+  if(sh){ const box=sh.closest('.qi'), q=QS[+box.dataset.q];
+    sh.outerHTML=`<div class="g-model${isAr(q.model)?'':' ltr'}"><b>الإجابة النموذجية:</b><div>${esc(q.model).replace(/\n/g,'<br>')}</div></div><div class="g-self"><span>جاوبت صح؟</span><button class="btn small q-yes">أيوه ✓</button><button class="btn ghost small q-no">محتاج أراجعها</button></div>`;
+    const t=box.querySelector('.g-open'); if(t) t.disabled=true; return; }
+  const yn=e.target.closest('.q-yes,.q-no');
+  if(yn){ const box=yn.closest('.qi'); if(box.classList.contains('done')) return; box.classList.add('done'); box.querySelector('.g-self').remove(); return resolve(box,yn.classList.contains('q-yes'),''); }
+  if(e.target.closest('.q-wrong')) return renderQuiz(true);
+  if(e.target.closest('.q-again')){ renderQuiz(false); $('game').scrollIntoView({behavior:'smooth',block:'start'}); }
 });
+function checkTyped(box){
+  if(!box||box.classList.contains('done')) return;
+  const q=QS[+box.dataset.q], B=blanksOf(q), ins=[...box.querySelectorAll('.g-bl')], vals=ins.map(x=>x.value);
+  if(!vals.some(v=>v.trim())) return;
+  let pos=vals.map((v,j)=>typedOk(v,B[j]));
+  if(!pos.every(Boolean)&&B.length>1){ const used=new Set(), any=vals.map(v=>{ const j=B.findIndex((b,j)=>!used.has(j)&&typedOk(v,b)); if(j>=0){used.add(j);return true;} return false; }); if(any.every(Boolean)) pos=any; }
+  ins.forEach((x,j)=>{ x.disabled=true; x.classList.add(pos[j]?'ok':'bad'); });
+  const btn=box.querySelector('.q-check'); if(btn) btn.disabled=true;
+  box.classList.add('done'); resolve(box,pos.every(Boolean),B.map(b=>b[0]).join(' – '));
+}
 document.addEventListener('keydown',e=>{
-  if($('tQuiz').classList.contains('hide')) return;
-  if(e.target&&e.target.classList&&e.target.classList.contains('g-bl')){ if(e.key==='Enter'){ e.preventDefault(); const all=[...document.querySelectorAll('#game .g-bl')], i=all.indexOf(e.target); if(i<all.length-1&&!all[i+1].value) all[i+1].focus(); else gTyped(); } return; }
-  if(e.target&&e.target.id==='gopen') return;
-  if(!G.answered&&/^[1-6a-fA-F]$/.test(e.key)){ const k=/\d/.test(e.key)?+e.key-1:e.key.toLowerCase().charCodeAt(0)-97; const b=document.querySelector(`#game .g-opt[data-k="${k}"]`); if(b) gAnswer(k); }
-  else if(G.answered&&e.key==='Enter'){ const n=$('gnext'); if(n) n.click(); }
+  if(!e.target||!e.target.classList||!e.target.classList.contains('g-bl')||e.key!=='Enter') return;
+  e.preventDefault(); const box=e.target.closest('.qi'), all=[...box.querySelectorAll('.g-bl')], i=all.indexOf(e.target);
+  if(i<all.length-1&&!all[i+1].value) all[i+1].focus(); else checkTyped(box);
 });
 function tab(t){
   document.querySelectorAll('#tabs [data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
