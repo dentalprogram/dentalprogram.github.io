@@ -47,6 +47,13 @@ pre{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:10px;fo
 .freebox{display:flex!important;align-items:center;gap:10px;background:rgba(255,201,77,.1);border:1px dashed rgba(255,201,77,.5);border-radius:12px;padding:10px 12px;color:var(--ink)!important;cursor:pointer;margin-top:12px!important}
 .freebox input{width:20px;height:20px;accent-color:#ff8a3d}
 .badge-free{font-size:11px;font-weight:800;background:rgba(255,201,77,.2);color:#ffc94d;border-radius:999px;padding:1px 8px;margin-inline-start:6px}
+.ipick{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.ipick button{font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--bg2);border:1.5px solid var(--line);border-radius:14px;padding:10px 4px;color:var(--muted);cursor:pointer;font-size:11px;font-weight:700}
+.ipick button svg{width:30px;height:30px;color:var(--y)}
+.ipick button.on{border-color:var(--o);background:rgba(255,138,61,.14);color:var(--ink)}
+.sic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(255,201,77,.1);border:1px solid rgba(255,201,77,.35);vertical-align:middle;margin-inline-end:8px}
+.sic svg{width:22px;height:22px;color:var(--y)}
+.editpick{margin-top:10px}
 </style>
 </head>
 <body>
@@ -122,10 +129,8 @@ pre{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:10px;fo
     <div id="t-subs" class="hide">
       <div class="card">
         <h2>➕ مادة جديدة</h2>
-        <div style="display:grid;grid-template-columns:80px 1fr;gap:8px">
-          <div><label>إيموجي</label><input id="sIcon" value="📘"></div>
-          <div><label>اسم المادة</label><input id="sName"></div>
-        </div>
+        <label>اسم المادة</label><input id="sName">
+        <label>اختار الأيقونة</label><div class="ipick" id="sPick"></div><input type="hidden" id="sIcon" value="book">
         <div style="margin-top:12px"><button class="btn" id="sAdd">ضيف المادة</button></div>
         <div class="msg" id="smsg"></div>
       </div>
@@ -136,6 +141,7 @@ pre{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:10px;fo
   </div>
 </div>
 
+<script src="icons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -173,7 +179,12 @@ async function loadAll(){
   renderAll();
 }
 function renderAll(){ renderSubs(); renderLecs(); renderCodes(); }
-const subName=id=>{const s=subjects.find(x=>x.id===id);return s?s.icon+' '+s.name:'مادة اتمسحت';};
+const subName=id=>{const s=subjects.find(x=>x.id===id);return s?s.name:'مادة اتمسحت';};
+const sIc=s=>`<span class="sic">${window.subjectIcon?subjectIcon(s.name,s.icon):''}</span>`;
+function pickHTML(cur){ return (window.SUBJECT_ICONS||[]).map(([k,l])=>`<button type="button" data-ik="${k}" class="${k===cur?'on':''}">${subjectIconKey(k)}<span>${l}</span></button>`).join(''); }
+function drawPick(){ $('sPick').innerHTML=pickHTML($('sIcon').value); }
+$('sPick').onclick=e=>{const b=e.target.closest('[data-ik]'); if(!b) return; $('sIcon').value=b.dataset.ik; drawPick();};
+drawPick();
 
 document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));
@@ -182,19 +193,24 @@ document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{
 
 /* ---------- subjects ---------- */
 function renderSubs(){
-  $('sList').innerHTML=subjects.map(s=>`<div class="item"><div class="top"><b>${esc(s.icon)} ${esc(s.name)}</b>
-    <div class="acts"><span class="muted">${lectures.filter(l=>l.subjectId===s.id).length} محاضرة</span><button class="btn red small" data-sdel="${s.id}">مسح</button></div></div></div>`).join('')||'<div class="muted">لسه مفيش مواد</div>';
-  $('cSubs').innerHTML=subjects.map(s=>`<label><input type="checkbox" value="${s.id}">${esc(s.icon)} ${esc(s.name)}</label>`).join('')+(subjects.length>1?`<label><input type="checkbox" id="cAll">الكل</label>`:'');
+  $('sList').innerHTML=subjects.map(s=>`<div class="item"><div class="top"><b>${sIc(s)}${esc(s.name)}</b>
+    <div class="acts"><span class="muted">${lectures.filter(l=>l.subjectId===s.id).length} محاضرة</span><button class="btn ghost small" data-sic="${s.id}">غيّر الأيقونة</button><button class="btn red small" data-sdel="${s.id}">مسح</button></div></div><div class="ipick editpick hide" id="ep_${s.id}"></div></div>`).join('')||'<div class="muted">لسه مفيش مواد</div>';
+  $('cSubs').innerHTML=subjects.map(s=>`<label><input type="checkbox" value="${s.id}">${esc(s.name)}</label>`).join('')+(subjects.length>1?`<label><input type="checkbox" id="cAll">الكل</label>`:'');
   const all=$('cAll'); if(all) all.onchange=()=>$('cSubs').querySelectorAll('input[value]').forEach(x=>x.checked=all.checked);
-  $('lSub').innerHTML=subjects.map(s=>`<option value="${s.id}">${esc(s.icon)} ${esc(s.name)}</option>`).join('');
+  $('lSub').innerHTML=subjects.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
 }
 $('sAdd').onclick=async()=>{
   const name=$('sName').value.trim(); if(!name) return say('smsg','اكتب اسم المادة');
   const id='s'+Date.now().toString(36);
-  try{ await setDoc(doc(db,'subjects',id),{name,icon:$('sIcon').value.trim()||'📘',order:subjects.length+1});
-    $('sName').value=''; say('smsg','اتضافت ✓',true); await loadAll(); }catch(e){ say('smsg','حصلت مشكلة'); }
+  try{ await setDoc(doc(db,'subjects',id),{name,icon:$('sIcon').value||'book',order:subjects.length+1});
+    $('sName').value=''; $('sIcon').value='book'; drawPick(); say('smsg','اتضافت ✓',true); await loadAll(); }catch(e){ say('smsg','حصلت مشكلة'); }
 };
-$('sList').onclick=e=>{const b=e.target.closest('[data-sdel]'); if(!b) return; confirm2(b,async()=>{
+$('sList').onclick=async e=>{
+  const ch=e.target.closest('[data-sic]');
+  if(ch){ const s=subjects.find(x=>x.id===ch.dataset.sic), box=$('ep_'+s.id); box.innerHTML=pickHTML(s.icon); box.classList.toggle('hide'); return; }
+  const pk=e.target.closest('.editpick [data-ik]');
+  if(pk){ const id=pk.closest('.editpick').id.slice(3); try{ await updateDoc(doc(db,'subjects',id),{icon:pk.dataset.ik}); say('smsg','الأيقونة اتغيّرت ✓',true); await loadAll(); }catch(err){ say('smsg','حصلت مشكلة'); } return; }
+  const b=e.target.closest('[data-sdel]'); if(!b) return; confirm2(b,async()=>{
   await deleteDoc(doc(db,'subjects',b.dataset.sdel)); await loadAll(); });};
 
 /* ---------- lectures ---------- */
