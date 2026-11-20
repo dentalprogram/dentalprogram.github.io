@@ -318,11 +318,11 @@ $('lSave').onclick=async()=>{
         if(cur&&cur.type!=='exam') await delChunks(id,s.k,cur.n);
         pdfs[s.k]={type:'exam',n:qs.length,name:f.name}; exams[s.k]=qs;
       } else if(f){
-        const imgs=await pdfToImages(f,s.t), n=imgs.length;
+        const imgs=await pdfToImages(f,s.t), n=imgs.length, v=Date.now();
         for(let i=0;i<n;i++){ say('lmsg2',`جاري رفع ${s.t}... ${Math.round((i+1)*100/n)}%`,true);
-          await setDoc(doc(db,'chunks',`${id}_${s.k}_${i}`),{subjectId,lecture:id,i,data:imgs[i]}); }
+          await setDoc(doc(db,'chunks',`${id}_${s.k}_${i}`),{subjectId,lecture:id,i,v,data:imgs[i]}); }
         if(cur&&cur.type!=='exam'&&cur.n>n) for(let i=n;i<cur.n;i++) await deleteDoc(doc(db,'chunks',`${id}_${s.k}_${i}`)).catch(()=>{});
-        pdfs[s.k]={n,name:f.name,type:'img'};
+        pdfs[s.k]={n,name:f.name,type:'img',v};
       } else if(cur&&removed[s.k]){ if(cur.type!=='exam') await delChunks(id,s.k,cur.n); }
       else if(cur){ pdfs[s.k]=cur; if(cur.type==='exam') exams[s.k]=curExams[s.k]||[]; }
     }

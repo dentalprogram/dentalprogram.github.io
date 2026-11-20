@@ -409,7 +409,7 @@ if(!firebaseConfig.apiKey){ $('loading').textContent='الموقع لسه بيت
 const app=initializeApp(firebaseConfig), auth=getAuth(app);
 let db; try{ db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})}); }catch(e){ db=getFirestore(app); }
 /* file pages: use the copy saved on this device first, download only if missing */
-async function getPage(ref){ try{ const s=await getDocFromCache(ref); if(s.exists()) return s; }catch(e){} return getDoc(ref); }
+async function getPage(ref,v){ try{ const s=await getDocFromCache(ref); if(s.exists()&&(s.data().v||0)===(v||0)) return s; }catch(e){} return getDoc(ref); }
 let freeMode=false;
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const isDone=id=>!!LS.get('dp_done',{})[id];
@@ -635,7 +635,7 @@ function stamp(c){
 async function loadPdf(id,k,meta){
   const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جاري تحميل الملف...'; $('pdfMsg').style.display='';
   try{
-    const jobs=Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`)));
+    const jobs=Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`),meta.v));
     if(meta.type==='img'){
       for(let i=0;i<jobs.length;i++){
         const part=await jobs[i];
