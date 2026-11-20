@@ -348,7 +348,7 @@ $('lList').onclick=async e=>{
 /* ---------- codes ---------- */
 function genCode(){ const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; const r=n=>Array.from(crypto.getRandomValues(new Uint32Array(n)),x=>A[x%A.length]).join(''); return 'DP-'+r(4)+'-'+r(4); }
 const site=location.origin+location.pathname.replace(/[^/]*$/,'')+'learn.html';
-function message(c){ return `أهلًا ${c.name} 👋\nده الكود بتاعك: ${c.id}\nادخل من هنا: ${site}\nالكود بيشتغل على جهاز واحد بس، فادخله من الجهاز اللي هتذاكر عليه.`; }
+function message(c){ return `أهلًا ${c.name} 👋\nده الكود بتاعك: ${c.id}\nادخل من هنا: ${site}\nافتح اللينك من كروم مش من جوه واتساب، وسجّل بحساب جوجل بتاعك، والكود هيتربط بيه. تقدر تدخل بنفس الحساب من أي جهاز، بس جهاز واحد في نفس الوقت.`; }
 $('cMake').onclick=async()=>{
   const name=$('cName').value.trim(), phone=$('cPhone').value.trim();
   const subs=[...$('cSubs').querySelectorAll('input[value]:checked')].map(x=>x.value);
@@ -370,13 +370,13 @@ $('cMake').onclick=async()=>{
 };
 function renderCodes(){
   const q=$('cSearch').value.trim().toLowerCase();
-  const list=codes.filter(c=>!q||(c.id+' '+c.name+' '+c.phone).toLowerCase().includes(q));
+  const list=codes.filter(c=>!q||(c.id+' '+c.name+' '+c.phone+' '+(c.email||'')).toLowerCase().includes(q));
   $('cList').innerHTML=list.map(c=>{
-    const st=!c.active?'<span class="badge b-off">متوقف</span>':c.uid?'<span class="badge b-ok">شغال على جهاز</span>':'<span class="badge b-wait">لسه ما دخلش</span>';
+    const st=!c.active?'<span class="badge b-off">متوقف</span>':c.uid?'<span class="badge b-ok">'+(c.email?'مربوط بجوجل':'شغال على جهاز')+'</span>':'<span class="badge b-wait">لسه ما دخلش</span>';
     return `<div class="item"><div class="top"><div><b>${esc(c.name)}</b> ${st}<br><span class="code">${c.id}</span> <span class="muted ltr" style="display:inline-block">${esc(c.phone||'')}</span>
-      <div class="muted" style="font-size:13px">${(c.subjects||[]).map(subName).map(esc).join(' · ')}</div></div>
+      ${c.email?`<div class="muted ltr" style="font-size:13px">${esc(c.email)}</div>`:''}<div class="muted" style="font-size:13px">${(c.subjects||[]).map(subName).map(esc).join(' · ')}</div></div>
       <div class="acts">
-        ${c.uid?`<button class="btn ghost small" data-reset="${c.id}">فك الجهاز</button>`:''}
+        ${c.uid?`<button class="btn ghost small" data-reset="${c.id}">فك الربط</button>`:''}
         <button class="btn ghost small" data-tog="${c.id}">${c.active?'إيقاف':'تشغيل'}</button>
         <button class="btn ghost small" data-msg="${c.id}">نسخ الرسالة</button>
         <button class="btn red small" data-cdel="${c.id}">مسح</button>
@@ -387,7 +387,7 @@ $('cList').onclick=async e=>{
   const b=e.target.closest('button'); if(!b) return;
   const id=b.dataset.reset||b.dataset.tog||b.dataset.msg||b.dataset.cdel, c=codes.find(x=>x.id===id); if(!c) return;
   try{
-    if(b.dataset.reset) confirm2(b,async()=>{ if(c.uid) await deleteDoc(doc(db,'users',c.uid)).catch(()=>{}); await updateDoc(doc(db,'codes',id),{uid:null}); await loadAll(); });
+    if(b.dataset.reset) confirm2(b,async()=>{ if(c.uid) await deleteDoc(doc(db,'users',c.uid)).catch(()=>{}); await updateDoc(doc(db,'codes',id),{uid:null,email:null}); await loadAll(); });
     if(b.dataset.tog){ await updateDoc(doc(db,'codes',id),{active:!c.active}); await loadAll(); }
     if(b.dataset.msg) navigator.clipboard.writeText(message(c)).then(()=>{b.textContent='اتنسخت ✓';});
     if(b.dataset.cdel) confirm2(b,async()=>{ if(c.uid) await deleteDoc(doc(db,'users',c.uid)).catch(()=>{}); await deleteDoc(doc(db,'codes',id)); await loadAll(); });

@@ -26,6 +26,9 @@ input:focus{outline:none;border-color:var(--o)}
 .btn.ghost{background:var(--bg2);color:var(--ink);border:1px solid var(--line)}
 .btn.small{font-size:14px;padding:7px 14px}
 .btn:disabled{opacity:.5}
+.gbtn{background:#fff;color:#1f2937;display:flex;align-items:center;justify-content:center;gap:10px}
+.acct{direction:ltr;font-weight:800;color:var(--y);margin:4px 0 12px;word-break:break-all}
+.lnk{background:none;border:none;color:var(--muted);font-family:inherit;font-size:13px;text-decoration:underline;cursor:pointer;margin-top:8px}
 .msg{margin-top:10px;font-weight:700;min-height:1.5em}.msg.err{color:var(--bad)}.msg.ok{color:var(--ok)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;transition:.15s}
@@ -306,14 +309,43 @@ header{backdrop-filter:none!important}
   <!-- code entry -->
   <div id="vCode" class="hide">
     <div class="card" style="max-width:460px;margin:30px auto;text-align:center">
-      <div class="bigic"><i class="ic" data-i="lock"></i></div>
-      <h1>ادخل الكود بتاعك</h1>
-      <p class="muted">الكود ده وصلك على واتساب بعد ما دفعت. الكود بيشتغل على جهاز واحد بس، فادخله من الجهاز اللي هتذاكر عليه.</p>
-      <input id="code" placeholder="DP-XXXX-XXXX" autocomplete="off" maxlength="20">
-      <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">دخول</button></div>
-      <div class="msg" id="cmsg"></div>
+      <div id="stInApp" class="hide">
+        <div class="bigic"><i class="ic" data-i="lock"></i></div>
+        <h1>افتح الموقع من كروم</h1>
+        <p class="muted">انت فاتح الموقع من جوه تطبيق تاني، وهنا مش هينفع تسجّل دخول. افتح نفس اللينك من كروم أو سفاري.</p>
+        <a class="btn" id="openChrome" style="width:100%;display:none;text-decoration:none;box-sizing:border-box">افتح في كروم</a>
+        <button class="btn ghost" id="copyLink" style="width:100%;margin-top:10px">انسخ اللينك</button>
+        <div class="msg" id="iamsg"></div>
+      </div>
+      <div id="stGoogle" class="hide">
+        <div class="bigic"><i class="ic" data-i="lock"></i></div>
+        <h1 id="gTitle">سجّل دخولك الأول</h1>
+        <p class="muted" id="gSub">الكود بتاعك هيتربط بحساب جوجل بتاعك، فتقدر تدخل من أي متصفح بنفس الحساب من غير ما الكود يتقفل.</p>
+        <button class="btn gbtn" id="gIn" style="width:100%"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> <span>الدخول بحساب جوجل</span></button>
+        <div class="msg" id="gmsg"></div>
+      </div>
+      <div id="stCode" class="hide">
+        <div class="bigic"><i class="ic" data-i="lock"></i></div>
+        <h1>ادخل الكود بتاعك</h1>
+        <p class="muted">الكود ده وصلك على واتساب بعد ما دفعت، وهيتربط بالحساب ده بس:</p>
+        <div class="acct" id="acct"></div>
+        <input id="code" placeholder="DP-XXXX-XXXX" autocomplete="off" maxlength="20">
+        <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">دخول</button></div>
+        <div class="msg" id="cmsg"></div>
+        <button class="lnk" id="swAcct">مش ده حسابك؟ غيّره</button>
+      </div>
       <div class="or"><span>أو</span></div>
       <button class="btn ghost" id="tryFree" style="width:100%"><i class="ic" data-i="eye"></i> Try for Free</button>
+    </div>
+  </div>
+
+  <!-- opened on another device -->
+  <div id="vKick" class="hide">
+    <div class="card" style="max-width:460px;margin:30px auto;text-align:center">
+      <div class="bigic"><i class="ic" data-i="lock"></i></div>
+      <h1>حسابك اتفتح على جهاز تاني</h1>
+      <p class="muted">الحساب بيشتغل على جهاز واحد بس في نفس الوقت. لو انت اللي فتحته، تقدر تكمّل هنا والجهاز التاني هيقفل.</p>
+      <button class="btn" id="kickBack" style="width:100%">كمّل على الجهاز ده</button>
     </div>
   </div>
 
@@ -361,13 +393,13 @@ header{backdrop-filter:none!important}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, getDocFromCache, doc, getDoc, setDoc, updateDoc, collection, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, linkWithPopup, signOut, signInWithCredential } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, getDocFromCache, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const show=v=>{['loading','vCode','vHome','vSub','vLec'].forEach(x=>$(x).classList.toggle('hide',x!==v));window.scrollTo(0,0);};
+const show=v=>{['loading','vCode','vKick','vHome','vSub','vLec'].forEach(x=>$(x).classList.toggle('hide',x!==v));window.scrollTo(0,0);};
 
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
@@ -384,40 +416,107 @@ const isDone=id=>!!LS.get('dp_done',{})[id];
 const isNew=l=>l.createdAt&&Date.now()-l.createdAt<7*864e5;
 let me=null, code=null, codeInfo=null, subjects=[], lectures=[], curSub=null, curLec=null;
 
+/* ---------- login: code is tied to the student's Google account, one device at a time ---------- */
+const UA=navigator.userAgent||'';
+const inApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Snapchat|Line\/|TikTok|musical_ly|; wv\)/i.test(UA);
+const gp=new GoogleAuthProvider(); gp.setCustomParameters({prompt:'select_account'});
+const isG=u=>!!u&&u.providerData.some(p=>p.providerId==='google.com');
+let sid=null, unsubKick=null, legacy=false;
+
 onAuthStateChanged(auth, async u=>{
   if(!u){ try{ await signInAnonymously(auth); }catch(e){ $('loading').textContent='مش قادر يوصل، اتأكد من النت وحدّث الصفحة'; } return; }
   me=u.uid; await boot();
 });
 
+function step(st){ ['stInApp','stGoogle','stCode'].forEach(x=>$(x).classList.toggle('hide',x!==st)); show('vCode'); fillIcons(); }
+function askLogin(){
+  if(inApp){
+    const url=location.href.split('#')[0];
+    if(/Android/i.test(UA)){ const a=$('openChrome'); a.href='intent://'+url.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;end'; a.style.display='block'; }
+    return step('stInApp');
+  }
+  $('gTitle').textContent=legacy?'اربط الكود بحساب جوجل':'سجّل دخولك الأول';
+  $('gSub').textContent=legacy?'خطوة واحدة بس: اربط الكود بتاعك بحساب جوجل، وبعد كده تقدر تدخل من أي متصفح أو موبايل جديد بنفس الحساب.':'الكود بتاعك هيتربط بحساب جوجل بتاعك، فتقدر تدخل من أي متصفح بنفس الحساب من غير ما الكود يتقفل.';
+  step('stGoogle');
+}
+function askCode(){ $('acct').textContent=auth.currentUser?.email||''; step('stCode'); }
+
 async function boot(){
+  legacy=false;
   try{
     const ud=await getDoc(doc(db,'users',me));
-    if(ud.exists()){
+    if(ud.exists()&&ud.data().code){
       const c=ud.data().code, cd=await getDoc(doc(db,'codes',c));
-      if(cd.exists() && cd.data().active && cd.data().uid===me){ code=c; codeInfo=cd.data(); return home(); }
-      if(cd.exists() && cd.data().uid){ $('cmsg').className='msg err'; $('cmsg').textContent='الكود بتاعك اتوقف، كلّمنا على واتساب'; }
+      if(cd.exists() && cd.data().active && cd.data().uid===me){
+        code=c; codeInfo=cd.data();
+        if(!isG(auth.currentUser)){ legacy=true; if(location.hash==='#free') return enterFree(); return askLogin(); }
+        return home();
+      }
+      if(cd.exists() && !cd.data().active){ $('cmsg').className='msg err'; $('cmsg').textContent='الكود بتاعك اتوقف، كلّمنا على واتساب'; }
     }
   }catch(e){}
   if(location.hash==='#free') return enterFree();
-  show('vCode'); fillIcons();
+  if(isG(auth.currentUser)) return askCode();
+  askLogin();
 }
+
+$('gIn').onclick=async()=>{
+  $('gIn').disabled=true; $('gmsg').className='msg'; $('gmsg').textContent='';
+  try{
+    const cur=auth.currentUser;
+    if(cur&&cur.isAnonymous){
+      try{ await linkWithPopup(cur,gp); me=cur.uid; }
+      catch(e){
+        if(e.code==='auth/credential-already-in-use'||e.code==='auth/email-already-in-use'){
+          if(legacy) throw 'الإيميل ده مربوط بكود تاني. اختار إيميل تاني أو كلّمنا على واتساب';
+          const cred=GoogleAuthProvider.credentialFromError(e);
+          await signInWithCredential(auth,cred); $('gIn').disabled=false; return;
+        } else throw e;
+      }
+    } else { await signInWithPopup(auth,gp); $('gIn').disabled=false; return; }
+    if(legacy&&code){ try{ await updateDoc(doc(db,'codes',code),{email:auth.currentUser.email||''}); }catch(e){} return home(); }
+    await boot();
+  }catch(e){
+    $('gmsg').className='msg err';
+    $('gmsg').textContent= typeof e==='string'?e:(e.code==='auth/popup-closed-by-user'||e.code==='auth/cancelled-popup-request')?'اتقفلت نافذة جوجل قبل ما تختار حسابك، جرب تاني':(e.code==='auth/popup-blocked')?'المتصفح منع نافذة جوجل، اسمح بالنوافذ المنبثقة وجرب تاني':'حصلت مشكلة في الدخول، جرب تاني';
+  }
+  $('gIn').disabled=false;
+};
+$('swAcct').onclick=async()=>{ try{ await signOut(auth); }catch(e){} };
+$('copyLink').onclick=async()=>{ const url=location.href.split('#')[0]; try{ await navigator.clipboard.writeText(url); $('iamsg').className='msg ok'; $('iamsg').textContent='اتنسخ، افتح كروم والصقه'; }catch(e){ $('iamsg').className='msg'; $('iamsg').textContent=url; } };
 
 $('go').onclick=async()=>{
   const c=$('code').value.trim().toUpperCase().replace(/\s+/g,'');
   if(!c) return;
+  if(!isG(auth.currentUser)) return askLogin();
   $('go').disabled=true; $('cmsg').className='msg'; $('cmsg').textContent='جاري التأكد...';
   try{
     const ref=doc(db,'codes',c), cd=await getDoc(ref);
     if(!cd.exists()) throw 'الكود ده غلط، اتأكد منه وجرب تاني';
     const d=cd.data();
     if(!d.active) throw 'الكود ده متوقف، كلّمنا على واتساب';
-    if(d.uid && d.uid!==me) throw 'الكود ده متسجل على جهاز تاني. لو غيّرت جهازك كلّمنا على واتساب';
-    if(!d.uid) await updateDoc(ref,{uid:me,claimedAt:serverTimestamp()});
+    if(d.uid && d.uid!==me) throw 'الكود ده مربوط بحساب جوجل تاني. ادخل بالحساب اللي استخدمته أول مرة، ولو مش فاكره كلّمنا على واتساب';
+    const em=auth.currentUser.email||'';
+    if(!d.uid) await updateDoc(ref,{uid:me,email:em,claimedAt:serverTimestamp()});
     await setDoc(doc(db,'users',me),{code:c});
-    code=c; codeInfo={...d,uid:me}; home();
+    code=c; codeInfo={...d,uid:me,email:em}; home();
   }catch(e){ $('cmsg').className='msg err'; $('cmsg').textContent= typeof e==='string'?e:'حصلت مشكلة، جرب تاني'; }
   $('go').disabled=false;
 };
+
+/* one device at a time: opening the account somewhere else closes it here */
+async function claimSession(){
+  if(unsubKick){ unsubKick(); unsubKick=null; }
+  sid=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)+Date.now());
+  try{ await updateDoc(doc(db,'users',me),{session:sid}); }catch(e){ return; }
+  unsubKick=onSnapshot(doc(db,'users',me),s=>{
+    if(s.metadata.hasPendingWrites||!s.exists()) return;
+    const v=s.data().session;
+    if(v&&v!==sid){ if(unsubKick){unsubKick();unsubKick=null;} $('wm').style.display='none'; show('vKick'); fillIcons(); }
+    if(!s.data().code){ location.reload(); }
+  },()=>{});
+}
+$('kickBack').onclick=()=>{ location.hash=''; location.reload(); };
 $('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('go').click();});
 $('tryFree').onclick=()=>enterFree();
 function freeWatermark(){
@@ -445,7 +544,7 @@ function watermark(){
 window.addEventListener('resize',()=>{if(codeInfo)watermark(); else if(freeMode)freeWatermark();});
 
 async function home(){
-  watermark(); show('loading');
+  watermark(); show('loading'); claimSession();
   try{
     const [s,l]=await Promise.all([getDocs(collection(db,'subjects')),getDocs(collection(db,'lectures'))]);
     subjects=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>codeInfo.subjects.includes(x.id)).sort((a,b)=>(a.order||0)-(b.order||0));
