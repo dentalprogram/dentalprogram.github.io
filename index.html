@@ -331,7 +331,7 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 
 /* ---------- nav blends with hero ---------- */
 .nav{background:transparent!important;backdrop-filter:none!important;border-bottom:1px solid transparent!important;transition:background .3s,border-color .3s,backdrop-filter .3s}
-.nav.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent)!important;backdrop-filter:blur(10px)!important;border-bottom-color:var(--line)!important}
+.nav{position:relative!important}
 .hero{margin-top:-62px!important;padding-top:104px!important}
 .num b{min-width:0;overflow-wrap:anywhere;font-size:16px}
 .num .copy{flex:none}
@@ -520,7 +520,6 @@ $('foot').textContent='© '+new Date().getFullYear()+' '+SITE.name+' — كل ا
 const wa=t=>'https://wa.me/'+SITE.whatsapp+'?text='+encodeURIComponent(t);
 $('waFloat').href=$('footWa').href=wa('السلام عليكم، عندي استفسار عن المواد');
 window.addEventListener('scroll',()=>$('totop').classList.toggle('show',scrollY>700),{passive:true});
-const navEl=document.querySelector('.nav'); const navUpd=()=>navEl.classList.toggle('scrolled',scrollY>20); window.addEventListener('scroll',navUpd,{passive:true}); navUpd();
 $('totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
 $('grid').innerHTML=SUBJECTS.map((s,i)=>`<div class="card reveal">
