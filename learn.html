@@ -256,13 +256,13 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
       <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">دخول</button></div>
       <div class="msg" id="cmsg"></div>
       <div class="or"><span>أو</span></div>
-      <button class="btn ghost" id="tryFree" style="width:100%"><i class="ic" data-i="eye"></i> جرّب المحاضرات المجانية</button>
+      <button class="btn ghost" id="tryFree" style="width:100%"><i class="ic" data-i="eye"></i> Try for Free</button>
     </div>
   </div>
 
   <!-- subjects -->
   <div id="vHome" class="hide">
-    <div id="freeBar" class="freebar hide"><div><b>دي محاضرات مجانية عشان تجرب المستوى</b><div class="muted">عجبتك؟ اشترك وافتح كل المحاضرات، وكل جديد هيوصلك أول بأول.</div></div><a class="btn small" href="./#subjects">اشترك دلوقتي</a></div>
+    <div id="freeBar" class="freebar hide"><div><b>محاضرات مفتوحة عشان تجرب المستوى</b><div class="muted">عجبتك؟ اشترك وافتح كل المحاضرات، وكل جديد هيوصلك أول بأول.</div></div><a class="btn small" href="./#subjects">اشترك دلوقتي</a></div>
     <div id="hello"></div>
     <div id="cont"></div>
     <h1 id="homeTitle"><i class="ic" data-i="book"></i> موادك</h1>
@@ -364,8 +364,8 @@ $('go').onclick=async()=>{
 $('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('go').click();});
 $('tryFree').onclick=()=>enterFree();
 function freeWatermark(){
-  $('who').textContent='عينة مجانية';
-  const t='Dental Programming  •  عينة مجانية';
+  $('who').textContent='';
+  const t='Dental Program  •  Free';
   let h='';for(let y=-100;y<window.innerHeight+300;y+=210)for(let x=-200;x<window.innerWidth+200;x+=440)h+=`<span style="top:${y}px;left:${x+(Math.round(y/210)%2)*220}px">${esc(t)}</span>`;
   $('wm').innerHTML=h; $('wm').style.display='block';
 }
@@ -402,12 +402,12 @@ function renderHome(){
     $('hello').innerHTML=`<div class="hello"><div><div class="hi">أهلًا ${esc(codeInfo.name||'')} 👋</div><div class="muted">خلّصت ${dn} من ${mine.length} محاضرة في موادك</div><div class="prog big"><i style="width:${pc}%"></i></div></div><div class="pc">${pc}%</div></div>`; }
   else $('hello').innerHTML='';
   $('homeSub').textContent=freeMode?'جرّب المستوى بنفسك، ولو عجبك اشترك':'اختار مادة وكمّل من مكان ما وقفت';
-  $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> محاضرات مجانية':'<i class="ic" data-i="book"></i> موادك';
+  $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> Try for Free':'<i class="ic" data-i="book"></i> موادك';
   const last=LS.get('dp_last',null), ll=last&&lectures.find(l=>l.id===last.id);
   $('cont').innerHTML=(!freeMode&&ll)?`<div class="contc" data-l="${esc(ll.id)}"><i class="ic" data-i="play"></i><div><small>كمّل من مكان ما وقفت</small><b>${esc(ll.title)}</b></div></div>`:'';
   $('subs').innerHTML=subjects.length?subjects.map(s=>{const ls=lectures.filter(l=>l.subjectId===s.id), d=ls.filter(l=>isDone(l.id)).length, nw=ls.some(isNew);
     return `<div class="tile${!freeMode&&ls.length&&d===ls.length?' full':''}" data-s="${esc(s.id)}">${!freeMode&&ls.length?`<span class="tpc">${Math.round(d*100/ls.length)}%</span>`:''}<div class="ic">${subjectIcon(s.name,s.icon)}</div><h3>${esc(s.name)}${nw?'<span class="newb">جديد</span>':''}</h3><div class="muted">${ls.length} محاضرة${!freeMode&&ls.length?` · خلّصت ${d}`:''}</div>${!freeMode&&ls.length?`<div class="prog"><i style="width:${Math.round(d*100/ls.length)}%"></i></div>`:''}</div>`}).join('')
-    : `<div class="card muted">${freeMode?'لسه مفيش محاضرات مجانية، ارجع قريب':'لسه مفيش مواد متاحة ليك'}</div>`;
+    : `<div class="card muted">${freeMode?'لسه مفيش محاضرات Free، ارجع قريب':'لسه مفيش مواد متاحة ليك'}</div>`;
   show('vHome'); fillIcons();
 }
 $('cont').onclick=e=>{const t=e.target.closest('[data-l]'); if(!t) return; const l=lectures.find(x=>x.id===t.dataset.l); curSub=subjects.find(s=>s.id===l.subjectId)||{id:l.subjectId,name:''}; openLec(l.id);};
@@ -415,7 +415,7 @@ $('subs').onclick=e=>{const t=e.target.closest('[data-s]');if(t)openSub(t.datase
 function openSub(id){
   curSub=subjects.find(s=>s.id===id); $('subTitle').textContent=curSub.name;
   const ls=lectures.filter(l=>l.subjectId===id);
-  $('lecs').innerHTML=ls.length?ls.map((l,i)=>`<div class="lec${isDone(l.id)?' done':''}" data-l="${esc(l.id)}"><span class="n">${i+1}</span><div>${esc(l.title)}${isNew(l)?'<span class="newb">جديد</span>':''}${l.free&&!freeMode?'<span class="freeb">مجانية</span>':''}</div><i class="ic tick" data-i="check"></i></div>`).join(''):'<div class="card muted">المحاضرات هتنزل هنا قريب</div>';
+  $('lecs').innerHTML=ls.length?ls.map((l,i)=>`<div class="lec${isDone(l.id)?' done':''}" data-l="${esc(l.id)}"><span class="n">${i+1}</span><div>${esc(l.title)}${isNew(l)?'<span class="newb">جديد</span>':''}${l.free&&!freeMode?'<span class="freeb">Free</span>':''}</div><i class="ic tick" data-i="check"></i></div>`).join(''):'<div class="card muted">المحاضرات هتنزل هنا قريب</div>';
   show('vSub'); fillIcons();
 }
 $('lecs').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
@@ -447,7 +447,7 @@ let curPdfs={}, curId=null;
 let pdfToken=0;
 function stamp(c){
   const ctx=c.getContext('2d'), w=c.width, H=c.height;
-  const t=codeInfo?`${codeInfo.name||''}   ${codeInfo.phone||''}   ${code}`:'Dental Programming   •   عينة مجانية';
+  const t=codeInfo?`${codeInfo.name||''}   ${codeInfo.phone||''}   ${code}`:'Dental Program   •   Free';
   const fs=Math.max(14,Math.round(w/42));
   ctx.save(); ctx.globalAlpha=.075; ctx.fillStyle='#e8681f'; ctx.font=`700 ${fs}px Inter, Cairo, sans-serif`;
   ctx.translate(w/2,H/2); ctx.rotate(-25*Math.PI/180);
