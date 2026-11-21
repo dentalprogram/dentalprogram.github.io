@@ -7,13 +7,13 @@
 <script>window.__dp=fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());</script>
 <meta name="theme-color" content="#6B5C49">
 <title>Dental Program</title>
-<meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات Free تجربها قبل ما تشترك">
+<meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان Level One، مع محاضرات مجانية تجربها قبل ما تشترك">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:site_name" content="Dental Program">
 <meta property="og:url" content="https://dentalprogram.github.io/">
 <meta property="og:title" content="Dental Program | شرح وبنوك أسئلة">
-<meta property="og:description" content="شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، مع محاضرات Free تجربها قبل ما تشترك">
+<meta property="og:description" content="شرح وبنوك أسئلة لطلبة طب الأسنان Level One، مع محاضرات مجانية تجربها قبل ما تشترك">
 <meta property="og:image" content="https://dentalprogram.github.io/og.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="800">
@@ -452,8 +452,8 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
 .payic-sm{width:20px;height:20px;color:var(--acc)}
 .opt.on.vf,.opt.on.ip,.opt.on{border-color:var(--o);background:rgba(122,28,28,.22)}
 .opt.on .payic-sm{color:var(--ink)}/* content cleanup */
-.aud{direction:rtl}
-.card .tag{direction:rtl}
+.aud{direction:ltr}
+.card .tag{direction:ltr}
 .card .d{margin-bottom:18px}
 /* ===== features section: side decorations (wide screens) ===== */
 [data-sec="feats"]{position:relative;overflow:hidden}
@@ -497,7 +497,7 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
       <div id="aud" style="min-height:34px"></div>
       <h1 id="sName">Dental Program</h1>
       <p id="sSlogan" style="display:none"></p>
-      <p class="lead"><span data-t>شرح وبنوك أسئلة لطلبة طب الأسنان الفرقة الأولى، كل مادة متقسمة محاضرات وفيها شرح واختبارات تذاكرها من مكان واحد.</span></p>
+      <p class="lead"><span data-t>شرح وبنوك أسئلة لطلبة طب الأسنان Level One، كل مادة متقسمة محاضرات وفيها شرح واختبارات تذاكرها من مكان واحد.</span></p>
       <div class="btns">
         <a class="btn" href="#subjects"><span data-t>شوف المواد</span></a>
         <a data-sec="btnFree" class="btn ghost" href="learn.html#free"><i class="ic" data-i="eye"></i> <span data-t>جرّب مجانًا</span></a>
@@ -522,7 +522,7 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
 
 <section class="stats" aria-label="أرقام سريعة">
   <div class="container stats-in">
-    <div class="stat"><b id="stSubj">6</b><span>مواد الفرقة الأولى</span></div>
+    <div class="stat"><b id="stSubj">6</b><span>مواد Level One</span></div>
     <div class="stat"><b>4</b><span>أنواع أسئلة في كل محاضرة</span></div>
     <div class="stat"><b>24/7</b><span>ذاكر في أي وقت ومن أي مكان</span></div>
     <div class="stat"><b>100%</b><span>أونلاين، من الموبايل أو اللابتوب</span></div>
@@ -548,7 +548,7 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
   <section class="section" id="subjects">
     <div class="container">
       <div class="sec-head reveal">
-        <span class="eyebrow"><span data-t>الفرقة الأولى</span></span>
+        <span class="eyebrow"><span data-t>Level One</span></span>
         <h2><span data-t>المواد</span></h2>
         <p class="sec-sub"><span data-t>اشترك في المادة اللي محتاجها، أو خد المواد كلها بسعر أقل</span></p>
       </div>
@@ -723,7 +723,7 @@ $('totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
 const TONES=['','c2','c3','c4'];
 $('grid').innerHTML=SUBJECTS.map((s,i)=>`<article class="card glass tilt reveal">
-  <div class="card-top pop"><div class="ico3d ${TONES[i%4]}">${subjectIcon(s.name,s.icon)}</div><span class="tag">الفرقة الأولى</span></div>
+  <div class="card-top pop"><div class="ico3d ${TONES[i%4]}">${subjectIcon(s.name,s.icon)}</div><span class="tag">Level One</span></div>
   <h3 class="pop2">${esc(s.name)}</h3>${s.desc?`<p class="d pop2">${esc(s.desc)}</p>`:''}
   <div class="card-foot pop2"><div class="price">${money(s.price)}</div><button class="btn buy small" data-buy="${i}">${T('اطلب دلوقتي')}</button></div></article>`).join('');
 
