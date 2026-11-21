@@ -4,25 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237A1F2B'/><stop offset='1' stop-color='%237A1F2B'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23ffffff' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
-<meta name="theme-color" content="#F6F1E9">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237A1C1C'/><stop offset='1' stop-color='%237A1C1C'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23CDB28A' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
+<meta name="theme-color" content="#6B5C49">
 <title>إدارة الطلبة والمحاضرات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ===== Dental Program panels (admin + studio), calm beige + burgundy ===== */
 :root{
-  --bg:#F6F1E9;--bg2:#EFE6D8;--card:#FFFDF9;--ink:#2B2320;--muted:#6F625A;--line:#E4D8C6;
-  --o:#7A1F2B;--y:#A8323E;--p2:#8C5A3C;--pink:#A0525C;--ok:#2F7D57;--bad:#B42318;
+  --on:#F2E8D8; --acc:#F3DFBF;
+  --bg:#6B5C49;--bg2:#615340;--card:#776750;--ink:#F2E8D8;--muted:#DCCEB6;--line:#8F7C61;
+  --o:#7A1C1C;--y:#8A2424;--p2:#7A1C1C;--pink:#8A2424;--ok:#7BC8A0;--bad:#F0907F;
   --grad:var(--o);--glass:var(--card);--gl:var(--line);
-  --sh:0 1px 2px rgba(60,40,30,.06);
+  --sh:0 1px 2px rgba(0,0,0,.25);
   --font:'Cairo',system-ui,'Segoe UI',Tahoma,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;min-height:100vh}
 button,input,select,textarea{font-family:inherit}
-a{color:var(--o)}
+a{color:var(--acc)}
 .hide{display:none!important}
 .ltr{direction:ltr;text-align:left}
 .muted,.sub{color:var(--muted)}
@@ -42,34 +43,34 @@ svg.uic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none}
 .brand .mark svg{width:20px;height:20px}
 .brand b{display:block;font-size:16.5px;font-weight:800;line-height:1.25}
 .brand small{display:block;color:var(--muted);font-size:12.5px;line-height:1.3}
-.topbar .tlink{display:inline-flex;align-items:center;gap:6px;color:var(--o);text-decoration:none;box-shadow:inset 0 0 0 1.5px var(--o);border-radius:10px;padding:6px 12px;font-weight:700;font-size:14px;white-space:nowrap}
+.topbar .tlink{display:inline-flex;align-items:center;gap:6px;color:var(--acc);text-decoration:none;box-shadow:inset 0 0 0 1.5px var(--o);border-radius:10px;padding:6px 12px;font-weight:700;font-size:14px;white-space:nowrap}
 .topbar .tlink:hover{background:color-mix(in srgb,var(--o) 7%,transparent)}
 .topbar .tlink .ic{width:16px;height:16px}
 .page-head{margin:8px 0 6px}
-.page-head h1{font-size:26px;font-weight:800;margin:0;color:var(--o)}
+.page-head h1{font-size:26px;font-weight:800;margin:0;color:var(--acc)}
 .page-head p{margin:4px 0 0;color:var(--muted)}
 
 /* cards & form */
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:var(--sh)}
 .card h2{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:800;margin:0 0 12px}
-.card h2 .ic{width:38px;height:38px;padding:9px;border-radius:10px;color:var(--o);background:color-mix(in srgb,var(--o) 9%,var(--card));border:1px solid color-mix(in srgb,var(--o) 16%,transparent)}
+.card h2 .ic{width:38px;height:38px;padding:9px;border-radius:10px;color:var(--acc);background:color-mix(in srgb,var(--o) 9%,var(--card));border:1px solid color-mix(in srgb,var(--o) 16%,transparent)}
 label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px;color:var(--muted)}
 input,select,textarea{font-size:15.5px;width:100%;padding:10px 13px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);transition:border-color .2s}
-input::placeholder,textarea::placeholder{color:#A99B8E}
+input::placeholder,textarea::placeholder{color:#BFAF95}
 select option{background:var(--card)}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--o)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc)}
 textarea{resize:vertical;line-height:1.7}
 input[type=file]{padding:9px;background:var(--card);border-style:dashed;cursor:pointer}
-input[type=file]::file-selector-button{font-family:inherit;font-weight:700;border:none;border-radius:8px;background:var(--o);color:#FFF8F0;padding:6px 12px;margin-inline-end:10px;cursor:pointer}
+input[type=file]::file-selector-button{font-family:inherit;font-weight:700;border:none;border-radius:8px;background:var(--o);color:#F2E8D8;padding:6px 12px;margin-inline-end:10px;cursor:pointer}
 a:focus-visible,button:focus-visible{outline:2px solid var(--o);outline-offset:2px}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15.5px;line-height:1.2;border:0;border-radius:11px;padding:11px 18px;cursor:pointer;text-decoration:none;color:#FFF8F0;background:var(--o);transition:background .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15.5px;line-height:1.2;border:0;border-radius:11px;padding:11px 18px;cursor:pointer;text-decoration:none;color:#F2E8D8;background:var(--o);transition:background .2s}
 .btn:hover{background:color-mix(in srgb,var(--o) 85%,#000)}
-.btn.ghost{background:transparent;color:var(--o);box-shadow:inset 0 0 0 1.5px var(--o)}
+.btn.ghost{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--o)}
 .btn.ghost:hover{background:color-mix(in srgb,var(--o) 7%,transparent)}
-.btn.red{background:#FBECEA;color:var(--bad);box-shadow:inset 0 0 0 1px #E5A9A2}
-.btn.red:hover{background:var(--bad);color:#fff}
+.btn.red{background:rgba(240,144,127,.14);color:var(--bad);box-shadow:inset 0 0 0 1px rgba(240,144,127,.45)}
+.btn.red:hover{background:var(--bad);color:#F2E8D8}
 .btn.small{font-size:13.5px;padding:7px 12px;border-radius:9px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn .ic{width:17px;height:17px}
@@ -91,10 +92,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--o);outline-offset:2
 .col span{font-size:14px;font-weight:600}
 .chk{display:flex;align-items:center;gap:10px;margin:0;padding:10px 4px;font-weight:600;color:var(--ink);cursor:pointer;border-bottom:1px solid var(--line)}
 .chk:last-child{border-bottom:none}
-.chk input{width:20px;height:20px;accent-color:var(--o);flex:none}
+.chk input{width:20px;height:20px;accent-color:var(--acc);flex:none}
 .tx{border-top:1px solid var(--line);padding:10px 0}
 .tx .orig{font-size:13.5px;color:var(--muted);margin-bottom:6px}
-.tx.changed .orig{color:var(--o);font-weight:700}
+.tx.changed .orig{color:var(--acc);font-weight:700}
 .bar{position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;justify-content:center;align-items:center}
 #smsg{text-align:center;z-index:21;pointer-events:none}
 
@@ -102,48 +103,59 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--o);outline-offset:2
 .tabs{display:flex;gap:6px;margin:14px 0 4px;padding:5px;background:var(--bg2);border-radius:14px}
 .tabs button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;border:none;background:transparent;color:var(--muted);border-radius:10px;padding:9px;cursor:pointer}
 .tabs button:hover{color:var(--ink)}
-.tabs button.on{background:var(--o);color:#FFF8F0}
+.tabs button.on{background:var(--o);color:#F2E8D8}
 .tabs .ic{width:18px;height:18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{display:flex;align-items:center;gap:8px;margin:0;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:5px 14px;color:var(--ink);cursor:pointer;font-weight:600;direction:ltr}
-.chips label:has(input:checked){border-color:var(--o);background:color-mix(in srgb,var(--o) 8%,var(--card));color:var(--o)}
-.chips input{width:16px;height:16px;accent-color:var(--o);margin:0}
+.chips label:has(input:checked){border-color:var(--acc);background:color-mix(in srgb,var(--o) 8%,var(--card));color:var(--acc)}
+.chips input{width:16px;height:16px;accent-color:var(--acc);margin:0}
 .item{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
 .item .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .item .acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .item b{font-weight:700}
 .item > b{display:flex;align-items:center;gap:8px}
-.item > b .ic{color:var(--o)}
+.item > b .ic{color:var(--acc)}
 .badge{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 10px;vertical-align:middle}
-.b-ok{background:#E5F2EA;color:var(--ok)}
-.b-off{background:#FBECEA;color:var(--bad)}
-.b-wait{background:#F4EAD6;color:#8A6A2F}
-.code{font-weight:800;letter-spacing:1px;direction:ltr;display:inline-block;color:var(--o);font-variant-numeric:tabular-nums}
+.b-ok{background:rgba(123,200,160,.14);color:var(--ok)}
+.b-off{background:rgba(240,144,127,.14);color:var(--bad)}
+.b-wait{background:rgba(242,232,216,.1);color:#F3DFBF}
+.code{font-weight:800;letter-spacing:1px;direction:ltr;display:inline-block;color:var(--acc);font-variant-numeric:tabular-nums}
 .newcode{background:color-mix(in srgb,var(--o) 6%,var(--card));border:1px solid color-mix(in srgb,var(--o) 30%,var(--line));border-radius:14px;padding:16px;margin-top:14px}
-.newcode .big{font-size:28px;color:var(--o)}
+.newcode .big{font-size:28px;color:var(--acc)}
 pre{white-space:pre-wrap;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;font-family:inherit;font-size:14.5px;margin:10px 0}
-.freebox{display:flex!important;align-items:center;gap:10px;background:#F4EAD6;border:1px dashed #D9C39A;border-radius:12px;padding:12px 14px;color:var(--ink)!important;cursor:pointer;margin-top:16px!important;font-weight:600}
-.freebox input{width:20px;height:20px;accent-color:var(--o);flex:none}
-.freebox .ic{color:#8A6A2F;width:20px;height:20px}
-.badge-free{font-size:11px;font-weight:700;background:#F4EAD6;color:#8A6A2F;border-radius:999px;padding:1px 8px;margin-inline-start:8px}
+.freebox{display:flex!important;align-items:center;gap:10px;background:rgba(242,232,216,.1);border:1px dashed rgba(242,232,216,.4);border-radius:12px;padding:12px 14px;color:var(--ink)!important;cursor:pointer;margin-top:16px!important;font-weight:600}
+.freebox input{width:20px;height:20px;accent-color:var(--acc);flex:none}
+.freebox .ic{color:#F3DFBF;width:20px;height:20px}
+.badge-free{font-size:11px;font-weight:700;background:rgba(242,232,216,.1);color:#F3DFBF;border-radius:999px;padding:1px 8px;margin-inline-start:8px}
 .ipick{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
 .ipick button{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 4px 10px;color:var(--muted);cursor:pointer;font-size:12px;font-weight:600}
-.ipick button svg{width:28px;height:28px;color:var(--o)}
+.ipick button svg{width:28px;height:28px;color:var(--acc)}
 .ipick button:hover{border-color:color-mix(in srgb,var(--o) 45%,var(--line))}
-.ipick button.on{border-color:var(--o);background:var(--o);color:#FFF8F0}
-.ipick button.on svg{color:#FFF8F0}
-.sic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;vertical-align:middle;margin-inline-end:4px;flex:none;color:var(--o);background:color-mix(in srgb,var(--o) 9%,var(--card));border:1px solid color-mix(in srgb,var(--o) 16%,transparent)}
+.ipick button.on{border-color:var(--acc);background:var(--o);color:#F2E8D8}
+.ipick button.on svg{color:#F2E8D8}
+.sic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;vertical-align:middle;margin-inline-end:4px;flex:none;color:var(--acc);background:color-mix(in srgb,var(--o) 9%,var(--card));border:1px solid color-mix(in srgb,var(--o) 16%,transparent)}
 .sic svg{width:20px;height:20px}
 .editpick{margin-top:12px}
 .lgroup{display:flex;align-items:center;gap:8px;margin-top:18px;font-weight:800}
 .lgroup:first-child{margin-top:4px}
 details summary{cursor:pointer}
 @media(max-width:560px){.card{padding:16px}.row{grid-template-columns:64px 1fr}.row2{grid-template-columns:1fr 110px}.tabs button{font-size:14px;padding:9px 6px}}
+/* more beige accents */
+.card h2 .ic,.sic{background:var(--o);color:var(--on);border-color:transparent}
+/* even more beige */
+.card{border-width:1.5px}.card h2,.page-head h1{color:var(--acc)}.topbar{border-bottom:2px solid var(--o)}
+/* subtle dot pattern */
+body{background-image:radial-gradient(rgba(242,232,216,.08) 1px,transparent 1.5px);background-size:26px 26px}
+/* ===== dark beige primary + dark red accents ===== */
+.btn.red:hover{color:#2B2118}
+
+/* polish pass */
+:root{--muted:#EADFCB}
 </style>
 </head>
 <body style="--w:900px">
 <header class="topbar"><div class="tin">
-  <a class="brand" href="./"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#fff" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/></svg></span><span><b>الطلبة والمحاضرات</b><small>Dental Program</small></span></a>
+  <a class="brand" href="./"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#F2E8D8" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/></svg></span><span><b>الطلبة والمحاضرات</b><small>Dental Program</small></span></a>
   <a class="tlink" href="admin.html"><i class="ic" data-i="spark"></i> إعدادات الموقع</a>
 </div></header>
 <div class="wrap">
