@@ -36,6 +36,9 @@
     ['bone',['anat','bone','skull','اناتومي','أناتومي','تشريح','عظام']],
     ['eye',['ophth','عيون']],
   ];
+  // قائمة الأيقونات اللي بتظهر في صفحة الإدارة عشان تختار منها
+  window.SUBJECT_ICONS=[['book','كتاب'],['tooth','سنة'],['teeth2','تشريح أسنان'],['biomat','مواد الحشو'],['implant','زراعة'],['microscope','هستولوجي'],['heart','فسيولوجي'],['bone','تشريح'],['atom','فيزياء'],['flask','كيمياء'],['dna','بيولوجي'],['pill','فارما'],['bacteria','ميكرو'],['virus','باثولوجي'],['brain','أعصاب'],['eye','عيون']];
+  window.subjectIconKey=k=>I[k]||I.book;
   window.subjectIcon=function(name,fallback){
     const n=String(name||'').toLowerCase();
     for(const [k,words] of K){ if(words.some(w=>n.includes(w))) return I[k]; }
