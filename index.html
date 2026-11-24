@@ -430,7 +430,29 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
 .card h3{margin-bottom:18px}
 .card-foot{margin-top:auto}
 @media(max-width:600px){.wa{width:46px;height:46px;bottom:14px;left:14px}.wa .ic{width:23px;height:23px}.totop{width:40px;height:40px;bottom:14px;right:14px}}
-</style>
+/* ===== subject cards: one red element (the button) ===== */
+#grid .card .ico3d{background:transparent;color:var(--acc);border:1.5px solid rgba(242,232,216,.3)}
+#grid .card::before{display:none}
+#grid .card .card-foot{border-top:1px solid rgba(242,232,216,.16)}
+#grid .card:hover{border-color:rgba(242,232,216,.35)}/* ===== calm pass: one accent per element, no edge stripes ===== */
+/* 1 feature cards: icon + title + subtitle only */
+.feat{background:var(--card);border-top:1.5px solid var(--line)}
+.feat::before,.feat::after{display:none}
+/* 2 no coloured edges on rounded cards */
+.strip,.pay,.faq details{border:1.5px solid var(--line)}
+.faq details[open]{border-color:rgba(242,232,216,.35)}
+/* 3 payment + free-try icons: outlined, the buttons stay red */
+.payic,.strip h3 .ico3d{background:transparent;color:var(--acc);border:1.5px solid rgba(242,232,216,.3)}
+/* 4 bundle: plain red card with one dashed frame */
+.bundle{background:var(--o)}
+.bundle::after,.bundle h3::after{display:none}
+.bundle::before{inset:10px}
+.bundle>.bin{padding-inline:34px}
+@media(max-width:600px){.bundle>.bin{padding:26px 24px}}
+/* 5 tighter gap under the hero */
+.hero{padding-bottom:36px}
+/* 6 no ornament under every heading */
+.sec-head h2::after{display:none}</style>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"></div>
@@ -469,10 +491,10 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
         <p class="sec-sub"><span data-t>كل محاضرة فيها أربع حاجات، تذاكرها كلها من مكان واحد</span></p>
       </div>
       <div class="feats reveal">
-        <div class="feat glass tilt"><span class="ico3d pop"><i class="ic" data-i="teach"></i></span><b class="pop2"><span data-t>Explanation</span></b><span class="ftag pop2"><span data-t>شرح المحاضرة</span></span><span class="fdeco" aria-hidden="true"><i></i><i></i><i></i></span></div>
-        <div class="feat glass tilt"><span class="ico3d c2 pop"><i class="ic" data-i="tf"></i></span><b class="pop2"><span data-t>True / False</span></b><span class="ftag pop2"><span data-t>صح وغلط</span></span><span class="fdeco" aria-hidden="true"><i></i><i></i><i></i></span></div>
-        <div class="feat glass tilt"><span class="ico3d c3 pop"><i class="ic" data-i="mcq"></i></span><b class="pop2"><span data-t>MCQ</span></b><span class="ftag pop2"><span data-t>اختيار من متعدد</span></span><span class="fdeco" aria-hidden="true"><i></i><i></i><i></i></span></div>
-        <div class="feat glass tilt"><span class="ico3d c4 pop"><i class="ic" data-i="pen"></i></span><b class="pop2"><span data-t>Written</span></b><span class="ftag pop2"><span data-t>أسئلة كتابي</span></span><span class="fdeco" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <div class="feat glass tilt"><span class="ico3d pop"><i class="ic" data-i="teach"></i></span><b class="pop2"><span data-t>Explanation</span></b><span class="ftag pop2"><span data-t>شرح المحاضرة</span></span></div>
+        <div class="feat glass tilt"><span class="ico3d c2 pop"><i class="ic" data-i="tf"></i></span><b class="pop2"><span data-t>True / False</span></b><span class="ftag pop2"><span data-t>صح وغلط</span></span></div>
+        <div class="feat glass tilt"><span class="ico3d c3 pop"><i class="ic" data-i="mcq"></i></span><b class="pop2"><span data-t>MCQ</span></b><span class="ftag pop2"><span data-t>اختيار من متعدد</span></span></div>
+        <div class="feat glass tilt"><span class="ico3d c4 pop"><i class="ic" data-i="pen"></i></span><b class="pop2"><span data-t>Written</span></b><span class="ftag pop2"><span data-t>أسئلة كتابي</span></span></div>
       </div>
     </div>
   </section>
@@ -543,7 +565,6 @@ footer.foot{background-image:radial-gradient(rgba(242,232,216,.1) 1px,transparen
         <h2><span data-t>أسئلة بتتكرر</span></h2>
       </div>
       <div class="faq reveal" id="faqBox">
-        <details class="glass"><summary><span data-t>إزاي أشترك وإمتى يوصلني الكود؟</span></summary><p><span data-t>اختار المادة أو العرض الكامل، وحوّل على Vodafone Cash أو InstaPay، وابعت صورة التحويل على واتساب. أول ما نتأكد من التحويل، الكود بيوصلك على واتساب.</span></p></details>
         <details class="glass"><summary><span data-t>الكود بيشتغل على كام جهاز؟</span></summary><p><span data-t>على أي جهاز، بس بحساب جوجل اللي ربطت بيه الكود أول مرة. وبيشتغل على جهاز واحد في نفس الوقت: لو فتحت من جهاز تاني، الأولاني بيقفل لوحده. ولو مش فاكر ربطته بأنهي حساب، كلّمنا على واتساب.</span></p></details>
         <details class="glass"><summary><span data-t>المحاضرات اللي هتنزل بعدين داخلة في الاشتراك؟</span></summary><p><span data-t>أيوه، أي محاضرة جديدة بتنزل في المادة اللي اشتريتها بتظهرلك على نفس الكود، من غير ما تدفع تاني.</span></p></details>
         <details class="glass"><summary><span data-t>أقدر أنزّل الملفات؟</span></summary><p><span data-t>لأ، المذاكرة بتبقى جوه الموقع بس، عشان نحافظ على المحتوى. وتقدر تفتحه في أي وقت طول ما الكود شغال.</span></p></details>
@@ -635,7 +656,7 @@ if(SITE.audience) $('aud').innerHTML=`<span class="aud">${UI('users')} ${esc(SIT
 const RV=String(SITE.reviews||'').split('\n').map(l=>l.split('|')).filter(x=>x.length>=2&&x[1].trim());
 if(RV.length){ $('reviews').style.display=''; $('revSep').style.display='';
   $('revs').innerHTML=RV.map(([n,t])=>`<div class="rev glass"><div class="stars">${UI('star').repeat(5)}</div><p>${esc(t.trim())}</p><b>— ${esc(n.trim())}</b></div>`).join(''); }
-$('navName').textContent=SITE.name; $('footName').textContent=SITE.name; $('footSlogan').textContent=SITE.slogan||'شرح وبنوك أسئلة لطلبة طب الأسنان، تذاكر وتختبر نفسك من مكان واحد.';
+$('navName').textContent=SITE.name; $('footName').textContent=SITE.name; $('footSlogan').textContent=SITE.slogan||'';
 $('vfNum').textContent=$('mVf').textContent=SITE.vodafoneCash;
 $('vfName').textContent=SITE.vodafoneName?('باسم: '+SITE.vodafoneName):'';
 $('ipNum').textContent=$('mIp').textContent=SITE.instapay;
