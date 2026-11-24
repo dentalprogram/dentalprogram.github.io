@@ -1,58 +1,64 @@
 {
-  "site": {
-    "name": "Dental Program",
-    "slogan": "",
-    "currency": "جنيه",
-    "vodafoneCash": "01043976416",
-    "vodafoneName": "",
-    "instapay": "01559179096",
-    "instapayLink": "",
-    "whatsapp": "201043169689",
-    "bundlePrice": 1000,
-    "audience": "Dental Students · Level One",
-    "reviews": "",
-    "theme": {},
-    "hide": [],
-    "texts": {},
-    "faqExtra": "هل فيه استرجاع للفلوس؟ |  المحتوى رقمي، فمش بينفع استرجاع بعد ما الكود يشتغل. لكن لو الكود ماشتغلش أو حصلت أي مشكلة، كلّمنا على واتساب وهنحلها أو نرجعلك فلوسك.\nالكود شغال لحد إمتى؟ | طول الترم، لحد امتحان الفاينل"
-  },
-  "subjects": [
-    {
-      "name": "Histology",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "🌐"
-    },
-    {
-      "name": "Physiology",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "💻"
-    },
-    {
-      "name": "Biophysics",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "🧮"
-    },
-    {
-      "name": "General Anatomy",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "📊"
-    },
-    {
-      "name": "Dental Anatomy",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "🔐",
-      "avail": ""
-    },
-    {
-      "name": "Dental Biomaterials",
-      "desc": "ملخص كامل + بنك أسئلة",
-      "price": 200,
-      "icon": "🧠"
-    }
-  ]
+    "site":  {
+                 "name":  "Dental Program",
+                 "slogan":  "",
+                 "currency":  "جنيه",
+                 "vodafoneCash":  "01043976416",
+                 "vodafoneName":  "",
+                 "instapay":  "01559179096",
+                 "instapayLink":  "",
+                 "whatsapp":  "201043169689",
+                 "bundlePrice":  1000,
+                 "audience":  "Dental Students · Level One",
+                 "reviews":  "",
+                 "theme":  {
+
+                           },
+                 "hide":  [
+
+                          ],
+                 "texts":  {
+
+                           },
+                 "faqExtra":  "الكود شغال لحد إمتى؟ | طول الترم، لحد امتحان الفاينل"
+             },
+    "subjects":  [
+                     {
+                         "name":  "Histology",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "🌐"
+                     },
+                     {
+                         "name":  "Physiology",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "💻"
+                     },
+                     {
+                         "name":  "Biophysics",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "🧮"
+                     },
+                     {
+                         "name":  "General Anatomy",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "📊"
+                     },
+                     {
+                         "name":  "Dental Anatomy",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "🔐",
+                         "avail":  ""
+                     },
+                     {
+                         "name":  "Dental Biomaterials",
+                         "desc":  "",
+                         "price":  200,
+                         "icon":  "🧠"
+                     }
+                 ]
 }
