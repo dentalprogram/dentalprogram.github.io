@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237A1C1C'/><stop offset='1' stop-color='%237A1C1C'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23CDB28A' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
-<meta name="theme-color" content="#6B5C49">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%231F3A5F'/><stop offset='1' stop-color='%231F3A5F'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23CDB28A' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
+<meta name="theme-color" content="#F0EAE0">
 <title>إدارة الطلبة والمحاضرات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -151,6 +151,17 @@ body{background-image:radial-gradient(rgba(242,232,216,.08) 1px,transparent 1.5p
 
 /* polish pass */
 :root{--muted:#EADFCB}
+/* ===== THEME: cream paper + navy ink ===== */
+:root{--bg:#F0EAE0;--bg2:#E7DFD2;--card:#F4EEE5;--line:#D6CBBA;--ink:#1E2A3A;--muted:#4C586A;--o:#1F3A5F;--y:#2A4A75;--p2:#1F3A5F;--pink:#2A4A75;--acc:#1F3A5F;--on:#F4EEE5;--ok:#2F7D57;--bad:#B42318;--sh:0 1px 2px rgba(30,42,58,.06)}
+html{color-scheme:light;background:var(--bg)}
+body{background-color:var(--bg)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid var(--o);outline-offset:3px}
+.btn:hover{background:#2A4A75}
+.btn.ghost:hover{background:rgba(31,58,95,.07)}
+body{background-image:radial-gradient(rgba(30,42,58,.05) 1px,transparent 1.5px)}
+.card{box-shadow:none}
+.topbar{background:var(--bg)}
+.bar{background:var(--card)}
 </style>
 </head>
 <body style="--w:900px">

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237A1C1C'/><stop offset='1' stop-color='%237A1C1C'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23CDB28A' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%231F3A5F'/><stop offset='1' stop-color='%231F3A5F'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><path transform='translate(12 10) scale(.62)' fill='%23CDB28A' d='M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z'/></svg>">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#6B5C49">
+<meta name="theme-color" content="#F0EAE0">
 <title>منطقة المشتركين</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -319,6 +319,26 @@ body{background-image:radial-gradient(rgba(242,232,216,.08) 1px,transparent 1.5p
 .qsum{background:var(--o)}
 .shead .sic{box-shadow:none}.tile .ic,.tile:nth-child(n) .ic,.lec2 .n{background:transparent;color:var(--acc);border:1.5px solid rgba(242,232,216,.3)}
 .lec2.done .n{color:var(--ok);border-color:rgba(123,200,160,.5)}
+/* accessibility pass */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #F2E8D8;outline-offset:2px}
+.btn.small,.lec2 .go,.back,.donebtn{min-height:44px}
+html{color-scheme:dark}
+a,button,summary{touch-action:manipulation}
+/* ===== THEME: cream paper + navy ink ===== */
+:root{--bg:#F0EAE0;--bg2:#E7DFD2;--card:#F4EEE5;--line:#D6CBBA;--ink:#1E2A3A;--muted:#4C586A;--o:#1F3A5F;--y:#2A4A75;--p2:#1F3A5F;--pink:#2A4A75;--acc:#1F3A5F;--on:#F4EEE5;--ok:#2F7D57;--bad:#B42318;--sh:0 1px 2px rgba(30,42,58,.06)}
+html{color-scheme:light;background:var(--bg)}
+body{background-color:var(--bg)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid var(--o);outline-offset:3px}
+.btn:hover{background:#2A4A75}
+.btn.ghost:hover{background:rgba(31,58,95,.07)}body{background-image:radial-gradient(rgba(30,42,58,.05) 1px,transparent 1.5px)}
+header{background:var(--bg)}
+.tile .ic,.tile:nth-child(n) .ic,.lec2 .n,.contc>.ic{border-color:var(--line)}
+.g-opt.ok .k,.g-opt.bad .k{color:#F4EEE5}
+.qi,.card,.tile,.shead,.sum,.contc,.lec2{box-shadow:none}
+.freebar{background:var(--card);border-color:var(--line)}
+.g-opt .k{background:rgba(31,58,95,.12);color:var(--ink)}
+.g-opt.ok .k{background:var(--ok);color:#F4EEE5}
+.g-opt.bad .k{background:var(--bad);color:#F4EEE5}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -335,7 +355,7 @@ body{background-image:radial-gradient(rgba(242,232,216,.08) 1px,transparent 1.5p
 <div id="wm"></div>
 
 <div class="wrap">
-  <div id="loading" class="spin">جاري التحميل...</div>
+  <div id="loading" class="spin">جاري التحميل…</div>
 
   <!-- code entry -->
   <div id="vCode" class="hide">
@@ -360,7 +380,7 @@ body{background-image:radial-gradient(rgba(242,232,216,.08) 1px,transparent 1.5p
         <h1>ادخل الكود بتاعك</h1>
         <p class="muted">الكود ده وصلك على واتساب بعد ما دفعت، وهيتربط بالحساب ده بس:</p>
         <div class="acct" id="acct"></div>
-        <input id="code" placeholder="DP-XXXX-XXXX" autocomplete="off" maxlength="20">
+        <input id="code" name="code" placeholder="DP-XXXX-XXXX" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="20" aria-label="كود الاشتراك">
         <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">دخول</button></div>
         <div class="msg" id="cmsg"></div>
         <button class="lnk" id="swAcct">مش ده حسابك؟ غيّره</button>
@@ -510,7 +530,7 @@ $('go').onclick=async()=>{
   const c=$('code').value.trim().toUpperCase().replace(/\s+/g,'');
   if(!c) return;
   if(!isG(auth.currentUser)) return askLogin();
-  $('go').disabled=true; $('cmsg').className='msg'; $('cmsg').textContent='جاري التأكد...';
+  $('go').disabled=true; $('cmsg').className='msg'; $('cmsg').textContent='جاري التأكد…';
   try{
     const ref=doc(db,'codes',c), cd=await getDoc(ref);
     if(!cd.exists()) throw 'الكود ده غلط، اتأكد منه وجرب تاني';
@@ -647,21 +667,21 @@ function stamp(c){
   const ctx=c.getContext('2d'), w=c.width, H=c.height;
   const t=codeInfo?`${codeInfo.name||''}   ${codeInfo.phone||''}   ${code}`:'Dental Program   •   Free';
   const fs=Math.max(14,Math.round(w/42));
-  ctx.save(); ctx.globalAlpha=.075; ctx.fillStyle='#7A1C1C'; ctx.font=`700 ${fs}px Inter, Cairo, sans-serif`;
+  ctx.save(); ctx.globalAlpha=.075; ctx.fillStyle='#1F3A5F'; ctx.font=`700 ${fs}px Inter, Cairo, sans-serif`;
   ctx.translate(w/2,H/2); ctx.rotate(-25*Math.PI/180);
   const stepX=ctx.measureText(t).width+fs*10, stepY=fs*14, R=Math.hypot(w,H);
   for(let y=-R;y<R;y+=stepY){ const off=(Math.round(y/stepY)%2)*stepX/2; for(let x=-R;x<R;x+=stepX) ctx.fillText(t,x+off,y); }
   ctx.restore();
 }
 async function loadPdf(id,k,meta){
-  const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جاري تحميل الملف...'; $('pdfMsg').style.display='';
+  const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جاري تحميل الملف…'; $('pdfMsg').style.display='';
   try{
     const jobs=Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`),meta.v));
     if(meta.type==='img'){
       for(let i=0;i<jobs.length;i++){
         const part=await jobs[i];
         if(tok!==pdfToken) return;
-        $('pdfMsg').textContent=`جاري تحميل الصفحات... ${i+1} من ${jobs.length}`;
+        $('pdfMsg').textContent=`جاري تحميل الصفحات… ${i+1} من ${jobs.length}`;
         const img=new Image(); img.src='data:image/jpeg;base64,'+part.data().data; await img.decode();
         const c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight;
         c.getContext('2d').drawImage(img,0,0); stamp(c); $('pages').appendChild(c);
@@ -674,7 +694,7 @@ async function loadPdf(id,k,meta){
       const pdf=await lib.getDocument({data:all}).promise;
       for(let p=1;p<=pdf.numPages;p++){
         if(tok!==pdfToken) return;
-        $('pdfMsg').textContent=`جاري عرض الصفحات... ${p} من ${pdf.numPages}`;
+        $('pdfMsg').textContent=`جاري عرض الصفحات… ${p} من ${pdf.numPages}`;
         const page=await pdf.getPage(p), cw=($('pages').clientWidth||900)*(window.devicePixelRatio||1), vp=page.getViewport({scale:Math.min(3.5,Math.max(1.5,cw/page.getViewport({scale:1}).width))});
         const c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height;
         await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
