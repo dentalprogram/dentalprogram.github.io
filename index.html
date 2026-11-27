@@ -7,21 +7,21 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>window.__dp=fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());</script>
 <meta name="theme-color" content="#F0EAE0">
-<title>Dental Program | شرح وبنوك أسئلة لطب الأسنان</title>
-<meta name="description" content="شرح وبنوك أسئلة لطلبة طب الأسنان Level One، مع محاضرات مجانية تجربها قبل ما تشترك">
+<title>Dental Program | شرح وبنك أسئلة لطب الأسنان</title>
+<meta name="description" content="شرح وبنك أسئلة لطلاب طب الأسنان Level One، مع محاضرة مجانية للتجربة قبل الاشتراك">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:site_name" content="Dental Program">
 <meta property="og:url" content="https://dentalprogram.github.io/">
-<meta property="og:title" content="Dental Program | شرح وبنوك أسئلة">
-<meta property="og:description" content="شرح وبنوك أسئلة لطلبة طب الأسنان Level One، مع محاضرات مجانية تجربها قبل ما تشترك">
+<meta property="og:title" content="Dental Program | شرح وبنك أسئلة">
+<meta property="og:description" content="شرح وبنك أسئلة لطلاب طب الأسنان Level One، مع محاضرة مجانية للتجربة قبل الاشتراك">
 <meta property="og:image" content="https://dentalprogram.github.io/og.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="800">
-<meta property="og:image:alt" content="Dental Program - شرح وبنوك أسئلة">
+<meta property="og:image:alt" content="Dental Program - شرح وبنك أسئلة">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== Calm theme: beige + burgundy (token names kept so the admin color editor still works) ===== */
 :root{
@@ -574,9 +574,38 @@ footer.foot{background-color:#1E2A3A}
 footer.foot .logo,.foot-in p.fh{color:#F4EEE5}
 footer.foot .logo .mark{background:rgba(244,238,229,.12)}
 footer.foot{border-top-color:#2A4A75}
+:root{--font:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Tahoma,Arial,sans-serif}body{text-rendering:optimizeLegibility}
+/* ===== connected steps ===== */
+#how .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;max-width:none}
+#how .steps::before{display:block;content:"";position:absolute;top:28px;right:10%;left:10%;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(31,58,95,.22),var(--o))}
+#how .step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px!important;border:0!important}
+#how .step::after{display:none!important}
+#how .step .ico3d{display:grid;position:relative;z-index:1;width:56px;height:56px;border-radius:50%;margin:0 0 16px;background:linear-gradient(180deg,#2A4A75,#1F3A5F);color:#F4EEE5;border:4px solid var(--bg2);box-shadow:0 0 0 1px rgba(31,58,95,.35),0 8px 18px -6px rgba(31,58,95,.5)}
+#how .step .ico3d .ic{width:24px;height:24px}
+#how .step h3.sh{font-size:17px;margin:0 0 6px;align-self:auto}
+@media(max-width:900px){
+  #how .steps{grid-template-columns:1fr;max-width:560px}
+  #how .steps::before{top:28px;bottom:60px;right:27px;left:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--o),rgba(31,58,95,.22))}
+  #how .step{display:grid!important;grid-template-columns:56px 1fr;column-gap:16px;align-items:start;text-align:start;padding:0 0 26px!important}
+  #how .step .ico3d{grid-row:1/3;margin:0}
+  #how .step h3.sh{margin-top:4px}
+}
+/* ===== light glass ===== */
+body{background:radial-gradient(1100px 560px at 90% -8%,rgba(31,58,95,.10),transparent 62%),radial-gradient(900px 520px at -5% 32%,rgba(42,74,117,.07),transparent 60%),var(--bg)}
+.nav{background:rgba(240,234,224,.74);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px)}
+.glass:not(.feat),.faq details{background:linear-gradient(180deg,rgba(250,246,239,.78),rgba(244,238,229,.42));border:1px solid rgba(214,203,186,.95);box-shadow:inset 0 1px 0 rgba(252,249,243,.9),0 12px 30px -16px rgba(30,42,58,.22)}
+.bundle{background:linear-gradient(155deg,#2D4E7B 0%,#1F3A5F 55%,#192F4D 100%)!important;box-shadow:inset 0 1px 0 rgba(244,238,229,.22),0 20px 44px -20px rgba(31,58,95,.6)}
+.btns .btn:not(.ghost){background:linear-gradient(180deg,#2A4A75,#1F3A5F);box-shadow:inset 0 1px 0 rgba(244,238,229,.2),0 8px 20px -8px rgba(31,58,95,.55);transition:transform .15s ease,box-shadow .15s ease}
+.btns .btn:not(.ghost):hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(244,238,229,.2),0 12px 24px -8px rgba(31,58,95,.6)}
+.btns .btn.ghost{background:rgba(250,246,239,.5)}
+.sub-row .sub-ic,.uic-box{box-shadow:inset 0 1px 0 rgba(252,249,243,.9)}
+/* sharp text: the font has no 800 weight, so stop the browser faking it */
+html{font-synthesis:none;-webkit-font-smoothing:auto}
+h1,h2,h3,b,strong,.logo,.b-price .now,.price,.btn{font-weight:700}
+:root{--muted:#3F4A5B}
 </style>
 </head>
-<body><a class="skip" href="#main">تخطّى للمحتوى</a>
+<body><a class="skip" href="#main">تخطَّ إلى المحتوى</a>
 <div class="aurora" aria-hidden="true"></div>
 <div class="page">
 
@@ -584,8 +613,8 @@ footer.foot{border-top-color:#2A4A75}
   <div class="container">
     <a class="logo" href="#"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#F2E8D8" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/></svg></span><span id="navName">Dental Program</span></a>
     <div class="links">
-      <a href="#subjects"><span data-t>المواد</span></a><a href="#how"><span data-t>إزاي تطلب</span></a><a href="#pay"><span data-t>الدفع</span></a><a href="#faq"><span data-t>الأسئلة الشائعة</span></a>
-      <a class="cta" href="learn.html"><i class="ic" data-i="lock"></i> <span data-t>دخول المشتركين</span></a>
+      <a href="#subjects"><span data-t>المواد</span></a><a href="#how"><span data-t>طريقة الاشتراك</span></a><a href="#pay"><span data-t>الدفع</span></a><a href="#faq"><span data-t>الأسئلة الشائعة</span></a>
+      <a class="cta" href="learn.html"><i class="ic" data-i="lock"></i> <span data-t>Log in</span></a>
     </div>
   </div>
 </nav>
@@ -596,10 +625,10 @@ footer.foot{border-top-color:#2A4A75}
       
       <h1 id="sName">Dental Program</h1>
       <p id="sSlogan" style="display:none"></p>
-      <p class="lead"><span data-t>شرح وبنك أسئلة لكل محاضرة، متقسمين مادة مادة. تذاكر وتختبر نفسك من مكان واحد.</span></p>
+      <p class="lead"><span data-t>شرح وبنك أسئلة لكل محاضرة، مقسَّمة حسب المادة. ذاكر واختبر نفسك في مكان واحد.</span></p>
       <div class="btns">
-        <a class="btn" href="#subjects"><span data-t>شوف المواد</span></a>
-        <a data-sec="btnFree" class="btn ghost" href="learn.html#free"><i class="ic" data-i="eye"></i> <span data-t>جرّب مجانًا</span></a>
+        <a data-sec="btnFree" class="btn" href="learn.html#free"><span data-t>Try for free</span></a>
+        <a class="btn ghost" href="#subjects"><span data-t>View subjects</span></a>
       </div>
       <div class="hero-subs" id="heroSubs" aria-label="المواد"></div>
     </div>
@@ -609,14 +638,14 @@ footer.foot{border-top-color:#2A4A75}
   <section data-sec="feats" class="section">
     <div class="container">
       <div class="sec-head reveal">
-        <h2><span data-t>هتاخد إيه في كل مادة؟</span></h2>
-        <p class="sec-sub"><span data-t>كل محاضرة فيها أربع حاجات، تذاكرها كلها من مكان واحد</span></p>
+        <h2><span data-t>ماذا تتضمن كل مادة؟</span></h2>
+        <p class="sec-sub"><span data-t>كل محاضرة تشمل أربعة أقسام في مكان واحد</span></p>
       </div>
       <div class="feats reveal">
         <div class="feat glass tilt"><span class="ico3d pop"><i class="ic" data-i="teach"></i></span><b class="pop2"><span data-t>Explanation</span></b><span class="ftag pop2"><span data-t>شرح المحاضرة</span></span></div>
-        <div class="feat glass tilt"><span class="ico3d c2 pop"><i class="ic" data-i="tf"></i></span><b class="pop2"><span data-t>True / False</span></b><span class="ftag pop2"><span data-t>صح وغلط</span></span></div>
+        <div class="feat glass tilt"><span class="ico3d c2 pop"><i class="ic" data-i="tf"></i></span><b class="pop2"><span data-t>True / False</span></b><span class="ftag pop2"><span data-t>صح أو خطأ</span></span></div>
         <div class="feat glass tilt"><span class="ico3d c3 pop"><i class="ic" data-i="mcq"></i></span><b class="pop2"><span data-t>MCQ</span></b><span class="ftag pop2"><span data-t>اختيار من متعدد</span></span></div>
-        <div class="feat glass tilt"><span class="ico3d c4 pop"><i class="ic" data-i="pen"></i></span><b class="pop2"><span data-t>Written</span></b><span class="ftag pop2"><span data-t>أسئلة كتابي</span></span></div>
+        <div class="feat glass tilt"><span class="ico3d c4 pop"><i class="ic" data-i="pen"></i></span><b class="pop2"><span data-t>Written</span></b><span class="ftag pop2"><span data-t>أسئلة مقالية</span></span></div>
       </div>
     </div>
   </section>
@@ -625,13 +654,13 @@ footer.foot{border-top-color:#2A4A75}
     <div class="container">
       <div class="sec-head reveal">
         <h2><span data-t>المواد</span></h2>
-        <p class="sec-sub"><span data-t>اشترك في المادة اللي محتاجها، أو خد المواد كلها بسعر أقل</span></p>
+        <p class="sec-sub"><span data-t>اشترك في المادة التي تحتاجها، أو احصل على جميع المواد بسعر أقل</span></p>
       </div>
       <div class="shop">
         <ul class="sub-list" id="grid" aria-label="المواد"></ul>
         <aside class="shop-side" aria-label="العرض">
           <div class="bundle" id="bundle"></div>
-          <a data-sec="free" class="free-link" href="learn.html#free"><span data-t>مش متأكد؟ جرّب محاضرة مجانًا الأول</span> <span aria-hidden="true">←</span></a>
+          <a data-sec="free" class="free-link" href="learn.html#free"><span data-t>غير متأكد؟ جرّب محاضرة مجانًا أولًا</span> <span aria-hidden="true">←</span></a>
           <div class="offers" id="offers"></div>
         </aside>
       </div>
@@ -641,14 +670,14 @@ footer.foot{border-top-color:#2A4A75}
   <section data-sec="how" class="section" id="how">
     <div class="container">
       <div class="sec-head reveal">
-        <h2><span data-t>إزاي تطلب وتذاكر؟</span></h2>
+        <h2><span data-t>طريقة الاشتراك</span></h2>
       </div>
       <ol class="steps reveal">
-        <li class="step"><span class="ico3d"><i class="ic" data-i="cart"></i></span><h3 class="sh"><span data-t>اختار المادة</span></h3><p><span data-t>دوس "اطلب دلوقتي" على المادة اللي محتاجها، أو خد العرض الكامل.</span></p></li>
-        <li class="step"><span class="ico3d c2"><i class="ic" data-i="cash"></i></span><h3 class="sh"><span data-t>حوّل المبلغ</span></h3><p><span data-t>حوّل بفودافون كاش أو انستاباي على البيانات اللي تحت.</span></p></li>
-        <li class="step"><span class="ico3d c3"><i class="ic" data-i="camera"></i></span><h3 class="sh"><span data-t>ابعت صورة التحويل</span></h3><p><span data-t>على واتساب، والزرار هيكتبلك الرسالة جاهزة.</span></p></li>
-        <li class="step"><span class="ico3d c4"><i class="ic" data-i="ticket"></i></span><h3 class="sh"><span data-t>استلم الكود بتاعك</span></h3><p><span data-t>بعد التأكد من التحويل، هيوصلك كود خاص بيك على واتساب.</span></p></li>
-        <li class="step"><span class="ico3d"><i class="ic" data-i="lock"></i></span><h3 class="sh"><span data-t>ادخل وذاكر</span></h3><p><span data-t>افتح "دخول المشتركين" من كروم، وسجّل بحساب جوجل بتاعك، وحط الكود. بعد كده تدخل بنفس الحساب من أي جهاز.</span></p></li>
+        <li class="step"><span class="ico3d"><i class="ic" data-i="cart"></i></span><h3 class="sh"><span data-t>اختر المادة</span></h3><p><span data-t>اضغط «اشترك» بجانب المادة التي تريدها، أو اختر الباقة الكاملة.</span></p></li>
+        <li class="step"><span class="ico3d c2"><i class="ic" data-i="cash"></i></span><h3 class="sh"><span data-t>حوِّل المبلغ</span></h3><p><span data-t>عبر Vodafone Cash أو InstaPay على البيانات الموضحة بالأسفل.</span></p></li>
+        <li class="step"><span class="ico3d c3"><i class="ic" data-i="camera"></i></span><h3 class="sh"><span data-t>أرسل إيصال التحويل</span></h3><p><span data-t>عبر واتساب، وستجد الرسالة مكتوبة مسبقًا.</span></p></li>
+        <li class="step"><span class="ico3d c4"><i class="ic" data-i="ticket"></i></span><h3 class="sh"><span data-t>استلم كود التفعيل</span></h3><p><span data-t>يصلك كود خاص بك على واتساب بعد تأكيد التحويل.</span></p></li>
+        <li class="step"><span class="ico3d"><i class="ic" data-i="lock"></i></span><h3 class="sh"><span data-t>ابدأ المذاكرة</span></h3><p><span data-t>افتح «Log in» من متصفح Chrome، وسجّل بحساب Google، ثم أدخل الكود. بعدها يمكنك الدخول بالحساب نفسه من أي جهاز.</span></p></li>
       </ol>
     </div>
   </section>
@@ -661,13 +690,13 @@ footer.foot{border-top-color:#2A4A75}
       <div class="pays reveal">
         <div class="pay vf glass tilt">
           <h3 class="pop2"><span class="ico3d payic"><i class="ic" data-i="phone"></i></span> <span data-t>Vodafone Cash</span></h3>
-          <div class="num pop2"><b id="vfNum"></b><button class="copy" data-copy="vf" aria-label="نسخ رقم Vodafone Cash"><span data-t>نسخ</span></button></div>
+          <div class="num pop2"><b id="vfNum"></b><button class="copy" data-copy="vf" aria-label="نسخ رقم Vodafone Cash"><span data-t>Copy</span></button></div>
           <div id="vfName"></div>
         </div>
         <div class="pay ip glass tilt">
           <h3 class="pop2"><span class="ico3d payic"><i class="ic" data-i="bank"></i></span> <span data-t>InstaPay</span></h3>
-          <div class="num pop2"><b id="ipNum"></b><button class="copy" data-copy="ip" aria-label="نسخ عنوان InstaPay"><span data-t>نسخ</span></button></div>
-          <a id="ipLink" class="copy" style="display:none;text-decoration:none;width:fit-content" target="_blank" rel="noopener"><span data-t>افتح انستاباي</span></a>
+          <div class="num pop2"><b id="ipNum"></b><button class="copy" data-copy="ip" aria-label="نسخ عنوان InstaPay"><span data-t>Copy</span></button></div>
+          <a id="ipLink" class="copy" style="display:none;text-decoration:none;width:fit-content" target="_blank" rel="noopener"><span data-t>Open InstaPay</span></a>
         </div>
       </div>
     </div>
@@ -676,7 +705,7 @@ footer.foot{border-top-color:#2A4A75}
   <div id="revSep" style="display:none"></div>
   <section class="section" id="reviews" style="display:none">
     <div class="container">
-      <div class="sec-head reveal"><h2><span data-t>قالوا عننا</span></h2></div>
+      <div class="sec-head reveal"><h2><span data-t>آراء الطلاب</span></h2></div>
       <div class="revs reveal" id="revs"></div>
     </div>
   </section>
@@ -684,15 +713,15 @@ footer.foot{border-top-color:#2A4A75}
   <section data-sec="faq" class="section" id="faq">
     <div class="container faq-wrap">
       <div class="faq-head">
-        <h2><span data-t>أسئلة بتتكرر</span></h2>
-        <p class="sec-sub"><span data-t>سؤالك مش هنا؟ ابعتهولنا وهنرد عليك.</span></p>
-        <a class="btn ghost" id="faqWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>اسألنا على واتساب</span></a>
+        <h2><span data-t>الأسئلة الشائعة</span></h2>
+        <p class="sec-sub"><span data-t>لم تجد إجابة سؤالك؟ راسلنا وسنرد عليك.</span></p>
+        <a class="btn ghost" id="faqWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>راسلنا على واتساب</span></a>
       </div>
       <div class="faq" id="faqBox">
-        <details><summary><span data-t>الكود بيشتغل على كام جهاز؟</span></summary><p><span data-t>على أي جهاز، بس بحساب جوجل اللي ربطت بيه الكود أول مرة. وبيشتغل على جهاز واحد في نفس الوقت: لو فتحت من جهاز تاني، الأولاني بيقفل لوحده. ولو مش فاكر ربطته بأنهي حساب، كلّمنا على واتساب.</span></p></details>
-        <details><summary><span data-t>المحاضرات اللي هتنزل بعدين داخلة في الاشتراك؟</span></summary><p><span data-t>أيوه، أي محاضرة جديدة بتنزل في المادة اللي اشتريتها بتظهرلك على نفس الكود، من غير ما تدفع تاني.</span></p></details>
-        <details><summary><span data-t>أقدر أنزّل الملفات؟</span></summary><p><span data-t>لأ، المذاكرة بتبقى جوه الموقع بس، عشان نحافظ على المحتوى. وتقدر تفتحه في أي وقت طول ما الكود شغال.</span></p></details>
-        <details><summary><span data-t>هل فيه استرجاع للفلوس؟</span></summary><p><span data-t>المحتوى رقمي، فمفيش استرجاع بعد ما الكود يشتغل. لكن لو الكود ما اشتغلش أو حصلت أي مشكلة فيه، كلّمنا على واتساب وهنحلها أو نرجعلك فلوسك.</span></p></details>
+        <details><summary><span data-t>على كم جهاز يعمل الكود؟</span></summary><p><span data-t>يعمل على أي جهاز، بشرط الدخول بحساب Google الذي فعّلت به الكود أول مرة. ويعمل على جهاز واحد في الوقت نفسه، فعند الدخول من جهاز آخر يُغلق الجهاز الأول تلقائيًا. وإن لم تتذكر الحساب المرتبط، تواصل معنا عبر واتساب.</span></p></details>
+        <details><summary><span data-t>هل يشمل الاشتراك المحاضرات التي تُضاف لاحقًا؟</span></summary><p><span data-t>نعم، أي محاضرة جديدة تُضاف إلى المادة التي اشتركت فيها تظهر لك بالكود نفسه دون أي تكلفة إضافية.</span></p></details>
+        <details><summary><span data-t>هل يمكن تحميل الملفات؟</span></summary><p><span data-t>لا، تتم المذاكرة داخل الموقع فقط حفاظًا على المحتوى، ويمكنك الوصول إليه في أي وقت طوال مدة صلاحية الكود.</span></p></details>
+        <details><summary><span data-t>هل يمكن استرداد المبلغ؟</span></summary><p><span data-t>المحتوى رقمي، لذا لا يُسترد المبلغ بعد تفعيل الكود. أما إذا لم يعمل الكود أو واجهت فيه أي مشكلة، فتواصل معنا عبر واتساب وسنحلها أو نرد لك المبلغ.</span></p></details>
       </div>
     </div>
   </section>
@@ -702,44 +731,44 @@ footer.foot{border-top-color:#2A4A75}
   <div class="container foot-in">
     <a class="logo" href="#"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#F2E8D8" d="M20 6c-8 0-14 6-14 15 0 7 3 11 5 17 2 7 2 20 8 20 5 0 5-12 9-12h8c4 0 4 12 9 12 6 0 6-13 8-20 2-6 5-10 5-17 0-9-6-15-14-15-5 0-8 3-12 3S25 6 20 6z"/></svg></span><span id="footName"></span></a>
     <p id="footSlogan"></p>
-    <nav class="foot-links" aria-label="روابط الموقع"><a href="#subjects"><span data-t>المواد</span></a><a href="#how"><span data-t>إزاي تطلب</span></a><a href="#pay"><span data-t>طرق الدفع</span></a><a href="#faq"><span data-t>الأسئلة الشائعة</span></a><a href="learn.html#free"><span data-t>جرّب مجانًا</span></a><a href="learn.html"><span data-t>دخول المشتركين</span></a></nav>
-    <a class="foot-wa" id="footWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>كلّمنا على واتساب</span></a>
+    <nav class="foot-links" aria-label="روابط الموقع"><a href="#subjects"><span data-t>المواد</span></a><a href="#how"><span data-t>طريقة الاشتراك</span></a><a href="#pay"><span data-t>الدفع</span></a><a href="#faq"><span data-t>الأسئلة الشائعة</span></a><a href="learn.html#free"><span data-t>Try for free</span></a><a href="learn.html"><span data-t>Log in</span></a></nav>
+    <a class="foot-wa" id="footWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>تواصل عبر واتساب</span></a>
   </div>
   <div class="container foot-bot"><span id="foot"></span></div>
 </footer>
 </div>
-<button class="totop" id="totop" aria-label="لفوق">↑</button>
-<a data-sec="wa" class="wa" id="waFloat" target="_blank" rel="noopener" title="واتساب" aria-label="كلّمنا على واتساب"><i class="ic" data-i="chat"></i></a>
+<button class="totop" id="totop" aria-label="العودة للأعلى">↑</button>
+<a data-sec="wa" class="wa" id="waFloat" target="_blank" rel="noopener" title="واتساب" aria-label="تواصل عبر واتساب"><i class="ic" data-i="chat"></i></a>
 
 <div class="modal" id="m" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="box">
   <button class="close" id="mClose" aria-label="إغلاق">✕</button>
   <h3 id="mTitle"></h3>
-  <div class="hint"><span data-t>اختار طريقة الدفع</span></div>
+  <div class="hint"><span data-t>اختر طريقة الدفع</span></div>
   <div class="opts">
     <button class="opt vf on" data-m="vf"><i class="ic payic-sm" data-i="phone"></i> <span data-t>Vodafone Cash</span></button>
     <button class="opt ip" data-m="ip"><i class="ic payic-sm" data-i="bank"></i> <span data-t>InstaPay</span></button>
   </div>
   <div class="payinfo on" id="pi-vf">
-    <div class="num"><b id="mVf"></b><button class="copy" data-copy="vf" aria-label="نسخ رقم Vodafone Cash"><span data-t>نسخ</span></button></div>
+    <div class="num"><b id="mVf"></b><button class="copy" data-copy="vf" aria-label="نسخ رقم Vodafone Cash"><span data-t>Copy</span></button></div>
   </div>
   <div class="payinfo" id="pi-ip">
-    <div class="num"><b id="mIp"></b><button class="copy" data-copy="ip" aria-label="نسخ عنوان InstaPay"><span data-t>نسخ</span></button></div>
+    <div class="num"><b id="mIp"></b><button class="copy" data-copy="ip" aria-label="نسخ عنوان InstaPay"><span data-t>Copy</span></button></div>
   </div>
-  <div class="total"><span><span data-t>المطلوب</span></span><span id="mPrice"></span></div>
-  <p class="note"><span data-t>بعد ما تحوّل، دوس الزرار اللي تحت وابعت صورة التحويل في نفس المحادثة، وهيوصلك كود الدخول بعد التأكد.</span></p>
-  <a class="btn wa-btn block" id="mWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>ابعت صورة التحويل على واتساب</span></a>
+  <div class="total"><span><span data-t>المبلغ المطلوب</span></span><span id="mPrice"></span></div>
+  <p class="note"><span data-t>بعد التحويل، اضغط الزر بالأسفل وأرسل صورة الإيصال في المحادثة نفسها، وسيصلك كود الدخول بعد التأكيد.</span></p>
+  <a class="btn wa-btn block" id="mWa" target="_blank" rel="noopener"><i class="ic" data-i="chat"></i> <span data-t>أرسل الإيصال عبر واتساب</span></a>
 </div></div>
 
 <div class="modal" id="mPick" role="dialog" aria-modal="true"><div class="box">
   <button class="close" id="pClose" aria-label="إغلاق">✕</button>
-  <h3><span data-t>اختار ٣ مواد</span></h3>
+  <h3><span data-t>اختر 3 مواد</span></h3>
   <div class="hint" id="pHint"></div>
   <div class="pick" id="pList"></div>
-  <button class="btn block" id="pGo" disabled><span data-t>كمّل للدفع</span></button>
+  <button class="btn block" id="pGo" disabled><span data-t>متابعة الدفع</span></button>
 </div></div>
 
-<div hidden id="dynT"><span data-t>اطلب دلوقتي</span><span data-t>المواد الست مع بعض</span><span data-t>خد العرض</span><span data-t>هتوفّر</span></div>
-<div class="toast" id="toast" role="status"><span data-t>اتنسخ ✓</span></div>
+<div hidden id="dynT"><span data-t>اشترك</span><span data-t>الباقة الكاملة · 6 مواد</span><span data-t>اشترك في الباقة</span><span data-t>توفير</span></div>
+<div class="toast" id="toast" role="status"><span data-t>Copied ✓</span></div>
 
 <script src="icons.js"></script>
 <script>
@@ -748,14 +777,14 @@ let SITE, SUBJECTS;
   try{
     const d=await window.__dp;
     SITE=d.site; SUBJECTS=d.subjects||[];
-  }catch(e){ document.body.innerHTML='<p style="text-align:center;padding:40px;color:#CDB28A">حصلت مشكلة في تحميل الموقع، حدّث الصفحة</p>'; return; }
+  }catch(e){ document.body.innerHTML='<p style="text-align:center;padding:40px;color:#CDB28A">حدثت مشكلة في تحميل الموقع، يُرجى تحديث الصفحة</p>'; return; }
   init();
 })();
 function init(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>`${n} <small>${esc(SITE.currency)}</small>`;
-document.title=SITE.name+' | شرح وبنوك أسئلة لطب الأسنان';
+document.title=SITE.name+' | شرح وبنك أسئلة لطب الأسنان';
 const TX=SITE.texts||{}, T=k=>esc(TX[k]||k);
 const TH=SITE.theme||{}; for(const k of ['o','y','bg','bg2','card','ink','muted','line']) if(TH[k]) document.documentElement.style.setProperty('--'+k,TH[k]);
 if(TH.bg){ const m=document.querySelector('meta[name=theme-color]'); if(m) m.content=TH.bg; }
@@ -773,9 +802,9 @@ $('vfNum').textContent=$('mVf').textContent=SITE.vodafoneCash;
 $('vfName').textContent=SITE.vodafoneName?('باسم: '+SITE.vodafoneName):'';
 $('ipNum').textContent=$('mIp').textContent=SITE.instapay;
 if(SITE.instapayLink){$('ipLink').href=SITE.instapayLink;$('ipLink').style.display='inline-block';}
-$('foot').textContent='© '+new Date().getFullYear()+' '+SITE.name+' — كل الحقوق محفوظة';
+$('foot').textContent='© '+new Date().getFullYear()+' '+SITE.name+' — جميع الحقوق محفوظة';
 const wa=t=>'https://wa.me/'+SITE.whatsapp+'?text='+encodeURIComponent(t);
-if($('faqWa')) $('faqWa').href=wa('السلام عليكم، عندي سؤال عن المواد'); $('waFloat').href=$('footWa').href=wa('السلام عليكم، عندي استفسار عن المواد');
+if($('faqWa')) $('faqWa').href=wa('السلام عليكم، لدي سؤال عن المواد'); $('waFloat').href=$('footWa').href=wa('السلام عليكم، لدي استفسار عن المواد');
 window.addEventListener('scroll',()=>{ $('totop').classList.toggle('show',scrollY>700); $('nav').classList.toggle('scrolled',scrollY>8); },{passive:true});
 $('totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
@@ -784,28 +813,28 @@ $('grid').innerHTML=SUBJECTS.map((s,i)=>`<li class="sub-row">
   <span class="sub-ic" aria-hidden="true">${subjectIcon(s.name,s.icon)}</span>
   <div class="sub-name"><b translate="no">${esc(s.name)}</b>${s.desc?`<small>${esc(s.desc)}</small>`:''}</div>
   <span class="sub-price">${money(s.price)}</span>
-  <button class="btn buy small" data-buy="${i}" aria-label="اطلب ${esc(s.name)}">${T('اطلب المادة')}</button></li>`).join('');
+  <button class="btn buy small" data-buy="${i}" aria-label="اشترك في ${esc(s.name)}">${T('اشترك')}</button></li>`).join('');
 
 const total=SUBJECTS.reduce((a,s)=>a+Number(s.price||0),0);
 const cur=esc(SITE.currency), launchOn=Number(SITE.launchPrice)>0&&Number(SITE.launchLeft)>0;
 const bundleNow=launchOn?Number(SITE.launchPrice):Number(SITE.bundlePrice);
 if(SITE.bundlePrice>0){
   const spots=Number(SITE.launchSpots)||0, left=Number(SITE.launchLeft)||0;
-  $('bundle').innerHTML=`<div class="bin"><div>${launchOn?`<span class="launch">${UI('spark')} عرض الافتتاح</span>`:''}<p class="b-k">${T('المواد الست مع بعض')}</p>
+  $('bundle').innerHTML=`<div class="bin"><div>${launchOn?`<span class="launch">${UI('spark')} عرض الافتتاح</span>`:''}<p class="b-k">${T('الباقة الكاملة · 6 مواد')}</p>
     <div class="b-price"><span class="now">${bundleNow}</span> <span class="cur">${cur}</span></div>
-    <p class="b-old">بدل <s>${total} ${cur}</s> · ${T('هتوفّر')} ${total-bundleNow} ${cur}</p>
-    ${launchOn?`<div class="note">بعد العرض هيبقى ${SITE.bundlePrice} ${cur}</div>`:''}
-    ${launchOn?`<div class="left">فاضل ${left} مكان بس بالسعر ده</div>${spots>left?`<div class="bar"><i style="width:${Math.round((spots-left)*100/spots)}%"></i></div>`:''}`:''}</div>
-    <button class="btn buy" data-buy="all">${T('اطلب المواد الست')}</button></div>`;
+    <p class="b-old">بدلًا من <s>${total} ${cur}</s> · ${T('توفير')} ${total-bundleNow} ${cur}</p>
+    ${launchOn?`<div class="note">بعد انتهاء العرض يصبح السعر ${SITE.bundlePrice} ${cur}</div>`:''}
+    ${launchOn?`<div class="left">متبقٍّ ${left} أماكن فقط بهذا السعر</div>${spots>left?`<div class="bar"><i style="width:${Math.round((spots-left)*100/spots)}%"></i></div>`:''}`:''}</div>
+    <button class="btn buy" data-buy="all">${T('اشترك في الباقة')}</button></div>`;
 } else $('bundle').style.display='none';
 const offs=[];
-if(Number(SITE.trioPrice)>0) offs.push(`<div class="offer glass"><h3>${UI('puzzle')} أي ٣ مواد</h3><p>اختار التلات مواد اللي محتاجهم بس</p><div class="big">${SITE.trioPrice} ${cur} <span style="font-size:14px;color:var(--muted);text-decoration:line-through">${3*Math.round(total/Math.max(SUBJECTS.length,1))}</span></div><button class="btn small" data-trio="1" style="margin-top:10px">اختار موادك</button></div>`);
-if(Number(SITE.friendDiscount)>0) offs.push(`<div class="offer glass"><h3>${UI('users')} هات صاحبك</h3><p>لو صاحبك اشترى وقال اسمك، تاخد خصم ${SITE.friendDiscount} ${cur} على طلبك الجاي.</p></div>`);
-if(Number(SITE.groupPrice)>0) offs.push(`<div class="offer glass"><h3>${UI('users')} عرض الشلة</h3><p>لو ${Number(SITE.groupSize)||4} أصحاب أو أكتر اشتروا العرض الكامل مع بعض، كل واحد يدفع:</p><div class="big">${SITE.groupPrice} ${cur}</div><p style="margin-top:6px">ابعتولنا على واتساب بأسماءكم.</p></div>`);
+if(Number(SITE.trioPrice)>0) offs.push(`<div class="offer glass"><h3>${UI('puzzle')} أي 3 مواد</h3><p>اختر المواد الثلاث التي تحتاجها فقط</p><div class="big">${SITE.trioPrice} ${cur} <span style="font-size:14px;color:var(--muted);text-decoration:line-through">${3*Math.round(total/Math.max(SUBJECTS.length,1))}</span></div><button class="btn small" data-trio="1" style="margin-top:10px">اختر المواد</button></div>`);
+if(Number(SITE.friendDiscount)>0) offs.push(`<div class="offer glass"><h3>${UI('users')} ادعُ صديقك</h3><p>إذا اشترك صديقك وذكر اسمك، تحصل على خصم ${SITE.friendDiscount} ${cur} على طلبك القادم.</p></div>`);
+if(Number(SITE.groupPrice)>0) offs.push(`<div class="offer glass"><h3>${UI('users')} عرض المجموعات</h3><p>إذا اشترك ${Number(SITE.groupSize)||4} أصدقاء أو أكثر في الباقة الكاملة معًا، يدفع كل منهم:</p><div class="big">${SITE.groupPrice} ${cur}</div><p style="margin-top:6px">راسلونا على واتساب بأسمائكم.</p></div>`);
 $('offers').innerHTML=offs.join(''); if(!offs.length) $('offers').style.display='none';
 let picked=[];
 function openPick(){ picked=[]; $('pList').innerHTML=SUBJECTS.map((s,i)=>`<label data-i="${i}"><input type="checkbox">${esc(s.name)}</label>`).join(''); pickUpd(); $('mPick').classList.add('on'); }
-function pickUpd(){ $('pHint').textContent=`اخترت ${picked.length} من ٣`; $('pGo').disabled=picked.length!==3;
+function pickUpd(){ $('pHint').textContent=`اخترت ${picked.length} من 3`; $('pGo').disabled=picked.length!==3;
   $('pList').querySelectorAll('label').forEach(l=>{const on=picked.includes(+l.dataset.i);l.classList.toggle('on',on);l.querySelector('input').checked=on;}); }
 $('pList').onclick=e=>{const l=e.target.closest('label'); if(!l) return; e.preventDefault(); const i=+l.dataset.i;
   if(picked.includes(i)) picked=picked.filter(x=>x!==i); else if(picked.length<3) picked.push(i); pickUpd();};
@@ -815,8 +844,8 @@ $('pGo').onclick=()=>{ $('mPick').classList.remove('on'); openBuy('trio'); };
 
 let method='vf', item=null;
 function openBuy(k){
-  item = k==='all' ? {name:launchOn?'المواد الست (عرض الافتتاح)':'المواد الست (العرض الكامل)',price:bundleNow}
-       : k==='trio' ? {name:'٣ مواد: '+picked.map(i=>SUBJECTS[i].name).join('، '),price:SITE.trioPrice}
+  item = k==='all' ? {name:launchOn?'الباقة الكاملة (عرض الافتتاح)':'الباقة الكاملة (6 مواد)',price:bundleNow}
+       : k==='trio' ? {name:'3 مواد: '+picked.map(i=>SUBJECTS[i].name).join('، '),price:SITE.trioPrice}
        : SUBJECTS[+k];
   $('mTitle').textContent=item.name;
   $('mPrice').innerHTML=money(item.price);
@@ -826,8 +855,8 @@ function setMethod(m){
   method=m;
   document.querySelectorAll('.opt').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
   $('pi-vf').classList.toggle('on',m==='vf'); $('pi-ip').classList.toggle('on',m==='ip');
-  const how=m==='vf'?'فودافون كاش':'انستاباي';
-  $('mWa').href=wa(`السلام عليكم، حوّلت ${item.price} ${SITE.currency} عن طريق ${how} علشان: ${item.name}\nودي صورة التحويل:`);
+  const how=m==='vf'?'Vodafone Cash':'InstaPay';
+  $('mWa').href=wa(`السلام عليكم، قمت بتحويل ${item.price} ${SITE.currency} عن طريق ${how} مقابل: ${item.name}\nوهذه صورة الإيصال:`);
 }
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-buy]'); if(b) openBuy(b.dataset.buy);

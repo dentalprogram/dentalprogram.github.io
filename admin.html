@@ -240,7 +240,7 @@ body{background-image:radial-gradient(rgba(30,42,58,.05) 1px,transparent 1.5px)}
       <div id="texts" class="sub">جاري تحميل الكلام...</div>
     </div>
     <div class="card">
-      <h2><i class="ic" data-i="help"></i> أسئلة زيادة في "أسئلة بتتكرر"</h2>
+      <h2><i class="ic" data-i="help"></i> أسئلة زيادة في "الأسئلة الشائعة"</h2>
       <label>كل سؤال في سطر لوحده، بالشكل ده: السؤال | الإجابة</label>
       <textarea id="f_faqExtra" rows="4" placeholder="هل فيه مراجعة قبل الامتحان؟ | أيوه، بتنزل قبل الامتحان بأسبوع"></textarea>
     </div>
@@ -312,7 +312,7 @@ $('addS').onclick=()=>{data.subjects.push({name:'مادة جديدة',desc:'مل
 
 
 const CDEF={o:['اللون الأساسي (كحلي)','#1f3a5f'],y:['لون زراير الشراء','#2a4a75'],bg:['الخلفية','#f0eae0'],bg2:['الخلفية التانية','#e7dfd2'],card:['الكروت','#f4eee5'],ink:['لون الكلام','#1e2a3a'],muted:['الكلام الباهت','#4c586a'],line:['الخطوط والحدود','#d6cbba']};
-const SECS={chips:'الكلمات الصغيرة تحت الاسم',btnFree:'زرار "جرّب ببلاش" فوق',btnSub:'زرار "مشترك؟ ادخل بالكود" فوق',feats:'قسم "هتاخد إيه في كل مادة"',free:'قسم "جرّب قبل ما تشتري"',how:'قسم "إزاي تطلب وتذاكر"',pay:'قسم "طرق الدفع"',student:'قسم "عندك كود بالفعل"',faq:'قسم "أسئلة بتتكرر"',wa:'زرار الواتساب العايم'};
+const SECS={chips:'الكلمات الصغيرة تحت الاسم',btnFree:'زرار "Try for free" فوق',btnSub:'زرار "مشترك؟ ادخل بالكود" فوق',feats:'قسم "هتاخد إيه في كل مادة"',free:'قسم "جرّب قبل ما تشتري"',how:'قسم "إزاي تطلب وتذاكر"',pay:'قسم "طرق الدفع"',student:'قسم "عندك كود بالفعل"',faq:'قسم "الأسئلة الشائعة"',wa:'زرار الواتساب العايم'};
 function renderExtra(){
   const th=data.site.theme||{};
   $('colors').innerHTML=Object.entries(CDEF).map(([k,[n,d]])=>`<label class="col"><input type="color" data-c="${k}" value="${th[k]||d}"><span>${n}</span></label>`).join('');

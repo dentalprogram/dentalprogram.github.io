@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#F0EAE0">
 <title>منطقة المشتركين</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== Calm theme: beige + burgundy (token names kept so the admin color editor still works) ===== */
 :root{
@@ -20,7 +20,7 @@
   --grad:var(--o);--grad-buy:var(--o);
   --glass:var(--card);--gl:var(--line);
   --sh:0 1px 2px rgba(0,0,0,.25);
-  --font:'Cairo',system-ui,'Segoe UI',Tahoma,Arial,sans-serif;
+  --font:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Tahoma,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{min-height:100%;background:var(--bg)}
@@ -339,6 +339,10 @@ header{background:var(--bg)}
 .g-opt .k{background:rgba(31,58,95,.12);color:var(--ink)}
 .g-opt.ok .k{background:var(--ok);color:#F4EEE5}
 .g-opt.bad .k{background:var(--bad);color:#F4EEE5}
+/* sharp text: the font has no 800 weight, so stop the browser faking it */
+html{font-synthesis:none;-webkit-font-smoothing:auto}
+h1,h2,h3,b,strong,.logo,.b-price .now,.price,.btn{font-weight:700}
+:root{--muted:#3F4A5B}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
@@ -355,38 +359,38 @@ header{background:var(--bg)}
 <div id="wm"></div>
 
 <div class="wrap">
-  <div id="loading" class="spin">جاري التحميل…</div>
+  <div id="loading" class="spin">جارٍ التحميل…</div>
 
   <!-- code entry -->
   <div id="vCode" class="hide">
     <div class="card" style="max-width:460px;margin:30px auto;text-align:center">
       <div id="stInApp" class="hide">
         <div class="bigic"><i class="ic" data-i="lock"></i></div>
-        <h1>افتح الموقع من كروم</h1>
-        <p class="muted">انت فاتح الموقع من جوه تطبيق تاني، وهنا مش هينفع تسجّل دخول. افتح نفس اللينك من كروم أو سفاري.</p>
-        <a class="btn" id="openChrome" style="width:100%;display:none;text-decoration:none;box-sizing:border-box">افتح في كروم</a>
-        <button class="btn ghost" id="copyLink" style="width:100%;margin-top:10px">انسخ اللينك</button>
+        <h1>افتح الموقع من متصفح Chrome</h1>
+        <p class="muted">أنت تفتح الموقع من داخل تطبيق آخر، ولا يمكن تسجيل الدخول من هنا. افتح الرابط نفسه من Chrome أو Safari.</p>
+        <a class="btn" id="openChrome" style="width:100%;display:none;text-decoration:none;box-sizing:border-box">Open in Chrome</a>
+        <button class="btn ghost" id="copyLink" style="width:100%;margin-top:10px">Copy link</button>
         <div class="msg" id="iamsg"></div>
       </div>
       <div id="stGoogle" class="hide">
         <div class="bigic"><i class="ic" data-i="lock"></i></div>
-        <h1 id="gTitle">سجّل دخولك الأول</h1>
-        <p class="muted" id="gSub">الكود بتاعك هيتربط بحساب جوجل بتاعك، فتقدر تدخل من أي متصفح بنفس الحساب من غير ما الكود يتقفل.</p>
-        <button class="btn gbtn" id="gIn" style="width:100%"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> <span>الدخول بحساب جوجل</span></button>
+        <h1 id="gTitle">سجّل الدخول أولًا</h1>
+        <p class="muted" id="gSub">سيُربط الكود بحساب Google الخاص بك، لتتمكن من الدخول من أي متصفح بالحساب نفسه.</p>
+        <button class="btn gbtn" id="gIn" style="width:100%"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> <span>Continue with Google</span></button>
         <div class="msg" id="gmsg"></div>
       </div>
       <div id="stCode" class="hide">
         <div class="bigic"><i class="ic" data-i="lock"></i></div>
-        <h1>ادخل الكود بتاعك</h1>
-        <p class="muted">الكود ده وصلك على واتساب بعد ما دفعت، وهيتربط بالحساب ده بس:</p>
+        <h1>أدخل كود التفعيل</h1>
+        <p class="muted">الكود الذي وصلك على واتساب بعد الدفع، وسيُربط بهذا الحساب فقط:</p>
         <div class="acct" id="acct"></div>
         <input id="code" name="code" placeholder="DP-XXXX-XXXX" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="20" aria-label="كود الاشتراك">
-        <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">دخول</button></div>
+        <div style="margin-top:14px"><button class="btn" id="go" style="width:100%">Log in</button></div>
         <div class="msg" id="cmsg"></div>
-        <button class="lnk" id="swAcct">مش ده حسابك؟ غيّره</button>
+        <button class="lnk" id="swAcct">ليس حسابك؟ غيّر الحساب</button>
       </div>
       <div class="or"><span>أو</span></div>
-      <button class="btn ghost" id="tryFree" style="width:100%"><i class="ic" data-i="eye"></i> جرّب مجانًا</button>
+      <button class="btn ghost" id="tryFree" style="width:100%">Try for free</button>
     </div>
   </div>
 
@@ -394,32 +398,32 @@ header{background:var(--bg)}
   <div id="vKick" class="hide">
     <div class="card" style="max-width:460px;margin:30px auto;text-align:center">
       <div class="bigic"><i class="ic" data-i="lock"></i></div>
-      <h1>حسابك اتفتح على جهاز تاني</h1>
-      <p class="muted">الحساب بيشتغل على جهاز واحد بس في نفس الوقت. لو انت اللي فتحته، تقدر تكمّل هنا والجهاز التاني هيقفل.</p>
-      <button class="btn" id="kickBack" style="width:100%">كمّل على الجهاز ده</button>
+      <h1>حسابك مفتوح على جهاز آخر</h1>
+      <p class="muted">يعمل الحساب على جهاز واحد في الوقت نفسه. إن كنت أنت من فتحه، يمكنك المتابعة هنا وسيُغلق الجهاز الآخر.</p>
+      <button class="btn" id="kickBack" style="width:100%">المتابعة على هذا الجهاز</button>
     </div>
   </div>
 
   <!-- subjects -->
   <div id="vHome" class="hide">
-    <div id="freeBar" class="freebar hide"><div><b>محاضرات مفتوحة عشان تجرب المستوى</b><div class="muted">عجبتك؟ اشترك وافتح كل المحاضرات، وكل جديد هيوصلك أول بأول.</div></div><a class="btn small" href="./#subjects">اشترك دلوقتي</a></div>
+    <div id="freeBar" class="freebar hide"><div><b>محاضرات مفتوحة للتجربة</b><div class="muted">اشترك لتفتح جميع المحاضرات، وكل محتوى جديد يصلك فور إضافته.</div></div><a class="btn small" href="./#subjects">اشترك الآن</a></div>
     <div id="hello"></div>
     <div id="cont"></div>
     <h1 id="homeTitle"><i class="ic" data-i="book"></i> موادك</h1>
-    <p class="muted homesub" id="homeSub">اختار مادة وكمّل من مكان ما وقفت</p>
+    <p class="muted homesub" id="homeSub">اختر مادة وتابع من حيث توقفت</p>
     <div class="grid" id="subs"></div>
   </div>
 
   <!-- lectures -->
   <div id="vSub" class="hide">
-    <button class="back" data-go="home"><span class="ar">→</span> رجوع للمواد</button>
+    <button class="back" data-go="home"><span class="ar">→</span> العودة إلى المواد</button>
     <div id="subHead"></div><h1 id="subTitle" class="hide"></h1>
     <div id="lecs"></div>
   </div>
 
   <!-- lecture -->
   <div id="vLec" class="hide">
-    <button class="back" data-go="sub"><span class="ar">→</span> رجوع للمحاضرات</button>
+    <button class="back" data-go="sub"><span class="ar">→</span> العودة إلى المحاضرات</button>
     <h1 id="lecTitle"></h1>
     <button class="donebtn" id="doneBtn"></button>
     <div class="tabs" id="tabs"></div>
@@ -446,7 +450,7 @@ document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['p','s','c'].includes(e.key.toLowerCase()))e.preventDefault();});
 
-if(!firebaseConfig.apiKey){ $('loading').textContent='الموقع لسه بيتجهز، جرب كمان شوية'; throw 0; }
+if(!firebaseConfig.apiKey){ $('loading').textContent='الموقع قيد التجهيز، حاول مرة أخرى لاحقًا'; throw 0; }
 const app=initializeApp(firebaseConfig), auth=getAuth(app);
 let db; try{ db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})}); }catch(e){ db=getFirestore(app); }
 /* file pages: use the copy saved on this device first, download only if missing */
@@ -465,7 +469,7 @@ const isG=u=>!!u&&u.providerData.some(p=>p.providerId==='google.com');
 let sid=null, unsubKick=null, legacy=false, udata=null;
 
 onAuthStateChanged(auth, async u=>{
-  if(!u){ try{ await signInAnonymously(auth); }catch(e){ $('loading').textContent='مش قادر يوصل، اتأكد من النت وحدّث الصفحة'; } return; }
+  if(!u){ try{ await signInAnonymously(auth); }catch(e){ $('loading').textContent='تعذّر الاتصال، تأكد من الإنترنت ثم حدّث الصفحة'; } return; }
   me=u.uid; await boot();
 });
 
@@ -476,8 +480,8 @@ function askLogin(){
     if(/Android/i.test(UA)){ const a=$('openChrome'); a.href='intent://'+url.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;end'; a.style.display='block'; }
     return step('stInApp');
   }
-  $('gTitle').textContent=legacy?'اربط الكود بحساب جوجل':'سجّل دخولك الأول';
-  $('gSub').textContent=legacy?'خطوة واحدة بس: اربط الكود بتاعك بحساب جوجل، وبعد كده تقدر تدخل من أي متصفح أو موبايل جديد بنفس الحساب.':'الكود بتاعك هيتربط بحساب جوجل بتاعك، فتقدر تدخل من أي متصفح بنفس الحساب من غير ما الكود يتقفل.';
+  $('gTitle').textContent=legacy?'اربط الكود بحساب Google':'سجّل الدخول أولًا';
+  $('gSub').textContent=legacy?'خطوة واحدة: اربط الكود بحساب Google، لتتمكن بعدها من الدخول من أي متصفح أو جهاز بالحساب نفسه.':'سيُربط الكود بحساب Google الخاص بك، لتتمكن من الدخول من أي متصفح بالحساب نفسه.';
   step('stGoogle');
 }
 function askCode(){ $('acct').textContent=auth.currentUser?.email||''; step('stCode'); }
@@ -493,7 +497,7 @@ async function boot(){
         if(!isG(auth.currentUser)){ legacy=true; if(location.hash==='#free') return enterFree(); return askLogin(); }
         return home();
       }
-      if(cd.exists() && !cd.data().active){ $('cmsg').className='msg err'; $('cmsg').textContent='الكود بتاعك اتوقف، كلّمنا على واتساب'; }
+      if(cd.exists() && !cd.data().active){ $('cmsg').className='msg err'; $('cmsg').textContent='تم إيقاف الكود، تواصل معنا عبر واتساب'; }
     }
   }catch(e){}
   if(location.hash==='#free') return enterFree();
@@ -509,7 +513,7 @@ $('gIn').onclick=async()=>{
       try{ await linkWithPopup(cur,gp); me=cur.uid; }
       catch(e){
         if(e.code==='auth/credential-already-in-use'||e.code==='auth/email-already-in-use'){
-          if(legacy) throw 'الإيميل ده مربوط بكود تاني. اختار إيميل تاني أو كلّمنا على واتساب';
+          if(legacy) throw 'هذا البريد مرتبط بكود آخر. اختر بريدًا مختلفًا أو تواصل معنا عبر واتساب';
           const cred=GoogleAuthProvider.credentialFromError(e);
           await signInWithCredential(auth,cred); $('gIn').disabled=false; return;
         } else throw e;
@@ -519,29 +523,29 @@ $('gIn').onclick=async()=>{
     await boot();
   }catch(e){
     $('gmsg').className='msg err';
-    $('gmsg').textContent= typeof e==='string'?e:(e.code==='auth/popup-closed-by-user'||e.code==='auth/cancelled-popup-request')?'اتقفلت نافذة جوجل قبل ما تختار حسابك، جرب تاني':(e.code==='auth/popup-blocked')?'المتصفح منع نافذة جوجل، اسمح بالنوافذ المنبثقة وجرب تاني':'حصلت مشكلة في الدخول، جرب تاني';
+    $('gmsg').textContent= typeof e==='string'?e:(e.code==='auth/popup-closed-by-user'||e.code==='auth/cancelled-popup-request')?'أُغلقت نافذة Google قبل اختيار الحساب، حاول مرة أخرى':(e.code==='auth/popup-blocked')?'منع المتصفح نافذة Google، اسمح بالنوافذ المنبثقة ثم حاول مرة أخرى':'حدثت مشكلة في تسجيل الدخول، حاول مرة أخرى';
   }
   $('gIn').disabled=false;
 };
 $('swAcct').onclick=async()=>{ try{ await signOut(auth); }catch(e){} };
-$('copyLink').onclick=async()=>{ const url=location.href.split('#')[0]; try{ await navigator.clipboard.writeText(url); $('iamsg').className='msg ok'; $('iamsg').textContent='اتنسخ، افتح كروم والصقه'; }catch(e){ $('iamsg').className='msg'; $('iamsg').textContent=url; } };
+$('copyLink').onclick=async()=>{ const url=location.href.split('#')[0]; try{ await navigator.clipboard.writeText(url); $('iamsg').className='msg ok'; $('iamsg').textContent='تم النسخ، افتح Chrome والصق الرابط'; }catch(e){ $('iamsg').className='msg'; $('iamsg').textContent=url; } };
 
 $('go').onclick=async()=>{
   const c=$('code').value.trim().toUpperCase().replace(/\s+/g,'');
   if(!c) return;
   if(!isG(auth.currentUser)) return askLogin();
-  $('go').disabled=true; $('cmsg').className='msg'; $('cmsg').textContent='جاري التأكد…';
+  $('go').disabled=true; $('cmsg').className='msg'; $('cmsg').textContent='جارٍ التحقق…';
   try{
     const ref=doc(db,'codes',c), cd=await getDoc(ref);
-    if(!cd.exists()) throw 'الكود ده غلط، اتأكد منه وجرب تاني';
+    if(!cd.exists()) throw 'الكود غير صحيح، تأكد منه وحاول مرة أخرى';
     const d=cd.data();
-    if(!d.active) throw 'الكود ده متوقف، كلّمنا على واتساب';
-    if(d.uid && d.uid!==me) throw 'الكود ده مربوط بحساب جوجل تاني. ادخل بالحساب اللي استخدمته أول مرة، ولو مش فاكره كلّمنا على واتساب';
+    if(!d.active) throw 'هذا الكود موقوف، تواصل معنا عبر واتساب';
+    if(d.uid && d.uid!==me) throw 'هذا الكود مرتبط بحساب Google آخر. ادخل بالحساب الذي استخدمته أول مرة، وإن لم تتذكره تواصل معنا عبر واتساب';
     const em=auth.currentUser.email||'';
     if(!d.uid) await updateDoc(ref,{uid:me,email:em,claimedAt:serverTimestamp()});
     await setDoc(doc(db,'users',me),{code:c},{merge:true});
     code=c; codeInfo={...d,uid:me,email:em}; home();
-  }catch(e){ $('cmsg').className='msg err'; $('cmsg').textContent= typeof e==='string'?e:'حصلت مشكلة، جرب تاني'; }
+  }catch(e){ $('cmsg').className='msg err'; $('cmsg').textContent= typeof e==='string'?e:'حدثت مشكلة، حاول مرة أخرى'; }
   $('go').disabled=false;
 };
 
@@ -613,15 +617,15 @@ async function home(){
 function renderHome(){
   $('freeBar').classList.toggle('hide',!freeMode);
   if(!freeMode&&codeInfo){ const mine=lectures.filter(l=>subjects.some(x=>x.id===l.subjectId)), dn=mine.filter(l=>isDone(l.id)).length, pc=mine.length?Math.round(dn*100/mine.length):0;
-    $('hello').innerHTML=`<div class="hello"><div><div class="hi">أهلًا ${esc(codeInfo.name||'')}</div><div class="muted">خلّصت ${dn} من ${mine.length} محاضرة في موادك</div><div class="prog big"><i style="width:${pc}%"></i></div></div><div class="pc">${pc}%</div></div>`; }
+    $('hello').innerHTML=`<div class="hello"><div><div class="hi">أهلًا ${esc(codeInfo.name||'')}</div><div class="muted">أنهيت ${dn} من ${mine.length} محاضرة في موادك</div><div class="prog big"><i style="width:${pc}%"></i></div></div><div class="pc">${pc}%</div></div>`; }
   else $('hello').innerHTML='';
-  $('homeSub').textContent=freeMode?'جرّب المستوى بنفسك، ولو عجبك اشترك':'اختار مادة وكمّل من مكان ما وقفت';
-  $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> جرّب مجانًا':'<i class="ic" data-i="book"></i> موادك';
+  $('homeSub').textContent=freeMode?'جرّب المحتوى بنفسك قبل الاشتراك':'اختر مادة وتابع من حيث توقفت';
+  $('homeTitle').innerHTML=freeMode?'<i class="ic" data-i="gift"></i> Try for free':'<i class="ic" data-i="book"></i> موادك';
   const last=LS.get('dp_last',null), ll=last&&lectures.find(l=>l.id===last.id);
-  $('cont').innerHTML=(!freeMode&&ll)?`<div class="contc" data-l="${esc(ll.id)}"><i class="ic" data-i="play"></i><div><small>كمّل من مكان ما وقفت</small><b>${esc(ll.title)}</b></div></div>`:'';
+  $('cont').innerHTML=(!freeMode&&ll)?`<div class="contc" data-l="${esc(ll.id)}"><i class="ic" data-i="play"></i><div><small>تابع من حيث توقفت</small><b>${esc(ll.title)}</b></div></div>`:'';
   $('subs').innerHTML=subjects.length?subjects.map(s=>{const ls=lectures.filter(l=>l.subjectId===s.id), d=ls.filter(l=>isDone(l.id)).length, nw=ls.some(isNew);
-    return `<div class="tile${!freeMode&&ls.length&&d===ls.length?' full':''}" data-s="${esc(s.id)}">${!freeMode&&ls.length?`<span class="tpc">${Math.round(d*100/ls.length)}%</span>`:''}<div class="ic">${subjectIcon(s.name,s.icon)}</div><h3>${esc(s.name)}${nw?'<span class="newb">جديد</span>':''}</h3><div class="muted">${ls.length} محاضرة${!freeMode&&ls.length?` · خلّصت ${d}`:''}</div>${!freeMode&&ls.length?`<div class="prog"><i style="width:${Math.round(d*100/ls.length)}%"></i></div>`:''}</div>`}).join('')
-    : `<div class="card muted">${freeMode?'لسه مفيش محاضرات مجانية، ارجع قريب':'لسه مفيش مواد متاحة ليك'}</div>`;
+    return `<div class="tile${!freeMode&&ls.length&&d===ls.length?' full':''}" data-s="${esc(s.id)}">${!freeMode&&ls.length?`<span class="tpc">${Math.round(d*100/ls.length)}%</span>`:''}<div class="ic">${subjectIcon(s.name,s.icon)}</div><h3>${esc(s.name)}${nw?'<span class="newb">جديد</span>':''}</h3><div class="muted">${ls.length} محاضرة${!freeMode&&ls.length?` · أنهيت ${d}`:''}</div>${!freeMode&&ls.length?`<div class="prog"><i style="width:${Math.round(d*100/ls.length)}%"></i></div>`:''}</div>`}).join('')
+    : `<div class="card muted">${freeMode?'لا توجد محاضرات مجانية حاليًا':'لا توجد مواد متاحة لحسابك حاليًا'}</div>`;
   show('vHome'); fillIcons();
 }
 $('cont').onclick=e=>{const t=e.target.closest('[data-l]'); if(!t) return; const l=lectures.find(x=>x.id===t.dataset.l); curSub=subjects.find(s=>s.id===l.subjectId)||{id:l.subjectId,name:''}; openLec(l.id);};
@@ -630,16 +634,16 @@ function openSub(id){
   curSub=subjects.find(s=>s.id===id); $('subTitle').textContent=curSub.name;
   const ls=lectures.filter(l=>l.subjectId===id);
   const dn=ls.filter(l=>isDone(l.id)).length, pc=ls.length?Math.round(dn*100/ls.length):0, nxt=ls.find(l=>!isDone(l.id));
-  $('subHead').innerHTML=`<div class="shead"><div class="sic">${subjectIcon(curSub.name,curSub.icon)}</div><div class="sinfo"><span class="slvl">Level One</span><h1>${esc(curSub.name)}</h1><div class="smeta"><span><i class="ic" data-i="book"></i> ${ls.length} محاضرة</span>${!freeMode?`<span><i class="ic" data-i="check"></i> خلّصت ${dn}</span>`:''}</div>${!freeMode&&ls.length?`<div class="prog big"><i style="width:${pc}%"></i></div>`:''}</div>${!freeMode&&ls.length?`<div class="spc">${pc}%</div>`:''}</div>
-  ${!freeMode&&nxt&&dn>0?`<div class="nextc" data-l="${esc(nxt.id)}"><i class="ic" data-i="play"></i><div><small>المحاضرة اللي عليك</small><b>${esc(nxt.title)}</b></div><span class="go">كمّل ‹</span></div>`:''}
+  $('subHead').innerHTML=`<div class="shead"><div class="sic">${subjectIcon(curSub.name,curSub.icon)}</div><div class="sinfo"><span class="slvl">Level One</span><h1>${esc(curSub.name)}</h1><div class="smeta"><span><i class="ic" data-i="book"></i> ${ls.length} محاضرة</span>${!freeMode?`<span><i class="ic" data-i="check"></i> أنهيت ${dn}</span>`:''}</div>${!freeMode&&ls.length?`<div class="prog big"><i style="width:${pc}%"></i></div>`:''}</div>${!freeMode&&ls.length?`<div class="spc">${pc}%</div>`:''}</div>
+  ${!freeMode&&nxt&&dn>0?`<div class="nextc" data-l="${esc(nxt.id)}"><i class="ic" data-i="play"></i><div><small>المحاضرة التالية</small><b>${esc(nxt.title)}</b></div><span class="go">Continue ‹</span></div>`:''}
   <div class="lhead">المحاضرات</div>`;
-  $('lecs').innerHTML=ls.length?ls.map((l,i)=>{const dd=isDone(l.id);return `<div class="lec2${dd?' done':''}" data-l="${esc(l.id)}"><span class="n">${String(i+1).padStart(2,'0')}</span><div class="lt"><b>${esc(l.title)}</b><small>${dd?'✓ خلّصتها':'لسه ماخلّصتهاش'}${l.free&&!freeMode?' · مجانًا':''}</small></div><span class="go">${dd?'راجعها':'ابدأ'} ‹</span></div>`}).join(''):'<div class="card muted">المحاضرات هتنزل هنا قريب</div>';
+  $('lecs').innerHTML=ls.length?ls.map((l,i)=>{const dd=isDone(l.id);return `<div class="lec2${dd?' done':''}" data-l="${esc(l.id)}"><span class="n">${String(i+1).padStart(2,'0')}</span><div class="lt"><b>${esc(l.title)}</b><small>${dd?'✓ مكتملة':'لم تكتمل بعد'}${l.free&&!freeMode?' · Free':''}</small></div><span class="go">${dd?'Review':'Start'} ‹</span></div>`}).join(''):'<div class="card muted">لا توجد محاضرات حاليًا</div>';
   show('vSub'); fillIcons();
 }
 $('lecs').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
 $('subHead').onclick=e=>{const t=e.target.closest('[data-l]');if(t)openLec(t.dataset.l);};
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ $('wm').style.display='block'; b.dataset.go==='home'?renderHome():openSub(curSub.id); });
-function doneUI(){ const on=isDone(curId); $('doneBtn').className='donebtn'+(on?' on':''); $('doneBtn').innerHTML=on?'<i class="ic" data-i="check"></i> خلّصت المحاضرة دي':'علّم إنك خلّصتها'; fillIcons($('doneBtn')); }
+function doneUI(){ const on=isDone(curId); $('doneBtn').className='donebtn'+(on?' on':''); $('doneBtn').innerHTML=on?'<i class="ic" data-i="check"></i> Completed':'Mark as complete'; fillIcons($('doneBtn')); }
 $('doneBtn').onclick=()=>{ const d=LS.get('dp_done',{}); const was=!!d[curId]; if(was) delete d[curId]; else d[curId]=1; LS.set('dp_done',d); doneUI(); pushProg(); };
 
 async function openLec(id){
@@ -656,8 +660,8 @@ async function openLec(id){
     if(QS.length) T.push({t:'quiz',l:'<i class="ic" data-i="target"></i>اختبر نفسك'});
     $('tabs').innerHTML=T.map(x=>`<button data-t="${x.t}">${x.l}</button>`).join(''); fillIcons($('tabs'));
     show('vLec');
-    if(T.length) tab(T[0].t); else { $('tabs').innerHTML='<div class="card muted">المحتوى هينزل هنا قريب</div>'; ['tPdf','tSum','tQuiz'].forEach(x=>$(x).classList.add('hide')); }
-  }catch(e){ show('vSub'); alertBox(freeMode?'مش قادر يفتح المحاضرة دي دلوقتي، جرب تاني':'مش قادر يفتح المحاضرة دي. لو الكود بتاعك شغال، كلّمنا على واتساب'); }
+    if(T.length) tab(T[0].t); else { $('tabs').innerHTML='<div class="card muted">لا يوجد محتوى حاليًا</div>'; ['tPdf','tSum','tQuiz'].forEach(x=>$(x).classList.add('hide')); }
+  }catch(e){ show('vSub'); alertBox(freeMode?'تعذّر فتح المحاضرة، حاول مرة أخرى':'تعذّر فتح المحاضرة. إن كان الكود فعّالًا، تواصل معنا عبر واتساب'); }
 }
 const SI=(i,t)=>`<i class="ic" data-i="${i}"></i>${t}`;
 const SLOTS=[{k:'tf',t:SI('tf','صح وغلط')},{k:'mcq',t:SI('mcq','اختيار من متعدد')},{k:'written',t:SI('pen','كتابي')}];
@@ -667,21 +671,21 @@ function stamp(c){
   const ctx=c.getContext('2d'), w=c.width, H=c.height;
   const t=codeInfo?`${codeInfo.name||''}   ${codeInfo.phone||''}   ${code}`:'Dental Program   •   Free';
   const fs=Math.max(14,Math.round(w/42));
-  ctx.save(); ctx.globalAlpha=.075; ctx.fillStyle='#1F3A5F'; ctx.font=`700 ${fs}px Inter, Cairo, sans-serif`;
+  ctx.save(); ctx.globalAlpha=.075; ctx.fillStyle='#1F3A5F'; ctx.font=`700 ${fs}px Inter, sans-serif`;
   ctx.translate(w/2,H/2); ctx.rotate(-25*Math.PI/180);
   const stepX=ctx.measureText(t).width+fs*10, stepY=fs*14, R=Math.hypot(w,H);
   for(let y=-R;y<R;y+=stepY){ const off=(Math.round(y/stepY)%2)*stepX/2; for(let x=-R;x<R;x+=stepX) ctx.fillText(t,x+off,y); }
   ctx.restore();
 }
 async function loadPdf(id,k,meta){
-  const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جاري تحميل الملف…'; $('pdfMsg').style.display='';
+  const n=meta.n, tok=++pdfToken; $('pages').innerHTML=''; $('pdfMsg').textContent='جارٍ تحميل الملف…'; $('pdfMsg').style.display='';
   try{
     const jobs=Array.from({length:n},(_,i)=>getPage(doc(db,'chunks',`${id}_${k}_${i}`),meta.v));
     if(meta.type==='img'){
       for(let i=0;i<jobs.length;i++){
         const part=await jobs[i];
         if(tok!==pdfToken) return;
-        $('pdfMsg').textContent=`جاري تحميل الصفحات… ${i+1} من ${jobs.length}`;
+        $('pdfMsg').textContent=`جارٍ تحميل الصفحات… ${i+1} من ${jobs.length}`;
         const img=new Image(); img.src='data:image/jpeg;base64,'+part.data().data; await img.decode();
         const c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight;
         c.getContext('2d').drawImage(img,0,0); stamp(c); $('pages').appendChild(c);
@@ -694,7 +698,7 @@ async function loadPdf(id,k,meta){
       const pdf=await lib.getDocument({data:all}).promise;
       for(let p=1;p<=pdf.numPages;p++){
         if(tok!==pdfToken) return;
-        $('pdfMsg').textContent=`جاري عرض الصفحات… ${p} من ${pdf.numPages}`;
+        $('pdfMsg').textContent=`جارٍ عرض الصفحات… ${p} من ${pdf.numPages}`;
         const page=await pdf.getPage(p), cw=($('pages').clientWidth||900)*(window.devicePixelRatio||1), vp=page.getViewport({scale:Math.min(3.5,Math.max(1.5,cw/page.getViewport({scale:1}).width))});
         const c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height;
         await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
@@ -702,7 +706,7 @@ async function loadPdf(id,k,meta){
       }
     }
     $('pdfMsg').style.display='none';
-  }catch(e){ if(tok===pdfToken) $('pdfMsg').textContent='مش قادر يفتح الملف، حدّث الصفحة وجرب تاني'; }
+  }catch(e){ if(tok===pdfToken) $('pdfMsg').textContent='تعذّر فتح الملف، حدّث الصفحة وحاول مرة أخرى'; }
 }
 /* pdf.js is only downloaded the first time a PDF is opened */
 let pdfP=null;
@@ -739,7 +743,7 @@ function typedOk(v,answers){ const x=norm(v); if(!x) return false; return answer
 /* ---------- scrolling quiz: all questions on one page ---------- */
 let ST={}, LIST=[], wrongMode=false;
 function renderQuiz(onlyWrong){
-  if(!QS.length){ $('game').innerHTML='<div class="card muted">مفيش أسئلة هنا</div>'; return; }
+  if(!QS.length){ $('game').innerHTML='<div class="card muted">لا توجد أسئلة في هذه المحاضرة</div>'; return; }
   wrongMode=!!onlyWrong;
   if(onlyWrong){ LIST=LIST.filter(i=>ST[i]&&!ST[i].ok); LIST.forEach(i=>delete ST[i]); }
   else { ST={}; LIST=QS.map((_,i)=>i); }
@@ -750,19 +754,19 @@ function renderQuiz(onlyWrong){
 function qHTML(i,k){
   const q=QS[i], L=isAr(q.q)?'':' ltr';
   let body='';
-  if(q.type==='open') body=`<textarea class="g-open${L?' ltr':''}" rows="3" placeholder="اكتب إجابتك هنا لو حابب، أو جاوب في دماغك"></textarea><button class="btn ghost q-show" style="width:100%;margin-top:8px">شوف الإجابة النموذجية</button>`;
+  if(q.type==='open') body=`<textarea class="g-open${L?' ltr':''}" rows="3" placeholder="اكتب إجابتك هنا (اختياري)"></textarea><button class="btn ghost q-show" style="width:100%;margin-top:8px">Show model answer</button>`;
   else if(q.type==='type'){
     const B=blanksOf(q), inp=j=>`<input class="g-bl${L?' ltr':''}" data-b="${j}" autocomplete="off" aria-label="الفراغ ${j+1}">`;
-    if(inlineOK(q)){ let j=0; const parts=esc(q.q).split(/_{3,}/); body=`<div class="g-q g-fill${L}">${parts.map((p,x)=>p+(x<parts.length-1?inp(j++):'')).join('')}</div><button class="btn q-check" style="width:100%;margin-top:4px">تأكيد</button>`; }
-    else body=`<div class="g-type" style="flex-direction:column">${B.map((_,j)=>inp(j)).join('')}<button class="btn q-check">تأكيد</button></div>`;
+    if(inlineOK(q)){ let j=0; const parts=esc(q.q).split(/_{3,}/); body=`<div class="g-q g-fill${L}">${parts.map((p,x)=>p+(x<parts.length-1?inp(j++):'')).join('')}</div><button class="btn q-check" style="width:100%;margin-top:4px">Check</button>`; }
+    else body=`<div class="g-type" style="flex-direction:column">${B.map((_,j)=>inp(j)).join('')}<button class="btn q-check">Check</button></div>`;
   } else body=(q.options||[]).map((o,x)=>`<button class="g-opt${isAr(o)?'':' ltr'}" data-k="${x}"><span class="k">${String.fromCharCode(65+x)}</span><span>${esc(o)}</span></button>`).join('');
   const showQ=!(q.type==='type'&&inlineOK(q));
-  return `<div class="qi" data-q="${i}"><div class="g-n">سؤال ${k+1} من ${LIST.length}</div>${showQ?`<div class="g-q${L}">${esc(q.q)}</div>`:''}${body}<div class="g-fb"></div></div>`;
+  return `<div class="qi" data-q="${i}"><div class="g-n">Question ${k+1} / ${LIST.length}</div>${showQ?`<div class="g-q${L}">${esc(q.q)}</div>`:''}${body}<div class="g-fb"></div></div>`;
 }
 function resolve(box,ok,correct){
   const i=+box.dataset.q, q=QS[i]; ST[i]={ok}; box.classList.add(ok?'is-ok':'is-bad');
   const fb=box.querySelector('.g-fb'); fb.className='g-fb show '+(ok?'ok':'bad');
-  fb.innerHTML=(ok?'✓ إجابة صحيحة':`✗ إجابة غلط${correct?` · الصح: <span class="${isAr(correct)?'':'ltr'}" style="display:inline-block">${esc(correct)}</span>`:''}`)+(q.explanation?`<p class="${isAr(q.explanation)?'':'ltr'}">${esc(q.explanation)}</p>`:'');
+  fb.innerHTML=(ok?'✓ Correct':`✗ Wrong${correct?` · الإجابة الصحيحة: <span class="${isAr(correct)?'':'ltr'}" style="display:inline-block">${esc(correct)}</span>`:''}`)+(q.explanation?`<p class="${isAr(q.explanation)?'':'ltr'}">${esc(q.explanation)}</p>`:'');
   updBar();
   if(LIST.every(j=>ST[j])) showEnd();
 }
@@ -774,9 +778,9 @@ function showEnd(){
   const n=LIST.length, r=LIST.filter(j=>ST[j].ok).length, w=n-r, pct=Math.round(r*100/n);
   let auto=false;
   if(!wrongMode&&!freeMode&&curId&&pct>=70&&!isDone(curId)){ const dd=LS.get('dp_done',{}); dd[curId]=1; LS.set('dp_done',dd); doneUI(); pushProg(); auto=true; }
-  $('qend').innerHTML=`<div class="qsum"><div class="qsum-t">${wrongMode?'نتيجة إعادة الغلط':'نتيجتك'}</div><div class="qsum-n">${r} / ${n} <small>(${pct}%)</small></div>
-    ${auto?'<div class="g-auto">✓ المحاضرة دي اتسجلت إنها خلصت</div>':''}
-    <div class="g-btns">${w?`<button class="btn q-wrong">حل الغلط بس (${w})</button>`:''}<button class="btn ghost q-again">من الأول</button></div></div>`;
+  $('qend').innerHTML=`<div class="qsum"><div class="qsum-t">${wrongMode?'نتيجة إعادة الأخطاء':'نتيجتك'}</div><div class="qsum-n">${r} / ${n} <small>(${pct}%)</small></div>
+    ${auto?'<div class="g-auto">✓ تم تسجيل المحاضرة كمكتملة</div>':''}
+    <div class="g-btns">${w?`<button class="btn q-wrong">Retry mistakes (${w})</button>`:''}<button class="btn ghost q-again">Start over</button></div></div>`;
 }
 $('game').addEventListener('click',e=>{
   const o=e.target.closest('.g-opt');
@@ -787,7 +791,7 @@ $('game').addEventListener('click',e=>{
   const c=e.target.closest('.q-check'); if(c) return checkTyped(c.closest('.qi'));
   const sh=e.target.closest('.q-show');
   if(sh){ const box=sh.closest('.qi'), q=QS[+box.dataset.q];
-    sh.outerHTML=`<div class="g-model${isAr(q.model)?'':' ltr'}"><b>الإجابة النموذجية:</b><div>${esc(q.model).replace(/\n/g,'<br>')}</div></div><div class="g-self"><span>جاوبت صح؟</span><button class="btn small q-yes">أيوه ✓</button><button class="btn ghost small q-no">محتاج أراجعها</button></div>`;
+    sh.outerHTML=`<div class="g-model${isAr(q.model)?'':' ltr'}"><b>Model answer:</b><div>${esc(q.model).replace(/\n/g,'<br>')}</div></div><div class="g-self"><span>هل كانت إجابتك صحيحة؟</span><button class="btn small q-yes">Yes ✓</button><button class="btn ghost small q-no">Needs review</button></div>`;
     const t=box.querySelector('.g-open'); if(t) t.disabled=true; return; }
   const yn=e.target.closest('.q-yes,.q-no');
   if(yn){ const box=yn.closest('.qi'); if(box.classList.contains('done')) return; box.classList.add('done'); box.querySelector('.g-self').remove(); return resolve(box,yn.classList.contains('q-yes'),''); }
