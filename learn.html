@@ -343,6 +343,7 @@ header{background:var(--bg)}
 html{font-synthesis:none;-webkit-font-smoothing:auto}
 h1,h2,h3,b,strong,.logo,.b-price .now,.price,.btn{font-weight:700}
 :root{--muted:#3F4A5B}
+body{font-weight:500}
 </style>
 <script>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{const t=(d.site||{}).theme||{};for(const k of ['o','y','bg','bg2','card','ink','muted','line'])if(t[k])document.documentElement.style.setProperty('--'+k,t[k]);}).catch(()=>{});</script>
 </head>
